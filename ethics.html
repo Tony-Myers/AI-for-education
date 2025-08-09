@@ -15,39 +15,41 @@
     .nav-link:focus, button:focus, a:focus { outline: 3px solid #0369a1; outline-offset: 2px; }
     .accordion-content { max-height:0 !important; overflow:hidden; transition:max-height .5s ease-in-out }
     .accordion-content.open { max-height:2000px !important; transition:max-height 1s ease-in-out }
+    .principle-card { transition:transform .3s,box-shadow .3s }
+    .principle-card:hover { transform:translateY(-5px); box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1) }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
 
 <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
-    <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
-        <a href="index.html" class="text-xl font-bold text-sky-700 cursor-pointer" tabindex="0">The AI-Powered Academic</a>
-        <div class="hidden md:flex space-x-4">
-            <a href="index.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Home</a>
-            <a href="integration.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">AI Integration</a>
-            <a href="ai-literacy.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">AI Literacy</a>
-            <a href="prompting.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Prompting</a>
-            <a href="research.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Research</a>
-            <a href="teaching.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Teaching</a>
-            <a href="ai-platforms.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">AI Platforms</a>
-            <a href="toolkit.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Toolkit</a>
-            <a href="ethics.html" class="nav-link text-slate-600 px-3 py-2 rounded-md active">Ethics</a>
-        </div>
-        <button id="mobile-menu-button" class="md:hidden p-2 text-slate-500 hover:text-sky-700">
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-    </nav>
-    <div id="mobile-menu" class="hidden md:hidden px-3 pb-3 space-y-1">
-        <a href="index.html" class="nav-link block px-3 py-2 w-full text-left">Home</a>
-        <a href="integration.html" class="nav-link block px-3 py-2 w-full text-left">AI Integration</a>
-        <a href="ai-literacy.html" class="nav-link block px-3 py-2 w-full text-left">AI Literacy</a>
-        <a href="prompting.html" class="nav-link block px-3 py-2 w-full text-left">Prompting</a>
-        <a href="research.html" class="nav-link block px-3 py-2 w-full text-left">Research</a>
-        <a href="teaching.html" class="nav-link block px-3 py-2 w-full text-left">Teaching</a>
-        <a href="ai-platforms.html" class="nav-link block px-3 py-2 w-full text-left">AI Platforms</a>
-        <a href="toolkit.html" class="nav-link block px-3 py-2 w-full text-left">Toolkit</a>
-        <a href="ethics.html" class="nav-link block px-3 py-2 w-full text-left">Ethics</a>
+  <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+    <a href="index.html" class="text-xl font-bold text-sky-700 cursor-pointer" tabindex="0">The AI-Powered Academic</a>
+    <div class="hidden md:flex space-x-4">
+      <a href="index.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Home</a>
+      <a href="integration.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">AI Integration</a>
+      <a href="ai-literacy.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">AI Literacy</a>
+      <a href="prompting.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Prompting</a>
+      <a href="research.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Research</a>
+      <a href="teaching.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Teaching</a>
+      <a href="ai-platforms.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">AI Platforms</a>
+      <a href="toolkit.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Toolkit</a>
+      <a href="ethics.html" class="nav-link text-slate-600 px-3 py-2 rounded-md active">Ethics</a>
     </div>
+    <button id="mobile-menu-button" class="md:hidden p-2 text-slate-500 hover:text-sky-700">
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden px-3 pb-3 space-y-1">
+    <a href="index.html" class="nav-link block px-3 py-2 w-full text-left">Home</a>
+    <a href="integration.html" class="nav-link block px-3 py-2 w-full text-left">AI Integration</a>
+    <a href="ai-literacy.html" class="nav-link block px-3 py-2 w-full text-left">AI Literacy</a>
+    <a href="prompting.html" class="nav-link block px-3 py-2 w-full text-left">Prompting</a>
+    <a href="research.html" class="nav-link block px-3 py-2 w-full text-left">Research</a>
+    <a href="teaching.html" class="nav-link block px-3 py-2 w-full text-left">Teaching</a>
+    <a href="ai-platforms.html" class="nav-link block px-3 py-2 w-full text-left">AI Platforms</a>
+    <a href="toolkit.html" class="nav-link block px-3 py-2 w-full text-left">Toolkit</a>
+    <a href="ethics.html" class="nav-link block px-3 py-2 w-full text-left">Ethics</a>
+  </div>
 </header>
 
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -55,22 +57,117 @@
       <h2 class="text-3xl font-bold">An Ethical Framework for AI in Academia</h2>
       <p class="max-w-3xl mx-auto">A proactive approach is essential to harness AI's benefits while mitigating risks. Use this interactive checklist to evaluate tools and practices.</p>
     </div>
-    <div class="bg-white rounded-xl shadow-lg p-8">
+    
+    <div class="bg-white rounded-xl shadow-lg p-8 mb-12">
       <div id="ethics-checklist-container" class="space-y-4">
         <p class="text-center text-slate-600">Loading ethical framework...</p>
       </div>
     </div>
-    <div class="text-center mt-8">
-      <a href="index.html" class="px-4 py-2 bg-slate-200 rounded hover:bg-slate-300">← Back to Home</a>
+
+    <div class="border-t border-slate-200 pt-12">
+      <h2 class="text-3xl font-bold text-center text-slate-800 mb-4">Broader Ethical Considerations</h2>
+      <p class="text-center max-w-3xl mx-auto text-slate-600 mb-12">Beyond the immediate academic context, the development and deployment of AI raise profound ethical questions for society. It is important for students and educators to consider these wider implications.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="principle-card bg-gradient-to-br from-red-50 to-pink-50 p-6 rounded-lg border border-red-200">
+          <h4 class="font-bold text-lg text-red-700 mb-2">Bias & Discrimination</h4>
+          <p class="text-slate-700">AI models trained on historical data can perpetuate and even amplify societal biases, leading to discriminatory outcomes.</p>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-purple-50 to-indigo-50 p-6 rounded-lg border border-purple-200">
+          <h4 class="font-bold text-lg text-purple-700 mb-2">Power & Inequality</h4>
+          <p class="text-slate-700">The development of AI can reinforce global power imbalances and widen structural inequalities between groups.</p>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-sky-50 to-blue-50 p-6 rounded-lg border border-sky-200">
+          <h4 class="font-bold text-lg text-sky-700 mb-2">Truth & Plagiarism</h4>
+          <p class="text-slate-700">The ability of AI to generate convincing text raises concerns about plagiarism, academic integrity, and the spread of fake news.</p>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-lg border border-amber-200">
+          <h4 class="font-bold text-lg text-amber-700 mb-2">Privacy & Surveillance</h4>
+          <p class="text-slate-700">Many AI systems rely on vast amounts of personal data, creating risks related to data collection and surveillance.</p>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-emerald-50 to-green-50 p-6 rounded-lg border border-emerald-200">
+          <h4 class="font-bold text-lg text-emerald-700 mb-2">Human Labour</h4>
+          <p class="text-slate-700">Increasing automation raises concerns about the future of work, including job displacement and worker exploitation.</p>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-slate-100 to-slate-200 p-6 rounded-lg border border-slate-300">
+          <h4 class="font-bold text-lg text-slate-700 mb-2">Environmental Impact</h4>
+          <p class="text-slate-700">The computational power for AI has a significant environmental footprint from energy use and electronic waste.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="border-t border-slate-200 pt-12 mt-12">
+      <h2 class="text-3xl font-bold text-center text-slate-800 mb-4">Exploring Algorithmic Bias Across Disciplines</h2>
+      <p class="text-center max-w-3xl mx-auto text-slate-600 mb-12">Algorithmic bias is a cross-curricular issue. The cycle below shows how real-world inequality can be amplified by AI systems. Following the graphic are starting points for students to explore this topic within different subjects, inspired by the work of <a href="https://leonfurze.com/" target="_blank" class="text-sky-600 font-semibold hover:underline">Leon Furze</a>.</p>
+      
+      <div class="bg-white rounded-xl shadow-lg p-8 my-12">
+        <h3 class="text-xl font-bold text-center text-slate-800 mb-8">The Cycle of Algorithmic Bias</h3>
+        <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+            <div class="text-center p-4 rounded-lg bg-red-50 border border-red-200 w-full md:w-1/4">
+                <h4 class="font-bold text-red-700">1. Real-World Inequity</h4>
+                <p class="text-sm text-slate-600">Unequal access, discriminatory processes, historical bias.</p>
+            </div>
+            <div class="text-2xl text-red-400 transform rotate-90 md:rotate-0">→</div>
+            <div class="text-center p-4 rounded-lg bg-amber-50 border border-amber-200 w-full md:w-1/4">
+                <h4 class="font-bold text-amber-700">2. Discriminatory Data</h4>
+                <p class="text-sm text-slate-600">Sampling bias, unrepresentative datasets, flawed data.</p>
+            </div>
+            <div class="text-2xl text-amber-400 transform rotate-90 md:rotate-0">→</div>
+            <div class="text-center p-4 rounded-lg bg-purple-50 border border-purple-200 w-full md:w-1/4">
+                <h4 class="font-bold text-purple-700">3. Biased AI Design</h4>
+                <p class="text-sm text-slate-600">Flawed models, exclusionary testing, poor explainability.</p>
+            </div>
+            <div class="text-2xl text-purple-400 transform rotate-90 md:rotate-0">→</div>
+            <div class="text-center p-4 rounded-lg bg-sky-50 border border-sky-200 w-full md:w-1/4">
+                <h4 class="font-bold text-sky-700">4. Application Injustice</h4>
+                <p class="text-sm text-slate-600">Deepening divides, reinforcing stereotypes, harmful outcomes.</p>
+            </div>
+        </div>
+        <div class="flex justify-center mt-4">
+             <div class="text-2xl text-sky-400 transform -rotate-90">↺</div>
+             <p class="text-slate-600 self-end ml-2">...which feeds back into real-world inequity.</p>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-gradient-to-r from-slate-50 to-gray-50 p-6 rounded-lg border border-slate-200 principle-card">
+            <h4 class="font-bold text-lg text-slate-700 mb-2">⚖️ Law</h4>
+            <p class="text-slate-600">What legal precedents, such as the UK's Equality Act 2010, exist to protect marginalised groups from discrimination? How would these laws apply to a decision made by a biased algorithm? Is a discriminatory automated system legal?</p>
+        </div>
+        <div class="bg-gradient-to-r from-amber-50 to-orange-50 p-6 rounded-lg border border-amber-200 principle-card">
+            <h4 class="font-bold text-lg text-amber-700 mb-2">📚 English and Literature</h4>
+            <p class="text-slate-600">How have certain groups been silenced or oppressed throughout history? What is the implication of this “gap” in the written record of the internet when it is used as data to train an AI? How might AI perpetuate or challenge these historical omissions?</p>
+        </div>
+        <div class="bg-gradient-to-r from-sky-50 to-blue-50 p-6 rounded-lg border border-sky-200 principle-card">
+            <h4 class="font-bold text-lg text-sky-700 mb-2">🔢 Mathematics & Statistics</h4>
+            <p class="text-slate-600">What is an algorithm? How can sampling biases and a lack of representative datasets lead to biased outcomes? Investigate how statistical techniques like re-weighting or algorithmic changes can be used to audit and enhance fairness.</p>
+        </div>
+        <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-lg border border-indigo-200 principle-card">
+            <h4 class="font-bold text-lg text-indigo-700 mb-2">👮🏾 Policing & Social Studies</h4>
+            <p class="text-slate-600">How does systemic bias affect different groups in society? Investigate how algorithms are used in policing and other societal functions. How can AI systems that are trained on historical data perpetuate or even "supercharge" existing societal biases?</p>
+        </div>
+        <div class="bg-gradient-to-r from-rose-50 to-pink-50 p-6 rounded-lg border border-rose-200 principle-card">
+            <h4 class="font-bold text-lg text-rose-700 mb-2">🏥 Allied Health</h4>
+            <p class="text-slate-600">Real-world health inequalities can create discriminatory data, leading to biased AI design. How might this cycle create application injustices, such as exacerbating rich-poor treatment gaps or deepening digital divides in healthcare? What are the risks if an AI diagnostic tool is trained on data from only one demographic?</p>
+        </div>
+        <div class="bg-gradient-to-r from-emerald-50 to-green-50 p-6 rounded-lg border border-emerald-200 principle-card">
+            <h4 class="font-bold text-lg text-emerald-700 mb-2">🏃🏼‍♀️ Sport</h4>
+            <p class="text-slate-600">AI is now used for player recruitment and performance analysis. If the training data reflects historical biases (e.g., favouring certain physical attributes), how might this disadvantage players who do not fit that mould? Could a "blind scouting" approach using AI help to reduce these biases?</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="text-center mt-12">
+      <a href="index.html" class="px-4 py-2 bg-slate-200 rounded-lg hover:bg-slate-300 transition-colors">← Back to Home</a>
     </div>
 </main>
 
-<footer class="bg-slate-800 text-white py-6 text-center text-sm">
+<footer class="bg-slate-800 text-white py-6 text-center text-sm mt-12">
   Tony Myers © 2025
 </footer>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  // Mobile menu toggle
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
   if (mobileMenuButton && mobileMenu) {
@@ -79,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Original ethics checklist data and rendering
   const ethicsChecklistData = [
     { principle: "Academic Integrity", question: "Does my syllabus clearly state my policy on using this tool for graded assignments?", redFlags: "A one-size-fits-all policy; lack of clarity on what constitutes cheating.", bestPractice: "Develop assignment-specific AI policies. When use is permitted, teach students how to cite the AI tool properly." },
     { principle: "Student Data Privacy", question: "Does the tool's privacy policy state whether it uses my students' data to train its models?", redFlags: "Vague privacy policies; no option to opt out of data collection for training; requiring excessive personal information.", bestPractice: "Prefer tools that do not train on user data. Anonymise all student work before uploading by removing all Personally Identifiable Information (PII)." },
@@ -90,35 +188,35 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!container) return;
     container.innerHTML = ethicsChecklistData.map((item, index) => `
       <div class="border border-slate-200 rounded-lg">
-        <button class="accordion-toggle w-full flex justify-between p-4 hover:bg-slate-50 font-semibold text-left" onclick="toggleAccordion(${index})">
+        <button class="accordion-toggle w-full flex justify-between items-center p-4 hover:bg-slate-50 font-semibold text-left text-lg text-slate-800" onclick="toggleAccordion(${index})">
           <span>${item.principle}</span>
-          <span id="arrow-${index}" class="transition-transform duration-300">▼</span>
+          <span id="arrow-${index}" class="transition-transform duration-300 text-sky-700 text-2xl">↓</span>
         </button>
         <div id="accordion-${index}" class="accordion-content">
-          <div class="p-4 border-t text-slate-600">
+          <div class="p-4 border-t border-slate-200 text-slate-600 space-y-3">
             <p><strong>Key Question:</strong> ${item.question}</p>
-            <p><strong>Red Flags:</strong> ${item.redFlags}</p>
-            <p><strong>Best Practice:</strong> ${item.bestPractice}</p>
+            <p><strong>🚩 Red Flags:</strong> ${item.redFlags}</p>
+            <p><strong>✅ Best Practice:</strong> ${item.bestPractice}</p>
           </div>
         </div>
       </div>
     `).join('');
-    window.toggleAccordion = function(index) {
-      const content = document.getElementById(`accordion-${index}`);
-      const arrow = document.getElementById(`arrow-${index}`);
-      if (content.classList.contains('open')) {
-        content.classList.remove('open');
-        content.style.maxHeight = '0px';
-        arrow.style.transform = 'rotate(0deg)';
-      } else {
-        content.classList.add('open');
-        content.style.maxHeight = '2000px';
-        arrow.style.transform = 'rotate(180deg)';
-      }
-    };
   }
   renderEthicsChecklist();
 });
+
+// Accordion toggle function (global scope)
+window.toggleAccordion = function(index) {
+  const content = document.getElementById(`accordion-${index}`);
+  const arrow = document.getElementById(`arrow-${index}`);
+  if (content.classList.contains('open')) {
+    content.classList.remove('open');
+    arrow.style.transform = 'rotate(0deg)';
+  } else {
+    content.classList.add('open');
+    arrow.style.transform = 'rotate(180deg)';
+  }
+};
 </script>
 
 </body>
