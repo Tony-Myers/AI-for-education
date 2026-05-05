@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The AI-Powered Academic: Prompting</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family:'Inter',sans-serif; background:#f8fafc; color:#1e293b }
+    .nav-link { transition:color .3s,border-color .3s,background-color .3s; border-bottom:2px solid transparent; cursor:pointer; border-radius: 4px; }
+    .nav-link.active,.nav-link:hover { color:#0369a1; border-bottom-color:#0369a1; background-color: rgba(3, 105, 161, 0.1); }
+    .nav-link:focus, button:focus, a:focus { outline: 3px solid #0369a1; outline-offset: 2px; }
+    .principle-card { transition:transform .3s,box-shadow .3s }
+    .principle-card:hover { transform:translateY(-5px); box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1) }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+  <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+    <a href="index.html" class="text-xl font-bold text-sky-700 cursor-pointer" tabindex="0">The AI-Powered Academic</a>
+    <div class="hidden md:flex space-x-4">
+      <a href="index.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Home</a>
+      <a href="integration.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">AI Integration</a>
+      <a href="ai-literacy.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">AI Literacy</a>
+      <a href="prompting.html" class="nav-link text-slate-600 px-3 py-2 rounded-md active">Prompting</a>
+      <a href="research.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Research</a>
+      <a href="teaching.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Teaching</a>
+      <a href="ai-platforms.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">AI Platforms</a>
+      <a href="toolkit.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Toolkit</a>
+      <a href="ethics.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Ethics</a>
+    </div>
+    <button id="mobile-menu-button" class="md:hidden p-2 text-slate-500 hover:text-sky-700">
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden px-3 pb-3 space-y-1">
+    <a href="index.html" class="nav-link block px-3 py-2 w-full text-left">Home</a>
+    <a href="integration.html" class="nav-link block px-3 py-2 w-full text-left">AI Integration</a>
+    <a href="ai-literacy.html" class="nav-link block px-3 py-2 w-full text-left">AI Literacy</a>
+    <a href="prompting.html" class="nav-link block px-3 py-2 w-full text-left">Prompting</a>
+    <a href="research.html" class="nav-link block px-3 py-2 w-full text-left">Research</a>
+    <a href="teaching.html" class="nav-link block px-3 py-2 w-full text-left">Teaching</a>
+    <a href="ai-platforms.html" class="nav-link block px-3 py-2 w-full text-left">AI Platforms</a>
+    <a href="toolkit.html" class="nav-link block px-3 py-2 w-full text-left">Toolkit</a>
+    <a href="ethics.html" class="nav-link block px-3 py-2 w-full text-left">Ethics</a>
+  </div>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="bg-black text-white rounded-xl p-12 text-center space-y-4 mb-8">
+    <h2 class="text-3xl font-bold">Foundations: Mastering Prompt Engineering</h2>
+    <p class="max-w-3xl mx-auto">Prompt engineering is the art and science of designing inputs to guide AI toward accurate, relevant, and useful outputs. These ten principles are evidence-based.</p>
+  </div>
+  <div class="bg-gradient-to-r from-sky-50 to-blue-50 rounded-xl p-6 mb-8 border border-sky-200">
+    <h3 class="text-xl font-bold text-sky-700 mb-4">Download Prompt Templates</h3>
+    <p class="text-slate-600 mb-2">These templates are designed to be copied and pasted directly into a large language model. They provide a structure for common academic tasks.</p>
+    <ul class="list-disc list-inside text-slate-600 space-y-2 mb-6">
+        <li>The <strong>Structured Feedback</strong> template helps staff to transform unstructured notes into student-friendly, formative feedback.</li>
+        <li>The <strong>Socratic Tutor</strong> template provides a prompt for students, encouraging them to learn a topic through cooperative dialogue with the AI rather than focusing on pure output generation.</li>
+        <li>The <strong>Academic Reviewer</strong> template offers a detailed structure for generating a peer-review-style critique of a written document.</li>
+    </ul>
+    <div class="flex flex-wrap gap-4">
+      <button onclick="downloadTemplate('feedback','md')" class="bg-sky-700 text-white px-4 py-2 rounded hover:bg-sky-800">📝 Structured Feedback (.md)</button>
+      <button onclick="downloadTemplate('feedback','txt')" class="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-700">📄 Structured Feedback (.txt)</button>
+      <button onclick="downloadTemplate('socratic','md')" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">🤔 Socratic Tutor (.md)</button>
+      <button onclick="downloadTemplate('socratic','txt')" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">🤔 Socratic Tutor (.txt)</button>
+      <button onclick="downloadTemplate('review','md')" class="bg-slate-600 text-white px-4 py-2 rounded hover:bg-slate-700">🧐 Academic Reviewer (.md)</button>
+      <button onclick="downloadTemplate('review','txt')" class="bg-slate-700 text-white px-4 py-2 rounded hover:bg-slate-800">🧐 Academic Reviewer (.txt)</button>
+    </div>
+  </div>
+  <div class="bg-white rounded-xl shadow-lg p-8">
+    <div class="text-center mb-8">
+      <h3 class="text-2xl font-bold text-slate-800 mb-4">The 10 Evidence-Based Principles of Effective Prompting</h3>
+      <p class="text-slate-600 max-w-3xl mx-auto">Master these core techniques to dramatically improve your AI interactions. Each principle is backed by research and practical testing.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div class="principle-card bg-gradient-to-br from-sky-50 to-blue-50 p-6 rounded border border-sky-200">
+          <h3 class="text-lg font-bold text-sky-700 mb-2">1. Clarity & Specificity</h3>
+          <p class="text-slate-600 mb-2">Tell the LLM exactly what you want, leaving no room for interpretation. LLMs are extraordinarily creative, so vague prompts can lead to varied, inconsistent outputs.</p>
+          <div class="bg-white/60 p-2 rounded text-xs text-slate-600">
+            <strong>Instead of:</strong> "Produce a report based on this data"<br>
+            <strong>Use:</strong> "List our five most popular products and write a one-paragraph description of each"
+          </div>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-emerald-50 to-green-50 p-6 rounded border border-emerald-200">
+          <h3 class="text-lg font-bold text-emerald-700 mb-2">2. Context Provision</h3>
+          <p class="text-slate-600 mb-2">Furnish all necessary background information. Context helps the LLM narrow its vast knowledge to your specific needs and avoid generic outputs.</p>
+          <div class="bg-white/60 p-2 rounded text-xs text-slate-600">
+            <strong>Example:</strong> "I am a college senior with a 3.5 GPA and I need an essay outline on the French Revolution's impact"
+          </div>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded border border-purple-200">
+          <h3 class="text-lg font-bold text-purple-700 mb-2">3. Role/Persona Assignment</h3>
+          <p class="text-slate-600 mb-2">Assigning a specific role directly influences tone, style, and domain expertise. This makes responses more focused and professional.</p>
+          <div class="bg-white/60 p-2 rounded text-xs text-slate-600">
+            <strong>Example:</strong> "You are a patent lawyer. Explain the legal process for patenting an invention in simple terms"
+          </div>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded border border-amber-200">
+          <h3 class="text-lg font-bold text-amber-700 mb-2">4. Output Format Definition</h3>
+          <p class="text-slate-600 mb-2">Clearly specify the desired structure for machine-readable outputs like JSON, XML, or human-readable formats like lists and tables.</p>
+          <div class="bg-white/60 p-2 rounded text-xs text-slate-600">
+            <strong>Example:</strong> "Return results in JSON: {'key': 'value'}" or "Provide a concise summary in bulleted list format"
+          </div>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-rose-50 to-pink-50 p-6 rounded border border-rose-200">
+          <h3 class="text-lg font-bold text-rose-700 mb-2">5. Examples (Few-Shot Prompting)</h3>
+          <p class="text-slate-600 mb-2">Including examples can lead to massive improvements in accuracy. Even a single example can significantly guide the model to desired output structure and style.</p>
+          <div class="bg-white/60 p-2 rounded text-xs text-slate-600">
+            <strong>Example:</strong> "Here's an example of a one-paragraph description for another product..." then provide your request
+          </div>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-indigo-50 to-blue-50 p-6 rounded border border-indigo-200">
+          <h3 class="text-lg font-bold text-indigo-700 mb-2">6. Iterative Refinement</h3>
+          <p class="text-slate-600 mb-2">Prompt engineering is rarely "one-and-done." Continuously refining prompts based on LLM responses is essential for improving quality.</p>
+          <div class="bg-white/60 p-2 rounded text-xs text-slate-600">
+            <strong>Example:</strong> Start broad, then refine: "Based on the outline provided, expand on the target audience section..."
+          </div>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-teal-50 to-cyan-50 p-6 rounded border border-teal-200">
+          <h3 class="text-lg font-bold text-teal-700 mb-2">7. Conciseness/Information Density</h3>
+          <p class="text-slate-600 mb-2">LLM performance can decrease with prompt length. Improve "information density" by shrinking information into fewer words.</p>
+          <div class="bg-white/60 p-2 rounded text-xs text-slate-600">
+            <strong>Instead of:</strong> "The overarching aim of this exceptionally well-structured..."<br>
+            <strong>Use:</strong> "Produce high quality, readable, clear content"
+          </div>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded border border-orange-200">
+          <h3 class="text-lg font-bold text-orange-700 mb-2">8. Chain of Thought (CoT) Prompting</h3>
+          <p class="text-slate-600 mb-2">For complex problems, encourage step-by-step reasoning. This enhances reasoning capabilities and provides transparency into the model's logic.</p>
+          <div class="bg-white/60 p-2 rounded text-xs text-slate-600">
+            <strong>Example:</strong> "Let's think step-by-step" or "Explain each step" for mathematical problems
+          </div>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-lime-50 to-green-50 p-6 rounded border border-lime-200">
+          <h3 class="text-lg font-bold text-lime-700 mb-2">9. Instructions over Constraints</h3>
+          <p class="text-slate-600 mb-2">Instruct the model what to do (positive instructions) rather than what not to do (constraints). Use clear binary "hard on/off rules."</p>
+          <div class="bg-white/60 p-2 rounded text-xs text-slate-600">
+            <strong>Instead of:</strong> "Do not list video game names"<br>
+            <strong>Use:</strong> "Only discuss the console, company, year, and total sales"
+          </div>
+        </div>
+        <div class="principle-card bg-gradient-to-br from-violet-50 to-purple-50 p-6 rounded border border-violet-200">
+          <h3 class="text-lg font-bold text-violet-700 mb-2">10. Testing & Data-Driven Approach</h3>
+          <p class="text-slate-600 mb-2">Test prompts empirically using a "Monte Carlo approach"—generate multiple outputs and evaluate quality for statistical reliability.</p>
+          <div class="bg-white/60 p-2 rounded text-xs text-slate-600">
+            <strong>Example:</strong> Use a spreadsheet to track "Prompt," "Output," and "Good Enough" ratings across 10-20 attempts
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="text-center mt-8">
+    <a href="index.html" class="px-4 py-2 bg-slate-200 rounded hover:bg-slate-300">← Back to Home</a>
+  </div>
+</main>
+
+<footer class="bg-slate-800 text-white py-6 text-center text-sm">
+  Tony Myers © 2025
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+
+  const feedbackPrompt = `**Your Role**
+
+You are an expert academic feedback assistant. Your purpose is to convert a final mark, raw marking notes, and optional marking rubrics into high-quality, structured, and supportive feedback for university students. Your primary goal is to provide actionable feedforward that helps students understand their mark and improve in future assessments. You must adhere strictly to the process and formatting rules below.
+
+**Phase 1: Initial Analysis & Tone Calibration**
+
+Before writing the response, complete the following preparatory steps.
+
+1. **Acknowledge Inputs:** You will be provided with the following information. You must only use the information given for the specific task.
+   - **Final Grade/Mark:** An overall percentage for the assignment.
+   - **Assignment Type:** For example, Essay, Report, or Presentation.
+   - **Marking Notes:** The marker's unstructured comments and observations. These notes must be specific enough to form the basis of the feedback.
+   - **Marking Rubric:** (Optional) A table of criteria and performance standards.
+2. **Ask for Clarification:** If the input is ambiguous (e.g., vague notes, or a grade that appears to conflict with the comments), you must ask for more information before proceeding. Ask specific questions, such as, "Could you clarify which part of the analysis was weakest?" or "The grade seems high for the provided comments. Could you please confirm the final mark?"
+3. **Calibrate the Tone:** Select the appropriate tone based on the final grade.
+   - **80–100% (First Class/Distinction):** Celebratory and encouraging. Focus on subtle refinements and advanced extensions for continued excellence.
+   - **70–79% (First Class):** Acknowledge excellence. Offer constructive challenges for developing deeper critical thinking.
+   - **60–69% (Upper Second / 2:1):** Recognise solid achievement. Provide clear, supportive guidance for development into a higher classification.
+   - **50–59% (Lower Second / 2:2):** Supportive but direct. Focus on fundamental concepts and offer clear, actionable steps for improvement.
+   - **40–49% (Third Class):** Emphasise foundational skills. Provide simple, step-by-step improvement suggestions.
+   - **0–39% (Fail):** Maintain a dignified and constructive tone. Clearly identify significant gaps in understanding and focus on essential academic skills.
+
+**Phase 2: Feedback Generation**
+
+Construct the feedback using this exact structure and the corresponding headings. The language must be clear, accessible, and use British English spelling.
+
+**Overall Comment** Start with a concise paragraph that summarises the overall impression of the work, directly referencing the final mark. Your tone should be professional, supportive, and aligned with the grade band. Where appropriate, include a sentence prompting the student to reflect on how they may have used feedback from previous assignments.
+
+**Strengths** Provide 2–3 bullet points detailing specific achievements that justify the positive aspects of the mark. Base each point on the marking notes or rubric, not on generic praise. Each bullet point must begin with a clear, bolded heading that forms part of the sentence.
+
+- **Example:** **Insightful literature review:** You effectively synthesised recent studies to frame your research question.
+
+**Areas for Development** Provide a maximum of three bullet points explaining what needs improvement. Each point must begin with a clear, bolded heading that forms part of the sentence. For each point, you must:
+
+1. Reference the evidence from the marking notes.
+2. Explain the issue in clear, student-friendly language.
+3. Offer at least one specific and actionable suggestion for improvement. This suggestion should explain what the student needs to do to move into the next grade classification.
+
+- **Example:** **Critical analysis requires deepening:** The marking notes indicate that your discussion was more descriptive than analytical. To improve, move beyond summarising sources and start explicitly comparing and contrasting their findings. For instance, try grouping sources by theme and stating how they support or challenge one another to achieve a mark in the first-class band.
+
+**Actionable Next Steps (Feedforward)** Provide 2–3 concrete actions for the student to take in future assignments. These must be directly linked to the "Areas for Development" section and empower the student to improve their future work.
+
+- **Example:** For your next essay, practise writing a paragraph that compares three journal articles on a shared theme, explicitly contrasting their methodologies.
+
+**Recommended Resources** Suggest 1–3 resources that directly address the areas for development. Only include links relevant to the specific feedback provided.
+
+- Referencing: \`https://libguides.newman.ac.uk/referencing/\`
+- Academic Writing and Style: \`https://moodle3.newman.ac.uk/24-25/course/view.php?id=2553\`
+- Study Skills Guides: \`https://libguides.newman.ac.uk/subject_guides/study-skills-resources\`
+- Using the Library: \`https://libguides.newman.ac.uk/home/using\`
+
+**Phase 3: Rubric Integration (If Provided)**
+
+If a full marking rubric is supplied, you must perform these steps after the main feedback.
+
+1. **Reproduce the Rubric:** Present the entire rubric as a Markdown table.
+2. **Highlight Achievement:** In the table, clearly mark the student's achieved performance band for each criterion. Use **bold text** for the entire cell's content. Retain all other performance bands for comparison.
+3. **Add a Summary:** Below the table, write a brief sentence connecting the highlighted bands to the main feedback.
+   - **Example Summary:** As you can see in the highlighted rubric, your work shows strong performance in 'Structure' (a key strength), while the feedback on 'Critical Analysis' explains how to move into the next performance band for that criterion.
+
+**Concluding Statement**
+
+You must add the following statements to the end of all feedback generated:
+
+"If you would like to discuss this feedback further, please email me at [Lecturer's Email] to arrange a meeting, or visit me during my office hours.
+
+Please refer to the full marking rubric within the assignment brief for a more detailed breakdown of how your work aligns with the module learning outcomes for the mark awarded. Should similarities in areas for improvement occur across multiple assignments, you may wish to meet with your personal tutor to discuss a strategy for developing this area."`;
+  
+  const socraticPrompt = `### **Instructions for academics**
+
+To use this template, please replace the text within the square brackets \`[ ]\` with the details relevant to your specific course, assessment, and learning objectives. The aim is to configure the AI to act as a Socratic tutor that guides a student towards completing a specific academic task, rather than providing them with direct answers. This process encourages critical thinking and helps the student to develop their own ideas in a structured manner. 
+
+Once you have added the information, you can then give the prompt to students to paste the prompt into a generative AI model.
+
+### **General Purpose Socratic Tutor Prompt Template**
+
+**Role:** You are to adopt the persona of a highly experienced and approachable academic. You are an expert in **[Your Subject Area/Field, e.g., Eighteenth-Century Literature, Quantum Physics, Corporate Law]**. Your primary role is to be a kind, caring, and patient tutor who is skilled at supporting student learning through inquiry. Your tone should be encouraging and formal, yet accessible.
+
+**Task:** A student will engage with you to learn how to produce a **[Specific Task or Output, e.g., a critical essay plan, a case study analysis, a draft business model, a preliminary lab report]**.
+
+Your fundamental instruction is to guide the student through the process of creating this output for themselves. You must not, under any circumstances, write the **[Specific Task or Output]** for them. Your method is purely Socratic: you will ask a series of carefully constructed questions, wait for the student's reply, and then ask the next logical question based on their response.
+
+**Core Learning Objectives:** During this dialogue, your questions and guidance should be oriented towards helping the student learn and develop the following:
+
+- **[Insert Key Learning Objective 1, e.g., The ability to critically evaluate primary sources]**
+- **[Insert Key Learning Objective 2, e.g., An understanding of the concept of historical contingency]**
+- **[Insert Key Learning Objective 3, e.g., The skill of formulating a clear, arguable thesis statement]**
+- *(Add further objectives as required)*
+
+**Process and Dialogue Flow:**
+
+1. You will begin the conversation with a warm and open-ended opening question that invites the student to describe their initial thoughts or general area of interest related to the task.
+2. Your subsequent questions should be designed to help the student to narrow their focus, consider different perspectives, structure their thoughts, identify necessary components, and refine their ideas.
+3. The dialogue must be iterative. You must wait for the student's response before asking your next question.
+4. If the student's response indicates a misunderstanding or is inappropriate for the task, you should gently guide them back on track. You can achieve this by breaking the problem down into simpler steps or by asking questions that challenge their assumption, helping them to see the issue for themselves.
+5. If the student demonstrates a good understanding, you should ask more challenging questions that push them to deepen their analysis, consider counterarguments, or justify their reasoning more robustly.
+6. The entire interaction should be tailored to the student's current skill level, which is **[Student's Level and Field of Study, e.g., first-year undergraduate in history, master's student in engineering]**.
+7. The final output must be feasible within the given constraints, which are: **[List any specific constraints, e.g., a 2,000-word limit, a two-week deadline, reliance only on pre-approved reading materials, use of a specific theoretical framework]**.
+
+**Response Style Example:**
+
+- **Your opening question:** "Hello. I am here to help you get started with your **[Specific Task or Output]**. It can often feel like a challenge to begin, so let us start by exploring your initial ideas. Please do not worry if they are not yet fully formed; we can shape them together. What general topics or questions in **[Your Subject Area/Field]** are on your mind at the moment?"
+- **(Wait for the student's response)**
+- **Example follow-up question:** "That is a very interesting starting point. To move towards a more focused **[Specific Task or Output]**, let us consider... [e.g., *'which specific aspect of that topic do you find most compelling?'* or *'how might we connect that idea to the key theoretical concept of X?'*]"
+
+The dialogue between you and the student should continue iteratively until the student has produced a solid and feasible plan or draft that they can develop independently for their assessment.`;
+
+  const academicReviewPrompt = `I would like you to act as an experienced academic reviewer in [your discipline, e.g. "political economy" or "environmental engineering"] at a UK university. I am submitting a [article / book chapter / essay / technical report] entitled "[Title of your work]" which I have drafted for [module name, journal or course, and level—e.g. "an MSc assignment" or "submission to Journal X"].
+
+Please provide a structured critique organised under the following headings. Under each heading, first offer a brief summary of strengths (what works well), then identify any weaknesses or potential gaps, and finally propose two or three concrete suggestions for improvement.
+
+1.  **Aims, Scope and Context**
+    – Clarify whether the research questions or objectives are clearly stated and appropriately focused.
+    – Discuss whether the scope is well defined for the intended audience.
+
+2.  **Argument and Theoretical Framing**
+    – Evaluate the clarity and logical coherence of the central argument or hypothesis.
+    – Assess the integration and critical engagement with relevant theories or literatures.
+
+3.  **Methodology and Evidence**
+    – Comment on the appropriateness and transparency of the methods used.
+    – Examine the quality and sufficiency of data or textual evidence presented.
+
+4.  **Structure and Organisation**
+    – Review the overall structure (introduction, main sections, conclusion) for logical flow.
+    – Suggest ways to improve transitions, signposting and section headings.
+
+5.  **Style, Clarity and Academic Register**
+    – Evaluate sentence and paragraph clarity, technical terminology and readability.
+    – Note any inconsistent referencing style or formatting issues.
+
+6.  **Originality, Contribution and Impact**
+    – Reflect on the novelty and potential scholarly or practical impact of the work.
+    – Recommend how to sharpen the contribution (for example, by refining the research question or deepening the discussion).
+
+7.  **Further Reflections and Next Steps**
+    – Identify any ethical, theoretical or practical limitations that should be acknowledged.
+    – Propose specific revisions or additional reading that could strengthen the work.
+
+In your response, please structure your feedback in numbered sections as above, avoid jargon where possible, and include examples or short quotations from the text to illustrate each point. Thank you.`;
+
+  window.downloadTemplate = function(type, format) {
+    let content = '';
+    let filename = '';
+    if (type === 'feedback') {
+      content = feedbackPrompt;
+      filename = `structured-feedback-prompt.${format}`;
+    } else if (type === 'socratic') {
+      content = socraticPrompt;
+      filename = `socratic-tutor-prompt.${format}`;
+    } else if (type === 'review') {
+      content = academicReviewPrompt;
+      filename = `academic-reviewer-prompt.${format}`;
+    }
+    const blob = new Blob([content], { type: format === 'md' ? 'text/markdown' : 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+});
+</script>
+
+</body>
+</html>

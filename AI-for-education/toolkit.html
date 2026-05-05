@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The AI-Powered Academic: Toolkit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family:'Inter',sans-serif; background:#f8fafc; color:#1e293b }
+    .nav-link { transition:color .3s,border-color .3s,background-color .3s; border-bottom:2px solid transparent; cursor:pointer; border-radius: 4px; }
+    .nav-link.active,.nav-link:hover { color:#0369a1; border-bottom-color:#0369a1; background-color: rgba(3, 105, 161, 0.1); }
+    .nav-link:focus, button:focus, a:focus { outline: 3px solid #0369a1; outline-offset: 2px; }
+    .tool-link { color:#0369a1 !important; text-decoration:none; }
+    .tool-link:hover { color:#075985 !important; text-decoration:underline; text-decoration-thickness: 2px; }
+    .tool-card { transition:transform .3s,box-shadow .3s }
+    .tool-card:hover { transform:translateY(-5px); box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1) }
+    .comparison-table th, .comparison-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+    .comparison-table th { background-color: #f9fafb; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+        <a href="index.html" class="text-xl font-bold text-sky-700 cursor-pointer" tabindex="0">The AI-Powered Academic</a>
+        <div class="hidden md:flex space-x-4">
+            <a href="index.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Home</a>
+            <a href="integration.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">AI Integration</a>
+            <a href="ai-literacy.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">AI Literacy</a>
+            <a href="prompting.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Prompting</a>
+            <a href="research.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Research</a>
+            <a href="teaching.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Teaching</a>
+            <a href="ai-platforms.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">AI Platforms</a>
+            <a href="toolkit.html" class="nav-link text-slate-600 px-3 py-2 rounded-md active">Toolkit</a>
+            <a href="ethics.html" class="nav-link text-slate-600 px-3 py-2 rounded-md">Ethics</a>
+        </div>
+        <button id="mobile-menu-button" class="md:hidden p-2 text-slate-500 hover:text-sky-700">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden px-3 pb-3 space-y-1">
+        <a href="index.html" class="nav-link block px-3 py-2 w-full text-left">Home</a>
+        <a href="integration.html" class="nav-link block px-3 py-2 w-full text-left">AI Integration</a>
+        <a href="ai-literacy.html" class="nav-link block px-3 py-2 w-full text-left">AI Literacy</a>
+        <a href="prompting.html" class="nav-link block px-3 py-2 w-full text-left">Prompting</a>
+        <a href="research.html" class="nav-link block px-3 py-2 w-full text-left">Research</a>
+        <a href="teaching.html" class="nav-link block px-3 py-2 w-full text-left">Teaching</a>
+        <a href="ai-platforms.html" class="nav-link block px-3 py-2 w-full text-left">AI Platforms</a>
+        <a href="toolkit.html" class="nav-link block px-3 py-2 w-full text-left">Toolkit</a>
+        <a href="ethics.html" class="nav-link block px-3 py-2 w-full text-left">Ethics</a>
+    </div>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="bg-black text-white rounded-xl p-12 text-center space-y-4 mb-8">
+      <h2 class="text-3xl font-bold">The Academic's AI Toolkit</h2>
+      <p class="max-w-3xl mx-auto">Explore tools to support diverse learners, automate resource creation, and enhance your own productivity.</p>
+    </div>
+
+    <div class="space-y-12 mb-12">
+      <h2 class="text-3xl font-bold text-center text-slate-800">Featured Tool: NotebookLM</h2>
+      
+      <div class="bg-white rounded-xl shadow-lg p-8 tool-card border-t-4 border-sky-600">
+        <div class="flex flex-col md:flex-row justify-between items-start mb-6">
+            <div>
+                <h3 class="text-3xl font-bold text-sky-700 mb-2">NotebookLM (Google)</h3>
+                <span class="inline-block bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded font-semibold uppercase tracking-wide">Essential for Staff & Students</span>
+            </div>
+            <a href="https://notebooklm.google.com" target="_blank" class="mt-4 md:mt-0 px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-500 font-medium transition-colors">Launch Tool →</a>
+        </div>
+
+        <p class="text-slate-600 mb-6 text-lg">A "grounded" AI assistant that processes text, audio, and video sources. Unlike standard chatbots, it cites its sources, making it safer for academic environments. It has recently evolved into a multimodal powerhouse capable of generating podcasts, visual aids, and lesson resources.</p>
+        
+        <div class="mb-8 bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-md">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-amber-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-bold text-amber-800">Verification Required</h3>
+                    <div class="mt-1 text-sm text-amber-700">
+                        <p>While using uploaded sources lowers the risk of hallucination compared to the open web, it does not eliminate it. <strong>You must always check the citation links</strong> provided next to every claim to ensure the AI has interpreted your source text accurately.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h4 class="text-lg font-bold text-slate-700 mb-4 border-b border-slate-200 pb-2">For Teaching & Support</h4>
+                <ul class="space-y-3 text-slate-700">
+                    <li class="flex items-start gap-2">
+                        <span class="text-purple-600 mt-1">🎙️</span>
+                        <span><strong>Generate "Audio Overviews" (Podcasts):</strong> Convert your text-heavy module handbooks or lecture notes into engaging audio discussions for accessibility.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-red-600 mt-1">📹</span>
+                        <span><strong>Video Processing:</strong> Upload YouTube lecture links. Ask NotebookLM to summarise them or extract key quotes for your slides.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-emerald-600 mt-1">🧩</span>
+                        <span><strong>Instant Quiz & Flashcards:</strong> Generate 20-question quizzes or flashcard tables from your readings to upload to the VLE.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-orange-600 mt-1">🎞️</span>
+                        <span><strong>Slide Deck & Infographic Outlines:</strong> Ask the AI to "Outline a 5-slide deck" or "Plan an infographic timeline" based on your sources.</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                 <h4 class="text-lg font-bold text-slate-700 mb-4 border-b border-slate-200 pb-2">For Research & Admin</h4>
+                 <ul class="space-y-3 text-slate-700">
+                    <li class="flex items-start gap-2">
+                        <span class="text-blue-600 mt-1">🔍</span>
+                        <span><strong>Grounded Analysis:</strong> Upload 20 PDFs and ask: "Synthesise the arguments on X across all sources with citations."</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-blue-600 mt-1">🧠</span>
+                        <span><strong>Mind Mapping:</strong> Use it to identify connections between varied sources to structure your literature review.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-blue-600 mt-1">📝</span>
+                        <span><strong>Grant & Briefing Prep:</strong> Quickly generate briefing documents, FAQs, or timelines from rough notes.</span>
+                   </ul>
+            </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-slate-200">
+            <h4 class="text-xl font-bold text-sky-700 mb-3">NotebookLM Enhancer Workflows</h4>
+            <p class="text-slate-600 mb-5">To further extend the utility of NotebookLM in academic settings, utilise the following custom-built extractor and enhancer tools. These applications are designed to help staff and students manipulate NotebookLM outputs into structured, ready-to-use teaching materials.</p>
+            
+            <div class="space-y-3">
+                <a href="https://tony-myers.github.io/NotebookLM-Quiz-extractor-and-enhancer/" target="_blank" class="block bg-slate-50 hover:bg-sky-50 p-4 rounded-lg border border-slate-200 transition-colors">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h5 class="font-bold text-slate-800">Quiz Extractor and Enhancer</h5>
+                            <p class="text-sm text-slate-600 mt-1">Transform raw NotebookLM quiz generations into structured, deployable assessments for your Virtual Learning Environment (VLE).</p>
+                        </div>
+                        <span class="text-sky-600 font-bold ml-4">→</span>
+                    </div>
+                </a>
+                
+                <a href="https://tony-myers.github.io/NotebookLM-Mind-Map-Extractor-and-Enhancer/" target="_blank" class="block bg-slate-50 hover:bg-sky-50 p-4 rounded-lg border border-slate-200 transition-colors">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h5 class="font-bold text-slate-800">Mind Map Extractor and Enhancer</h5>
+                            <p class="text-sm text-slate-600 mt-1">Convert synthesised notes and connections into visual mind maps to aid student comprehension and literature reviews.</p>
+                        </div>
+                        <span class="text-sky-600 font-bold ml-4">→</span>
+                    </div>
+                </a>
+
+                <a href="https://tony-myers.github.io/NotebookLM-slide-deck-theme-builder/" target="_blank" class="block bg-slate-50 hover:bg-sky-50 p-4 rounded-lg border border-slate-200 transition-colors">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h5 class="font-bold text-slate-800">Slide Deck Theme Builder</h5>
+                            <p class="text-sm text-slate-600 mt-1">Streamline the process of turning NotebookLM document outlines into formatted, thematic slide decks for lectures.</p>
+                        </div>
+                        <span class="text-sky-600 font-bold ml-4">→</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow-lg p-8">
+      <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-slate-800">Other Essential Tools</h2>
+          <p class="text-slate-600 mt-2">Filter by function to find the right tool for the job.</p>
+      </div>
+      <div class="flex flex-wrap gap-4 mb-8 justify-center">
+        <div class="flex items-center space-x-2">
+          <label for="filter-function" class="font-semibold text-slate-600">Function:</label>
+          <select id="filter-function" class="p-2 border rounded-md shadow-sm bg-white">
+            <option value="all">All Functions</option>
+          </select>
+        </div>
+        <div class="flex items-center space-x-2">
+          <label for="filter-cost" class="font-semibold text-slate-600">Cost:</label>
+          <select id="filter-cost" class="p-2 border rounded-md shadow-sm bg-white">
+            <option value="all">All Models</option>
+          </select>
+        </div>
+      </div>
+      <div id="toolkit-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <p class="col-span-full text-center text-slate-600">Loading toolkit...</p>
+      </div>
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="index.html" class="px-4 py-2 bg-slate-200 rounded hover:bg-slate-300">← Back to Home</a>
+    </div>
+</main>
+
+<footer class="bg-slate-800 text-white py-6 text-center text-sm">
+  Tony Myers © 2025
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+
+  const toolkitData = [
+    { name: "Google AI Studio", fn: "Prototyping & Code", features: "Build prompts and apps using Gemini models. Excellent for analysing multimodal data (video/images) and generating Python code for research.", cost: "Freemium", link: "https://aistudio.google.com" },
+    { name: "Gamma", fn: "Content Creation", features: "Generates beautiful slide decks, documents, and webpages from text prompts. Useful for rapid teaching material creation.", cost: "Freemium", link: "https://gamma.app" },
+    { name: "Research Rabbit", fn: "Literature Mapping", features: "Visualises citation networks to find connected papers. Essential for the 'discovery' phase of research.", cost: "Free", link: "https://researchrabbitapp.com" },
+    { name: "Elicit", fn: "Literature Review", features: "Finds papers and extracts key data into a table (e.g., participants, methods, findings). good for systematic reviews.", cost: "Freemium", link: "https://elicit.com" },
+    { name: "Connected Papers", fn: "Literature Mapping", features: "Visual graph of related papers. Helps ensure you haven't missed seminal works.", cost: "Freemium", link: "https://connectedpapers.com" },
+    { name: "Consensus", fn: "Evidence Search", features: "Search engine that answers questions with scientific consensus, citing study types and sample sizes.", cost: "Freemium", link: "https://consensus.app" }
+  ];
+
+  function renderToolkit(data) {
+    const grid = document.getElementById('toolkit-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    
+    if (data.length === 0) {
+        grid.innerHTML = '<p class="col-span-full text-center text-slate-600">No tools match the current filter.</p>';
+        return;
+    }
+
+    data.forEach((tool) => {
+      const card = document.createElement('div');
+      card.className = 'tool-card bg-white rounded-lg shadow-md p-6 flex flex-col border border-slate-100';
+      
+      let costClass = 'bg-blue-100 text-blue-800';
+      if (tool.cost === 'Free') costClass = 'bg-green-100 text-green-800';
+      if (tool.cost === 'Paid') costClass = 'bg-red-100 text-red-800';
+
+      card.innerHTML = `
+        <h3 class="text-xl font-bold text-slate-800 mb-1">${tool.name}</h3>
+        <p class="text-xs font-bold text-sky-600 uppercase tracking-wide mb-3">${tool.fn}</p>
+        <p class="text-slate-600 text-sm flex-grow mb-4 leading-relaxed">${tool.features}</p>
+        <div class="flex justify-between items-center mt-auto pt-4 border-t border-slate-100">
+          <span class="text-xs font-semibold px-2 py-1 rounded ${costClass}">${tool.cost}</span>
+          <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-link text-sm font-semibold text-sky-600 hover:text-sky-800">Visit →</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function setupToolkitFilters() {
+    const filterFunction = document.getElementById('filter-function');
+    const filterCost = document.getElementById('filter-cost');
+    if (!filterFunction || !filterCost) return;
+
+    const functions = [...new Set(toolkitData.map(tool => tool.fn))];
+    const costs = [...new Set(toolkitData.map(tool => tool.cost))];
+    
+    functions.sort().forEach(fn => {
+      const option = document.createElement('option');
+      option.value = fn;
+      option.textContent = fn;
+      filterFunction.appendChild(option);
+    });
+
+    costs.forEach(cost => {
+      const option = document.createElement('option');
+      option.value = cost;
+      option.textContent = cost;
+      filterCost.appendChild(option);
+    });
+    
+    function filterAndRender() {
+      const selectedFunction = filterFunction.value;
+      const selectedCost = filterCost.value;
+      const filteredData = toolkitData.filter(tool => {
+        return (selectedFunction === 'all' || tool.fn === selectedFunction) &&
+               (selectedCost === 'all' || tool.cost === selectedCost);
+      });
+      renderToolkit(filteredData);
+    }
+    
+    filterFunction.addEventListener('change', filterAndRender);
+    filterCost.addEventListener('change', filterAndRender);
+  }
+
+  renderToolkit(toolkitData);
+  setupToolkitFilters();
+});
+</script>
+
+</body>
+</html>

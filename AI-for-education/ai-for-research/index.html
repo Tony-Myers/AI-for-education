@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A practical guide to using generative AI across the research workflow, with secure platform choices, local AI options, verification protocols, and authorship guidance.">
+  <link rel="icon" href="data:,">
+  <title>AI for Research</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #526070;
+      --paper: #f7f8f4;
+      --line: #dfe4dc;
+      --forest: #174c43;
+      --teal: #0f766e;
+      --gold: #b58521;
+      --rose: #b45363;
+      --violet: #5b4b8a;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+
+    a, button { transition: color .18s ease, background-color .18s ease, border-color .18s ease, transform .18s ease; }
+    a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid rgba(181, 133, 33, .45); outline-offset: 3px; }
+
+    .hero {
+      min-height: 74vh;
+      background-image:
+        linear-gradient(90deg, rgba(12, 23, 28, .88) 0%, rgba(12, 23, 28, .76) 42%, rgba(12, 23, 28, .18) 100%),
+        url("images/research-hero-crop.png");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .band { border-top: 1px solid var(--line); }
+    .nav-link { border-bottom: 2px solid transparent; }
+    .nav-link:hover, .nav-link.active { color: var(--teal); border-color: var(--teal); }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.86);
+      box-shadow: 0 10px 30px rgba(23, 32, 51, .06);
+    }
+    .soft-card {
+      border: 1px solid rgba(23, 76, 67, .14);
+      border-radius: 8px;
+      background: #ffffff;
+    }
+    .pill { border-radius: 999px; border: 1px solid var(--line); }
+    .section-kicker { color: var(--teal); font-weight: 800; text-transform: uppercase; font-size: .78rem; letter-spacing: .08em; }
+    .rule { border-left: 4px solid var(--gold); }
+    .workflow-btn[aria-selected="true"], .filter-btn[aria-pressed="true"] {
+      background: var(--forest);
+      color: white;
+      border-color: var(--forest);
+    }
+    .source-link { color: #0f766e; font-weight: 650; }
+    .source-link:hover { color: #174c43; text-decoration: underline; text-decoration-thickness: 2px; }
+    .matrix-row { grid-template-columns: minmax(180px, 1.1fr) minmax(180px, 1fr) minmax(220px, 1.3fr); }
+    .icon-badge {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 118, 110, .1);
+      color: var(--teal);
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 720px) {
+      .hero { min-height: 70vh; background-position: 62% center; }
+      .matrix-row { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="sticky top-0 z-50 bg-white/92 backdrop-blur border-b border-stone-200">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="#top" class="font-extrabold text-lg text-[var(--forest)] whitespace-nowrap">AI for Research</a>
+      <div class="hidden lg:flex items-center gap-5 text-sm font-semibold text-slate-600">
+        <a class="nav-link py-2" href="#workflow">Workflow</a>
+        <a class="nav-link py-2" href="#prompting">Prompting</a>
+        <a class="nav-link py-2" href="#verification">Verification</a>
+        <a class="nav-link py-2" href="#secure">Secure AI</a>
+        <a class="nav-link py-2" href="#platforms">Platforms</a>
+        <a class="nav-link py-2" href="#ethics">Ethics</a>
+        <a class="nav-link py-2" href="#future">Future</a>
+      </div>
+      <a href="../index.html" class="pill px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-stone-100">Education site</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero flex items-end">
+      <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-12 pt-28 text-white">
+        <p class="font-bold uppercase tracking-[.08em] text-amber-200 text-sm">Updated 5 May 2026</p>
+        <h1 class="mt-4 max-w-4xl text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight">Generative AI for Research</h1>
+        <p class="mt-5 max-w-2xl text-lg sm:text-xl text-stone-100 leading-relaxed">
+          A practical, secure, and methodologically sceptical guide for researchers who want AI to accelerate work without outsourcing judgement.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#workflow" class="inline-flex items-center gap-2 rounded-md bg-amber-300 px-4 py-3 font-bold text-slate-950 hover:bg-amber-200">
+            <i data-lucide="route" class="h-5 w-5"></i>
+            Explore the workflow
+          </a>
+          <a href="#platforms" class="inline-flex items-center gap-2 rounded-md border border-white/60 px-4 py-3 font-bold text-white hover:bg-white/12">
+            <i data-lucide="shield-check" class="h-5 w-5"></i>
+            Choose a platform
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="band bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 grid gap-4 md:grid-cols-3">
+        <article class="soft-card p-5 rule">
+          <h2 class="font-extrabold text-lg">AI is a collaborator, not evidence</h2>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">Use models for generation, critique, transformation, and organisation. Scholarly databases, primary sources, code, and expert judgement still carry the evidential weight.</p>
+        </article>
+        <article class="soft-card p-5 rule">
+          <h2 class="font-extrabold text-lg">Security and accountability are separate</h2>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">A secure or local model can protect unpublished work, but it cannot make claims accountable. The researcher remains responsible for every interpretation, citation, and disclosure.</p>
+        </article>
+        <article class="soft-card p-5 rule">
+          <h2 class="font-extrabold text-lg">Verification is structural</h2>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">Hallucination, positional bias, and correlated model errors are not rare accidents. Build checks into prompts, workflows, and publication decisions from the beginning.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="workflow" class="band bg-[#f7f8f4]">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div class="max-w-3xl">
+          <p class="section-kicker">Research Lifecycle</p>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">Match the model to the task</h2>
+          <p class="mt-4 text-slate-600 leading-relaxed">The question is not whether AI can be inserted into research. It is whether the contribution is defensible, auditable, and proportionate to the evidence.</p>
+        </div>
+
+        <div class="mt-8 flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Research workflow stages">
+          <button class="workflow-btn pill px-4 py-2 font-bold whitespace-nowrap" data-stage="conception" aria-selected="true" role="tab">Conception</button>
+          <button class="workflow-btn pill px-4 py-2 font-bold whitespace-nowrap" data-stage="collection" aria-selected="false" role="tab">Data collection</button>
+          <button class="workflow-btn pill px-4 py-2 font-bold whitespace-nowrap" data-stage="analysis" aria-selected="false" role="tab">Analysis</button>
+          <button class="workflow-btn pill px-4 py-2 font-bold whitespace-nowrap" data-stage="interpretation" aria-selected="false" role="tab">Interpretation</button>
+          <button class="workflow-btn pill px-4 py-2 font-bold whitespace-nowrap" data-stage="writing" aria-selected="false" role="tab">Writing</button>
+          <button class="workflow-btn pill px-4 py-2 font-bold whitespace-nowrap" data-stage="review" aria-selected="false" role="tab">Peer review</button>
+        </div>
+
+        <div id="workflow-panel" class="mt-6 grid gap-6 lg:grid-cols-[1.1fr_.9fr] items-start"></div>
+
+        <div class="mt-10 grid gap-4 md:grid-cols-3">
+          <article class="card p-5">
+            <div class="icon-badge"><i data-lucide="mic" class="h-5 w-5"></i></div>
+            <h3 class="mt-4 font-extrabold text-lg">Voice interview bot</h3>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">The deck includes a voice-enabled qualitative interview bot. Treat it as an interview support system: test prompts, consent wording, bias, accessibility, and data handling before any live study.</p>
+            <a class="source-link mt-3 inline-block text-sm" href="https://github.com/Tony-Myers/AI_voice_interview_bot" target="_blank" rel="noopener noreferrer">View Tony's GitHub example</a>
+          </article>
+          <article class="card p-5">
+            <div class="icon-badge"><i data-lucide="terminal-square" class="h-5 w-5"></i></div>
+            <h3 class="mt-4 font-extrabold text-lg">Sandboxed analysis</h3>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">Use AI to draft deterministic R or Python code, not to calculate complex statistics inside a free-text chat. A sandbox helps contain untrusted code and protects the host system.</p>
+            <a class="source-link mt-3 inline-block text-sm" href="https://julius.ai/" target="_blank" rel="noopener noreferrer">Julius AI for data workflows</a>
+          </article>
+          <article class="card p-5">
+            <div class="icon-badge"><i data-lucide="book-check" class="h-5 w-5"></i></div>
+            <h3 class="mt-4 font-extrabold text-lg">Focused notebooks</h3>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">NotebookLM-style systems are strongest when the source set is curated and narrow. Avoid dumping an entire field into one mega-notebook and treating the summary as synthesis.</p>
+            <a class="source-link mt-3 inline-block text-sm" href="https://support.google.com/notebooklm/answer/16164461?hl=en" target="_blank" rel="noopener noreferrer">NotebookLM help</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="prompting" class="band bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid gap-10 lg:grid-cols-[.85fr_1.15fr]">
+          <div>
+            <p class="section-kicker">Architecture-Driven Prompting</p>
+            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">Prompting is context design</h2>
+            <p class="mt-4 text-slate-600 leading-relaxed">Transformer-based systems generate likely continuations from the context window. That makes prompting a methodological act: you are constraining the probability distribution, not asking an oracle.</p>
+            <div class="mt-6 grid gap-3 sm:grid-cols-3">
+              <div class="soft-card p-4">
+                <p class="text-sm font-bold text-[var(--rose)]">Temperature</p>
+                <p class="mt-1 text-sm text-slate-600">Lower for factual consistency, higher for divergent idea generation.</p>
+              </div>
+              <div class="soft-card p-4">
+                <p class="text-sm font-bold text-[var(--gold)]">Top-p</p>
+                <p class="mt-1 text-sm text-slate-600">Limits sampling to the most likely cumulative token set.</p>
+              </div>
+              <div class="soft-card p-4">
+                <p class="text-sm font-bold text-[var(--violet)]">Top-k</p>
+                <p class="mt-1 text-sm text-slate-600">Hard-cuts the candidate token pool to a fixed size.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-6">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-extrabold text-xl">The 7-part research prompt</h3>
+                <p class="mt-1 text-sm text-slate-600">Adapted from the workshop and the education AI prompting page.</p>
+              </div>
+              <button id="copyPrompt" class="inline-flex items-center gap-2 rounded-md border border-stone-300 px-3 py-2 text-sm font-bold hover:bg-stone-100">
+                <i data-lucide="copy" class="h-4 w-4"></i>
+                Copy
+              </button>
+            </div>
+            <ol class="mt-5 grid gap-3 sm:grid-cols-2 text-sm">
+              <li class="soft-card p-3"><strong>1. Role:</strong> define the expert lens.</li>
+              <li class="soft-card p-3"><strong>2. Task:</strong> specify the action.</li>
+              <li class="soft-card p-3"><strong>3. Context:</strong> state study design and purpose.</li>
+              <li class="soft-card p-3"><strong>4. Evidence:</strong> supply the data or text to use.</li>
+              <li class="soft-card p-3"><strong>5. Constraints:</strong> forbid unsupported claims.</li>
+              <li class="soft-card p-3"><strong>6. Format:</strong> require tables, code, or headings.</li>
+              <li class="soft-card p-3 sm:col-span-2"><strong>7. Verification:</strong> ask for uncertainty, checks, and missing evidence.</li>
+            </ol>
+            <pre id="promptText" class="mt-5 max-h-[360px] overflow-auto rounded-md bg-slate-950 p-4 text-sm leading-relaxed text-stone-100 whitespace-pre-wrap">Act as a critical methodological adviser.
+
+Task:
+Evaluate the supplied material for factual, statistical, and methodological reliability.
+
+Context:
+I am preparing an academic research output and need conservative feedback before submission.
+
+Evidence:
+[Paste the source text, table, output, transcript, or model results here.]
+
+Constraints:
+Use only the supplied material unless I explicitly ask for external sources. Do not invent citations, missing facts, or statistical values. Distinguish fact, interpretation, and speculation.
+
+Output format:
+Use a table with these columns:
+Claim | Support status | Evidence | Concern | Required check | Conservative revision.
+
+Verification:
+Flag overclaiming, causal language, missing uncertainty, mismatches between evidence and conclusion, and any claim that needs independent database or code verification.</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="verification" class="band bg-[#eef4f1]">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div class="max-w-3xl">
+          <p class="section-kicker">Verification</p>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">Fluency is not evidence</h2>
+          <p class="mt-4 text-slate-600 leading-relaxed">The workshop's central risk message is blunt: agreement between polished outputs is not the same thing as independent corroboration. Verification needs its own workflow.</p>
+        </div>
+
+        <div class="mt-8 grid gap-5 lg:grid-cols-2">
+          <article class="card p-6">
+            <h3 class="font-extrabold text-xl">VALID-AI dashboard</h3>
+            <div class="mt-5 grid gap-3">
+              <div class="flex gap-3"><span class="icon-badge"><i data-lucide="badge-check" class="h-5 w-5"></i></span><p><strong>Verify sources:</strong> confirm that citations exist and say what the model claims.</p></div>
+              <div class="flex gap-3"><span class="icon-badge"><i data-lucide="scale" class="h-5 w-5"></i></span><p><strong>Assess authority:</strong> prioritise peer-reviewed and primary material over plausible grey literature.</p></div>
+              <div class="flex gap-3"><span class="icon-badge"><i data-lucide="search-check" class="h-5 w-5"></i></span><p><strong>Look for bias:</strong> inspect omitted methods, geographies, populations, and theoretical positions.</p></div>
+              <div class="flex gap-3"><span class="icon-badge"><i data-lucide="alert-triangle" class="h-5 w-5"></i></span><p><strong>Identify limits:</strong> separate supported findings from interpretation and speculation.</p></div>
+              <div class="flex gap-3"><span class="icon-badge"><i data-lucide="git-branch" class="h-5 w-5"></i></span><p><strong>Document provenance:</strong> record model, prompt, source set, date, and checks performed.</p></div>
+            </div>
+          </article>
+
+          <article class="card p-6">
+            <h3 class="font-extrabold text-xl">RAG helps, but it is not magic</h3>
+            <p class="mt-3 text-slate-600 leading-relaxed">Retrieval augmented generation moves from closed-book pattern completion to open-book, source-grounded generation. It can reduce hallucination by grounding answers in a trusted corpus, but large undifferentiated notebooks still suffer coverage and context-window problems.</p>
+            <div class="mt-5 grid gap-3">
+              <div class="soft-card p-4"><strong>Exploratory RAG:</strong> useful for orientation, question generation, and finding candidate passages.</div>
+              <div class="soft-card p-4"><strong>Rigorous synthesis:</strong> requires defined inclusion criteria, paper-level extraction, traceable notes, and independent checking.</div>
+              <div class="soft-card p-4"><strong>StatsRAG pattern:</strong> build an auditable specification, verify against a trusted local library, then produce a verdict card on compliance, metric integrity, direction, and source support.</div>
+            </div>
+            <a class="source-link mt-4 inline-block text-sm" href="https://www.ibm.com/think/topics/retrieval-augmented-generation" target="_blank" rel="noopener noreferrer">IBM explainer on RAG</a>
+          </article>
+        </div>
+
+        <div class="mt-8 card p-6">
+          <h3 class="font-extrabold text-xl">Safety protocol for AI-assisted analysis</h3>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            <div class="soft-card p-4">
+              <p class="font-bold text-[var(--rose)]">Do not</p>
+              <p class="mt-2 text-sm text-slate-600">Rely on an LLM for direct calculation of complex datasets.</p>
+              <p class="mt-3 font-bold text-[var(--teal)]">Do</p>
+              <p class="mt-2 text-sm text-slate-600">Generate Python or R code and run deterministic statistical procedures.</p>
+            </div>
+            <div class="soft-card p-4">
+              <p class="font-bold text-[var(--rose)]">Do not</p>
+              <p class="mt-2 text-sm text-slate-600">Accept test selection without manual verification of the design.</p>
+              <p class="mt-3 font-bold text-[var(--teal)]">Do</p>
+              <p class="mt-2 text-sm text-slate-600">Check normality, variance, outliers, dependence, units, and model assumptions.</p>
+            </div>
+            <div class="soft-card p-4">
+              <p class="font-bold text-[var(--rose)]">Do not</p>
+              <p class="mt-2 text-sm text-slate-600">Paste an AI interpretation into a manuscript unchecked.</p>
+              <p class="mt-3 font-bold text-[var(--teal)]">Do</p>
+              <p class="mt-2 text-sm text-slate-600">Constrain the prompt, rerun with variations, compare models, and verify against sources and code.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="secure" class="band bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div class="max-w-3xl">
+          <p class="section-kicker">Secure AI Choices</p>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">Choose the smallest exposure that fits the job</h2>
+          <p class="mt-4 text-slate-600 leading-relaxed">The newest secure options are much better than public consumer chat, but "secure" still depends on your institution, licence, data classification, region, retention settings, and whether web grounding or connectors are enabled.</p>
+        </div>
+
+        <div class="mt-8 grid gap-5 lg:grid-cols-4">
+          <article class="card p-5">
+            <span class="icon-badge"><i data-lucide="globe-2" class="h-5 w-5"></i></span>
+            <h3 class="mt-4 font-extrabold text-lg">Public web AI</h3>
+            <p class="mt-2 text-sm text-slate-600">Best for low-risk brainstorming and public information. Do not upload unpublished manuscripts, sensitive participant data, or confidential grant material.</p>
+          </article>
+          <article class="card p-5">
+            <span class="icon-badge"><i data-lucide="building-2" class="h-5 w-5"></i></span>
+            <h3 class="mt-4 font-extrabold text-lg">Campus enterprise AI</h3>
+            <p class="mt-2 text-sm text-slate-600">ChatGPT Edu, Microsoft 365 Copilot Chat, Gemini for Workspace, and Claude for Work offer stronger controls, but local policy decides what data may be used.</p>
+          </article>
+          <article class="card p-5">
+            <span class="icon-badge"><i data-lucide="server-cog" class="h-5 w-5"></i></span>
+            <h3 class="mt-4 font-extrabold text-lg">Managed secure cloud</h3>
+            <p class="mt-2 text-sm text-slate-600">Azure AI Foundry, AWS Bedrock, and Google Vertex AI offer tenant-level governance, logging, region choices, and model-provider separation for serious deployments.</p>
+          </article>
+          <article class="card p-5">
+            <span class="icon-badge"><i data-lucide="hard-drive" class="h-5 w-5"></i></span>
+            <h3 class="mt-4 font-extrabold text-lg">Local or self-hosted AI</h3>
+            <p class="mt-2 text-sm text-slate-600">Ollama, LM Studio, Open WebUI, AnythingLLM, Jan, and GPT4All can run models on your own machine or server. This helps confidentiality, not accuracy.</p>
+          </article>
+        </div>
+
+        <div class="mt-8 card p-6">
+          <h3 class="font-extrabold text-xl">A simple classification rule</h3>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            <div class="soft-card p-4"><strong>Public data:</strong> use any appropriate tool, but verify and cite independently.</div>
+            <div class="soft-card p-4"><strong>Internal or unpublished work:</strong> use approved enterprise/campus AI or a managed secure cloud service.</div>
+            <div class="soft-card p-4"><strong>Sensitive, identifiable, or embargoed data:</strong> use approved local, self-hosted, or institutionally governed platforms only.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="platforms" class="band bg-[#f7f8f4]">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-3xl">
+            <p class="section-kicker">Current Platform Guide</p>
+            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">Tools worth knowing in 2026</h2>
+            <p class="mt-4 text-slate-600 leading-relaxed">These are not endorsements. They are a researcher's map: what each platform is good for, what to check, and when to avoid it.</p>
+          </div>
+          <div class="flex flex-wrap gap-2" aria-label="Filter platform cards">
+            <button class="filter-btn pill px-3 py-2 text-sm font-bold" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-btn pill px-3 py-2 text-sm font-bold" data-filter="secure" aria-pressed="false">Secure</button>
+            <button class="filter-btn pill px-3 py-2 text-sm font-bold" data-filter="literature" aria-pressed="false">Literature</button>
+            <button class="filter-btn pill px-3 py-2 text-sm font-bold" data-filter="analysis" aria-pressed="false">Analysis</button>
+            <button class="filter-btn pill px-3 py-2 text-sm font-bold" data-filter="local" aria-pressed="false">Local</button>
+          </div>
+        </div>
+
+        <div id="platform-grid" class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3"></div>
+
+        <div id="local-lab" class="mt-12">
+          <p class="section-kicker">Local Model Lab</p>
+          <h3 class="mt-2 text-2xl sm:text-3xl font-extrabold">Places to try local and open models</h3>
+          <div class="mt-6 grid gap-5 lg:grid-cols-3">
+            <article class="card p-5">
+              <h4 class="font-extrabold text-lg">Beginner desktop</h4>
+              <p class="mt-2 text-sm text-slate-600">LM Studio, Jan, and GPT4All are the easiest starting points for offline chat with open models such as Qwen, Llama, Gemma, Mistral, and DeepSeek.</p>
+            </article>
+            <article class="card p-5">
+              <h4 class="font-extrabold text-lg">Research workstation</h4>
+              <p class="mt-2 text-sm text-slate-600">Ollama plus Open WebUI gives a stronger local lab: model switching, RAG, tool calling, and a browser-style interface for teams or demos.</p>
+            </article>
+            <article class="card p-5">
+              <h4 class="font-extrabold text-lg">Explore before downloading</h4>
+              <p class="mt-2 text-sm text-slate-600">Hugging Face models and Spaces let you inspect model cards, licences, examples, and app demos before committing compute or storage locally.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ethics" class="band bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
+          <div>
+            <p class="section-kicker">Authorship and Peer Review</p>
+            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">Local AI solves confidentiality. It does not solve accountability.</h2>
+            <p class="mt-4 text-slate-600 leading-relaxed">The deck's peer-review section is a useful ethical spectrum: some uses of local AI are highly appropriate, some are risky, and unverified generation is academic misconduct regardless of where the model runs.</p>
+          </div>
+          <div class="grid gap-3">
+            <div class="matrix-row hidden md:grid text-sm font-bold text-slate-500 px-2">
+              <span>Use</span><span>Status</span><span>Core risk</span>
+            </div>
+            <div class="matrix-row grid gap-2 card p-4">
+              <strong>Gap analysis and red teaming</strong>
+              <span class="text-[var(--teal)] font-bold">Highly appropriate</span>
+              <span class="text-sm text-slate-600">The researcher must decide which critiques are valid.</span>
+            </div>
+            <div class="matrix-row grid gap-2 card p-4">
+              <strong>Grammar, wording, structure</strong>
+              <span class="text-[var(--teal)] font-bold">Highly appropriate</span>
+              <span class="text-sm text-slate-600">Meaning must remain human-generated and checked.</span>
+            </div>
+            <div class="matrix-row grid gap-2 card p-4">
+              <strong>Substantial drafting</strong>
+              <span class="text-[var(--gold)] font-bold">Problematic</span>
+              <span class="text-sm text-slate-600">Risks false synthesis, fabricated citations, and authorship blur.</span>
+            </div>
+            <div class="matrix-row grid gap-2 card p-4">
+              <strong>Unverified paste-in</strong>
+              <span class="text-[var(--rose)] font-bold">Inappropriate</span>
+              <span class="text-sm text-slate-600">The author cannot vouch for accuracy, originality, or source integrity.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 grid gap-5 lg:grid-cols-2">
+          <article class="card p-6">
+            <h3 class="font-extrabold text-xl">Disclosure statement examples</h3>
+            <p class="mt-3 text-slate-600">Adapt these to the journal. Always include the tool, version if available, task, date range, and human verification performed.</p>
+            <div class="mt-4 grid gap-3 text-sm">
+              <p class="soft-card p-4"><strong>Copy editing:</strong> I used [tool] to suggest grammar, wording, and structure improvements to human-authored text. I reviewed all changes and take responsibility for the final manuscript.</p>
+              <p class="soft-card p-4"><strong>Analysis support:</strong> I used [tool] to draft R/Python code and identify possible model assumptions. All analyses were run in [software], checked against the dataset and statistical references, and revised by the authors.</p>
+              <p class="soft-card p-4"><strong>Red teaming:</strong> I used [local/approved tool] to identify possible limitations, missing literature, and overclaims. Suggestions were independently evaluated and only incorporated after author review.</p>
+            </div>
+          </article>
+          <article class="card p-6">
+            <h3 class="font-extrabold text-xl">Non-negotiable research rules</h3>
+            <ul class="mt-4 space-y-3 text-slate-700">
+              <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--teal)] flex-none mt-0.5"></i><span>Never cite anything you have not read and verified yourself.</span></li>
+              <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--teal)] flex-none mt-0.5"></i><span>Never treat AI output as scholarly evidence.</span></li>
+              <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--teal)] flex-none mt-0.5"></i><span>Always verify sources in academic databases.</span></li>
+              <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--teal)] flex-none mt-0.5"></i><span>Use AI to assist thinking, not replace it.</span></li>
+              <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--teal)] flex-none mt-0.5"></i><span>Write your own argument and own the final judgement.</span></li>
+            </ul>
+            <div class="mt-5 flex flex-wrap gap-3 text-sm">
+              <a class="source-link" href="https://www.nature.com/nature-portfolio/editorial-policies/ai" target="_blank" rel="noopener noreferrer">Nature AI policy</a>
+              <a class="source-link" href="https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals" target="_blank" rel="noopener noreferrer">Elsevier AI policy</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="future" class="band bg-[#eef4f1]">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div class="max-w-3xl">
+          <p class="section-kicker">Future Direction</p>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">From co-intelligence to managed agents</h2>
+          <p class="mt-4 text-slate-600 leading-relaxed">The workshop points to a shift from back-and-forth prompting to agentic workflows. The researcher becomes less a prompt typist and more a manager of objectives, constraints, tools, audit logs, and checkpoints.</p>
+        </div>
+        <div class="mt-8 grid gap-5 md:grid-cols-3">
+          <article class="card p-5">
+            <span class="icon-badge"><i data-lucide="bot" class="h-5 w-5"></i></span>
+            <h3 class="mt-4 font-extrabold text-lg">Agents</h3>
+            <p class="mt-2 text-sm text-slate-600">Coding and research agents can run multi-step tasks, but require explicit permissions, sandboxing, source boundaries, and review gates.</p>
+          </article>
+          <article class="card p-5">
+            <span class="icon-badge"><i data-lucide="sliders-horizontal" class="h-5 w-5"></i></span>
+            <h3 class="mt-4 font-extrabold text-lg">Fine tuning and LoRA</h3>
+            <p class="mt-2 text-sm text-slate-600">Low-rank adaptation can specialise models without full retraining. It is powerful, but dataset quality, licensing, evaluation, and drift matter.</p>
+          </article>
+          <article class="card p-5">
+            <span class="icon-badge"><i data-lucide="network" class="h-5 w-5"></i></span>
+            <h3 class="mt-4 font-extrabold text-lg">Beyond standard transformers</h3>
+            <p class="mt-2 text-sm text-slate-600">Future systems may reduce context limitations or combine symbolic, retrieval, planning, and model-based reasoning. The verification burden will not disappear.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sources" class="band bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <p class="section-kicker">Sources</p>
+        <h2 class="mt-2 text-3xl font-extrabold">Primary and official links checked for this build</h2>
+        <div class="mt-6 grid gap-6 lg:grid-cols-3 text-sm">
+          <div>
+            <h3 class="font-extrabold text-lg">Research method and risk</h3>
+            <ul class="mt-3 space-y-2">
+              <li><a class="source-link" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer">Vaswani et al., Attention Is All You Need</a></li>
+              <li><a class="source-link" href="https://doi.org/10.1162/tacl_a_00638" target="_blank" rel="noopener noreferrer">Lost in the Middle, TACL 2024</a></li>
+              <li><a class="source-link" href="https://doi.org/10.48550/arXiv.2509.04664" target="_blank" rel="noopener noreferrer">Why Language Models Hallucinate</a></li>
+              <li><a class="source-link" href="https://doi.org/10.1038/s41586-026-10265-5" target="_blank" rel="noopener noreferrer">Towards end-to-end automation of AI research</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-lg">Security and enterprise AI</h3>
+            <ul class="mt-3 space-y-2">
+              <li><a class="source-link" href="https://openai.com/enterprise-privacy/" target="_blank" rel="noopener noreferrer">OpenAI enterprise privacy</a></li>
+              <li><a class="source-link" href="https://learn.microsoft.com/en-us/copilot/privacy-and-protections" target="_blank" rel="noopener noreferrer">Microsoft 365 Copilot Chat privacy</a></li>
+              <li><a class="source-link" href="https://support.google.com/docs/answer/14615114?hl=en-en" target="_blank" rel="noopener noreferrer">Gemini in Workspace data protection</a></li>
+              <li><a class="source-link" href="https://privacy.anthropic.com/en/articles/9267385-does-anthropic-act-as-a-data-processor-or-controller" target="_blank" rel="noopener noreferrer">Anthropic commercial data relationship</a></li>
+              <li><a class="source-link" href="https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/openai/data-privacy" target="_blank" rel="noopener noreferrer">Azure AI Foundry data privacy</a></li>
+              <li><a class="source-link" href="https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html" target="_blank" rel="noopener noreferrer">Amazon Bedrock data protection</a></li>
+              <li><a class="source-link" href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/vertex-ai-zero-data-retention" target="_blank" rel="noopener noreferrer">Google Vertex AI data governance</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-lg">Tools and local AI</h3>
+            <ul class="mt-3 space-y-2">
+              <li><a class="source-link" href="https://elicit.com/" target="_blank" rel="noopener noreferrer">Elicit</a></li>
+              <li><a class="source-link" href="https://scite.ai/" target="_blank" rel="noopener noreferrer">Scite</a></li>
+              <li><a class="source-link" href="https://www.rayyan.ai/" target="_blank" rel="noopener noreferrer">Rayyan</a></li>
+              <li><a class="source-link" href="https://huggingface.co/" target="_blank" rel="noopener noreferrer">Hugging Face</a></li>
+              <li><a class="source-link" href="https://ollama.com/" target="_blank" rel="noopener noreferrer">Ollama</a></li>
+              <li><a class="source-link" href="https://lmstudio.ai/" target="_blank" rel="noopener noreferrer">LM Studio</a></li>
+              <li><a class="source-link" href="https://docs.openwebui.com/" target="_blank" rel="noopener noreferrer">Open WebUI</a></li>
+              <li><a class="source-link" href="https://anythingllm.com/" target="_blank" rel="noopener noreferrer">AnythingLLM</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-slate-950 text-stone-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-sm">
+      <p>Tony Myers &copy; 2026. Built as a standalone companion to the AI for education site.</p>
+      <a class="text-amber-200 font-bold hover:text-amber-100" href="#top">Back to top</a>
+    </div>
+  </footer>
+
+  <script>
+    const workflowData = {
+      conception: {
+        icon: "lightbulb",
+        title: "Conception and design",
+        role: "Critical sparring partner",
+        body: "Use AI to structure inquiry, pressure-test hypotheses, generate candidate variables, and surface missing assumptions. It is not the sole creator of research questions.",
+        use: ["Question refinement", "Variable mapping", "Alternative theoretical framings", "Grant or study design critique"],
+        avoid: ["Claiming novelty without literature search", "Letting the model define the problem", "Confusing plausible ideas with feasible studies"]
+      },
+      collection: {
+        icon: "mic",
+        title: "Data collection",
+        role: "Wording and bias checker",
+        body: "AI can improve interview schedules, survey items, participant-facing explanations, and accessibility. Voice bots can help with structured interviewing, but require consent, governance, and piloting.",
+        use: ["Interview prompt testing", "Bias checks", "Plain-language participant materials", "Transcript preparation workflows"],
+        avoid: ["Collecting sensitive data in unapproved tools", "Synthetic data replacing participant evidence", "Unlogged changes to interview logic"]
+      },
+      analysis: {
+        icon: "chart-no-axes-combined",
+        title: "Data analysis",
+        role: "Code drafter and assumption checker",
+        body: "For qualitative work, AI can suggest candidate codes and reflexive questions. For quantitative work, it should draft deterministic code and diagnostics, not become the calculator or final analyst.",
+        use: ["R or Python drafting", "Debugging scripts", "Candidate qualitative codes", "Outlier and assumption checklists"],
+        avoid: ["LLM-only statistics", "Unsupported test selection", "Unverified thematic claims", "Over-reading p values"]
+      },
+      interpretation: {
+        icon: "scale",
+        title: "Interpretation",
+        role: "Alternative-reading tester",
+        body: "Ask for conservative, moderate, and speculative interpretations. Require the model to mark what evidence would support or undermine each reading.",
+        use: ["Uncertainty bands", "Rival explanations", "Causal language checks", "Practical versus statistical significance"],
+        avoid: ["Single 'correct' interpretation", "Consensus between models as proof", "Ignoring contradictory evidence"]
+      },
+      writing: {
+        icon: "pen-line",
+        title: "Writing and preparation",
+        role: "Clarity and structure editor",
+        body: "Use AI to improve readability, structure, argument flow, abstract variants, lay summaries, and responses to reviewers. Keep intellectual synthesis and final claims human-owned.",
+        use: ["Copy editing", "Structure review", "Abstract and title options", "AI disclosure drafting"],
+        avoid: ["Substantial unverified drafting", "Fabricated citations", "Outsourced narrative arc"]
+      },
+      review: {
+        icon: "messages-square",
+        title: "Peer review and response",
+        role: "Reviewer simulation and response organiser",
+        body: "Local or approved AI can act as a pre-review stress test for your own manuscript. For confidential peer review, follow the journal's rules and do not upload manuscripts into unapproved tools.",
+        use: ["Pre-review red teaming", "Reviewer response tables", "Tone checks", "Limitation audits"],
+        avoid: ["Uploading confidential review manuscripts to public AI", "AI as final evaluator", "Undeclared AI-supported peer review"]
+      }
+    };
+
+    const platformData = [
+      {
+        name: "ChatGPT Edu / Enterprise",
+        tags: ["secure", "writing", "analysis"],
+        best: "Campus-scale general AI, data analysis, file work, custom GPTs, writing support.",
+        check: "Use institutional workspace. OpenAI states business data is not used to train models by default.",
+        url: "https://openai.com/chatgpt/education/"
+      },
+      {
+        name: "Microsoft 365 Copilot Chat",
+        tags: ["secure", "writing"],
+        best: "Staff productivity, Office workflows, enterprise data protection, audit and retention integration.",
+        check: "Prompts and responses are processed within the Microsoft 365 service boundary when enterprise data protection applies.",
+        url: "https://learn.microsoft.com/en-us/copilot/privacy-and-protections"
+      },
+      {
+        name: "Gemini for Workspace",
+        tags: ["secure", "writing"],
+        best: "Google Workspace users needing document, email, meeting, and Drive-aware assistance.",
+        check: "Google says Workspace data is not used to train generative models outside Workspace without permission.",
+        url: "https://support.google.com/docs/answer/14615114?hl=en-en"
+      },
+      {
+        name: "Claude for Work",
+        tags: ["secure", "writing", "analysis"],
+        best: "Long-form critique, red teaming, coding support, policy-safe writing in team or enterprise settings.",
+        check: "Anthropic states commercial inputs and outputs are not used to train models by default.",
+        url: "https://privacy.anthropic.com/en/articles/7996868-i-want-to-opt-out-of-my-prompts-and-results-being-used-for-training-models"
+      },
+      {
+        name: "NotebookLM",
+        tags: ["literature", "writing", "secure"],
+        best: "Source-grounded notebooks, summaries, audio overviews, mind maps, briefing documents.",
+        check: "Use focused source sets and verify cited passages. Workspace and Education handling differs from personal accounts.",
+        url: "https://support.google.com/notebooklm/answer/16164461?hl=en"
+      },
+      {
+        name: "SecureXamine",
+        tags: ["secure", "local", "literature"],
+        best: "A local secure NotebookLM-style pattern for sensitive source-grounded work.",
+        check: "Treat as an institutional/local deployment pattern. Validate indexing, retention, access controls, and audit logs.",
+        url: "https://github.com/Tony-Myers"
+      },
+      {
+        name: "Azure AI Foundry / Azure OpenAI",
+        tags: ["secure", "analysis"],
+        best: "Institutional deployments needing region, tenant, governance, and compliance controls.",
+        check: "Microsoft states prompts, completions, embeddings, and training data are not available to OpenAI or used to train foundation models without permission.",
+        url: "https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/openai/data-privacy"
+      },
+      {
+        name: "Amazon Bedrock",
+        tags: ["secure", "analysis"],
+        best: "Multi-provider model access within AWS governance, IAM, VPC, logging, and encryption patterns.",
+        check: "AWS documents model-provider separation from customer prompts and completions in Bedrock deployment accounts.",
+        url: "https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html"
+      },
+      {
+        name: "Google Vertex AI",
+        tags: ["secure", "analysis"],
+        best: "Google Cloud model deployment, evaluation, grounding, data governance, and enterprise controls.",
+        check: "Google says Vertex AI managed model data is not used for training or fine tuning without permission, with retention caveats for selected features.",
+        url: "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/vertex-ai-zero-data-retention"
+      },
+      {
+        name: "Elicit",
+        tags: ["literature"],
+        best: "Semantic search, evidence tables, reports, alerts, screening, and data extraction for reviews.",
+        check: "Strong for discovery and extraction, but do not cite summaries without reading the source paper.",
+        url: "https://elicit.com/"
+      },
+      {
+        name: "Scite",
+        tags: ["literature"],
+        best: "Checking how papers are cited, whether claims are supported or contrasted, and grounding answers in full text.",
+        check: "Use Smart Citations as a signal for follow-up reading, not as a substitute for judgement.",
+        url: "https://scite.ai/"
+      },
+      {
+        name: "Rayyan",
+        tags: ["literature"],
+        best: "Systematic review screening, deduplication, filters, PICO workflow, and collaboration.",
+        check: "Keep inclusion/exclusion decisions auditable and reviewer-controlled.",
+        url: "https://www.rayyan.ai/"
+      },
+      {
+        name: "ResearchRabbit / Litmaps / Connected Papers",
+        tags: ["literature"],
+        best: "Citation-network discovery, seed-paper expansion, and visual literature exploration.",
+        check: "Excellent for discovery. Weak as evidence of completeness for a formal systematic search.",
+        url: "https://www.researchrabbit.ai/"
+      },
+      {
+        name: "Semantic Scholar",
+        tags: ["literature"],
+        best: "Academic search, APIs, citation metadata, and open research graph workflows.",
+        check: "Useful for automation, but metadata and generated summaries still need source checking.",
+        url: "https://www.semanticscholar.org/product/api"
+      },
+      {
+        name: "Julius AI",
+        tags: ["analysis"],
+        best: "Conversational data analysis, notebooks, charts, dashboards, and code-assisted statistical exploration.",
+        check: "Verify test selection, run code deterministically, inspect outliers, and check domain meaning.",
+        url: "https://julius.ai/"
+      },
+      {
+        name: "Hugging Face",
+        tags: ["local", "analysis"],
+        best: "Finding open models, datasets, model cards, licences, benchmarks, and Spaces demos.",
+        check: "Read model cards and licences. A demo Space is not a privacy-safe environment for sensitive data.",
+        url: "https://huggingface.co/"
+      },
+      {
+        name: "Ollama",
+        tags: ["local"],
+        best: "Fast local model setup from the command line, including Qwen, Llama, Gemma, Mistral, and more.",
+        check: "Offline local runs protect data leaving the machine; model quality and licence still vary.",
+        url: "https://ollama.com/"
+      },
+      {
+        name: "LM Studio",
+        tags: ["local"],
+        best: "Friendly desktop app for downloading, running, and serving local models privately.",
+        check: "Match model size to hardware. Keep confidential projects offline unless remote features are deliberately enabled.",
+        url: "https://lmstudio.ai/"
+      },
+      {
+        name: "Open WebUI",
+        tags: ["local", "secure"],
+        best: "Self-hosted interface for Ollama and OpenAI-compatible APIs, with RAG, plugins, and team-style workflows.",
+        check: "Self-hosting makes you the administrator: patching, access control, backups, and logs are your responsibility.",
+        url: "https://docs.openwebui.com/"
+      },
+      {
+        name: "AnythingLLM / Jan / GPT4All",
+        tags: ["local"],
+        best: "Private desktop AI with document chat, local storage, and simple open-model experimentation.",
+        check: "Good starting points for local AI literacy. Validate document indexing and export/backup behaviour.",
+        url: "https://anythingllm.com/"
+      }
+    ];
+
+    function renderWorkflow(stageKey) {
+      const stage = workflowData[stageKey];
+      const panel = document.getElementById("workflow-panel");
+      panel.innerHTML = `
+        <article class="card p-6">
+          <div class="flex items-start gap-4">
+            <span class="icon-badge"><i data-lucide="${stage.icon}" class="h-5 w-5"></i></span>
+            <div>
+              <p class="text-sm font-bold text-[var(--teal)]">${stage.role}</p>
+              <h3 class="mt-1 text-2xl font-extrabold">${stage.title}</h3>
+              <p class="mt-3 text-slate-600 leading-relaxed">${stage.body}</p>
+            </div>
+          </div>
+        </article>
+        <div class="grid gap-4">
+          <article class="card p-5">
+            <h4 class="font-extrabold">Use AI for</h4>
+            <ul class="mt-3 space-y-2 text-sm text-slate-700">
+              ${stage.use.map(item => `<li class="flex gap-2"><i data-lucide="check" class="h-4 w-4 text-[var(--teal)] flex-none mt-0.5"></i><span>${item}</span></li>`).join("")}
+            </ul>
+          </article>
+          <article class="card p-5">
+            <h4 class="font-extrabold">Do not use it for</h4>
+            <ul class="mt-3 space-y-2 text-sm text-slate-700">
+              ${stage.avoid.map(item => `<li class="flex gap-2"><i data-lucide="x" class="h-4 w-4 text-[var(--rose)] flex-none mt-0.5"></i><span>${item}</span></li>`).join("")}
+            </ul>
+          </article>
+        </div>
+      `;
+      document.querySelectorAll(".workflow-btn").forEach(btn => {
+        const selected = btn.dataset.stage === stageKey;
+        btn.setAttribute("aria-selected", selected ? "true" : "false");
+      });
+      lucide.createIcons();
+    }
+
+    function renderPlatforms(filter) {
+      const grid = document.getElementById("platform-grid");
+      const selected = filter === "all" ? platformData : platformData.filter(item => item.tags.includes(filter));
+      grid.innerHTML = selected.map(item => `
+        <article class="card p-5 flex flex-col">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="font-extrabold text-lg">${item.name}</h3>
+            <a class="inline-flex items-center justify-center rounded-md border border-stone-300 p-2 hover:bg-stone-100" href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="Open ${item.name}">
+              <i data-lucide="external-link" class="h-4 w-4"></i>
+            </a>
+          </div>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed"><strong>Best for:</strong> ${item.best}</p>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed"><strong>Check:</strong> ${item.check}</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            ${item.tags.map(tag => `<span class="pill px-2 py-1 text-xs font-bold text-slate-600">${tag}</span>`).join("")}
+          </div>
+        </article>
+      `).join("");
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.setAttribute("aria-pressed", btn.dataset.filter === filter ? "true" : "false");
+      });
+      lucide.createIcons();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderWorkflow("conception");
+      renderPlatforms("all");
+
+      document.querySelectorAll(".workflow-btn").forEach(btn => {
+        btn.addEventListener("click", () => renderWorkflow(btn.dataset.stage));
+      });
+
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.addEventListener("click", () => renderPlatforms(btn.dataset.filter));
+      });
+
+      document.getElementById("copyPrompt").addEventListener("click", async () => {
+        const text = document.getElementById("promptText").innerText;
+        try {
+          await navigator.clipboard.writeText(text);
+          document.getElementById("copyPrompt").innerHTML = '<i data-lucide="check" class="h-4 w-4"></i>Copied';
+          lucide.createIcons();
+          setTimeout(() => {
+            document.getElementById("copyPrompt").innerHTML = '<i data-lucide="copy" class="h-4 w-4"></i>Copy';
+            lucide.createIcons();
+          }, 1800);
+        } catch (err) {
+          console.warn("Clipboard copy failed", err);
+        }
+      });
+
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
