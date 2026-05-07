@@ -627,24 +627,24 @@ and any claim that needs independent database or code verification.</div>
     <p>Retrieval-augmented generation (RAG) moves from closed-book pattern completion to open-book, source-grounded generation. It can reduce hallucination by anchoring answers in a trusted corpus, but it introduces its own failure modes: retrieval misses, context-window truncation, and false confidence from partial matches.</p>
 
     <div class="card" style="margin-top:16px">
-      <h4>Three levels of RAG use</h4>
-      <p><strong>Exploratory RAG</strong> — useful for orientation, question generation, and finding candidate passages in a curated source set. Acceptable for early-stage literature scanning.</p>
-      <p><strong>Rigorous synthesis</strong> — requires defined inclusion criteria, paper-level extraction, traceable notes, and independent checking. RAG alone cannot perform this; it can assist with navigation within a pre-screened corpus.</p>
-      <p><strong>StatsRAG pattern</strong> — build an auditable statistical specification, verify it against a trusted local reference library, then produce a verdict card covering compliance, metric integrity, direction, and source support. This is the approach used in tools like the StatsRAG project for Bayesian analysis specification.</p>
-      <div class="video-embed" style="margin-top:16px">
-        <iframe src="https://www.youtube-nocookie.com/embed/cXrEgBpQwPc" title="StatsRAG: Verify LLM statistical output" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-      </div>
-      <p class="video-caption">Demo: StatsRAG — verifying LLM-generated statistical output against a trusted reference library.</p>
-      <a href="https://www.ibm.com/think/topics/retrieval-augmented-generation" class="card-link">IBM explainer on RAG</a>
-    </div>
-
-    <div class="card" style="margin-top:16px">
       <h4>When AI gets statistics wrong</h4>
       <p>The video below demonstrates a case where a model produces a confident but incorrect interpretation of statistical output. This is not a rare edge case — it is the default risk when statistical reasoning is delegated to a language model without independent verification. The model may identify the correct test, report plausible numbers, and still misinterpret what they mean.</p>
       <div class="video-embed">
         <iframe src="https://www.youtube-nocookie.com/embed/R3Kk1JZMt5o" title="Incorrect interpretation of statistical output" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
       <p class="video-caption">Demo: An LLM producing confident but incorrect interpretation of statistical output.</p>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h4>Three levels of RAG use</h4>
+      <p><strong>Exploratory RAG</strong> — useful for orientation, question generation, and finding candidate passages in a curated source set. Acceptable for early-stage literature scanning.</p>
+      <p><strong>Rigorous synthesis</strong> — requires defined inclusion criteria, paper-level extraction, traceable notes, and independent checking. RAG alone cannot perform this; it can assist with navigation within a pre-screened corpus.</p>
+      <p><strong>StatsRAG pattern</strong> — a direct response to the kind of misinterpretation shown above. Build an auditable statistical specification, verify it against a trusted local reference library, then produce a verdict card covering compliance, metric integrity, direction, and source support. This is the approach used in tools like the StatsRAG project for Bayesian analysis specification.</p>
+      <div class="video-embed" style="margin-top:16px">
+        <iframe src="https://www.youtube-nocookie.com/embed/cXrEgBpQwPc" title="StatsRAG: Verify LLM statistical output" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="video-caption">Demo: StatsRAG — verifying LLM-generated statistical output against a trusted reference library.</p>
+      <a href="https://www.ibm.com/think/topics/retrieval-augmented-generation" class="card-link">IBM explainer on RAG</a>
     </div>
 
     <h3 style="margin-top:36px">Safety protocol for AI-assisted analysis</h3>
