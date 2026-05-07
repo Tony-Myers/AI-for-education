@@ -1,826 +1,1144 @@
 <!DOCTYPE html>
-<html lang="en-GB" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A practical guide to using generative AI across the research workflow, with secure platform choices, local AI options, verification protocols, and authorship guidance.">
-  <link rel="icon" href="data:,">
-  <title>AI for Research</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ink: #172033;
-      --muted: #526070;
-      --paper: #f7f8f4;
-      --line: #dfe4dc;
-      --forest: #174c43;
-      --teal: #0f766e;
-      --gold: #b58521;
-      --rose: #b45363;
-      --violet: #5b4b8a;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A practical guide to using generative AI across the research workflow, with secure platform choices, local AI options, verification protocols, and authorship guidance. By Tony Myers, Birmingham Newman University.">
+<title>AI for Research — Tony Myers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & base ────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1a2e;
+  --ink-light:#3a3a5e;
+  --paper:#faf9f7;
+  --paper-warm:#f4f1ec;
+  --accent:#2d5a27;
+  --accent-light:#e8f0e6;
+  --accent-hover:#1e3d1a;
+  --blue:#1e3a5f;
+  --blue-light:#e6edf5;
+  --amber:#7a5c1f;
+  --amber-light:#fdf6e3;
+  --red:#8b2500;
+  --red-light:#fde8e3;
+  --border:#d5d0c8;
+  --shadow:0 2px 12px rgba(0,0,0,.06);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.08);
+  --radius:6px;
+  --serif:'Source Serif 4',Georgia,serif;
+  --sans:'Source Sans 3','Segoe UI',system-ui,sans-serif;
+  --mono:'Source Code Pro','Menlo',monospace;
+  --max-w:900px;
+  --nav-h:56px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 24px)}
+body{font-family:var(--sans);font-size:17px;line-height:1.7;color:var(--ink);background:var(--paper)}
+img{max-width:100%;display:block}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{color:var(--accent-hover)}
 
-    * { box-sizing: border-box; }
-    body {
-      font-family: "Inter", sans-serif;
-      background: var(--paper);
-      color: var(--ink);
-      letter-spacing: 0;
-    }
+/* ── Navigation ──────────────────────────────────────────── */
+.site-nav{position:sticky;top:0;z-index:100;background:rgba(250,249,247,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:var(--nav-h)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:100%;gap:8px}
+.nav-brand{font-family:var(--serif);font-weight:700;font-size:15px;color:var(--ink);text-decoration:none;white-space:nowrap;margin-right:auto}
+.nav-links{display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{font-size:13px;font-weight:500;color:var(--ink-light);text-decoration:none;padding:6px 10px;border-radius:4px;white-space:nowrap;transition:background .15s,color .15s}
+.nav-links a:hover,.nav-links a.active{background:var(--accent-light);color:var(--accent)}
+.nav-parent{font-size:12px;color:var(--ink-light);text-decoration:none;border:1px solid var(--border);padding:4px 10px;border-radius:4px;white-space:nowrap}
+.nav-parent:hover{background:var(--paper-warm);color:var(--ink)}
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.nav-hamburger svg{width:22px;height:22px;stroke:var(--ink);stroke-width:2;fill:none}
 
-    a, button { transition: color .18s ease, background-color .18s ease, border-color .18s ease, transform .18s ease; }
-    a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid rgba(181, 133, 33, .45); outline-offset: 3px; }
+/* ── Layout ──────────────────────────────────────────────── */
+.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
+.wide-container{max-width:1100px;margin:0 auto;padding:0 24px}
+section{padding:72px 0}
+section+section{border-top:1px solid var(--border)}
 
-    .hero {
-      min-height: 74vh;
-      background-image:
-        linear-gradient(90deg, rgba(12, 23, 28, .88) 0%, rgba(12, 23, 28, .76) 42%, rgba(12, 23, 28, .18) 100%),
-        url("images/research-hero-crop.png");
-      background-size: cover;
-      background-position: center;
-    }
+/* ── Typography ──────────────────────────────────────────── */
+h1,h2,h3,h4{font-family:var(--serif);color:var(--ink);line-height:1.25}
+h1{font-size:clamp(2rem,4vw,2.8rem);font-weight:700;letter-spacing:-.02em}
+h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:600;margin-bottom:16px}
+h3{font-size:1.25rem;font-weight:600;margin-bottom:10px}
+h4{font-size:1.05rem;font-weight:600;margin-bottom:8px}
+.section-label{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+p+p{margin-top:16px}
 
-    .band { border-top: 1px solid var(--line); }
-    .nav-link { border-bottom: 2px solid transparent; }
-    .nav-link:hover, .nav-link.active { color: var(--teal); border-color: var(--teal); }
-    .card {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255,255,255,.86);
-      box-shadow: 0 10px 30px rgba(23, 32, 51, .06);
-    }
-    .soft-card {
-      border: 1px solid rgba(23, 76, 67, .14);
-      border-radius: 8px;
-      background: #ffffff;
-    }
-    .pill { border-radius: 999px; border: 1px solid var(--line); }
-    .section-kicker { color: var(--teal); font-weight: 800; text-transform: uppercase; font-size: .78rem; letter-spacing: .08em; }
-    .rule { border-left: 4px solid var(--gold); }
-    .workflow-btn[aria-selected="true"], .filter-btn[aria-pressed="true"] {
-      background: var(--forest);
-      color: white;
-      border-color: var(--forest);
-    }
-    .source-link { color: #0f766e; font-weight: 650; }
-    .source-link:hover { color: #174c43; text-decoration: underline; text-decoration-thickness: 2px; }
-    .matrix-row { grid-template-columns: minmax(180px, 1.1fr) minmax(180px, 1fr) minmax(220px, 1.3fr); }
-    .icon-badge {
-      width: 2.4rem;
-      height: 2.4rem;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(15, 118, 110, .1);
-      color: var(--teal);
-      flex: 0 0 auto;
-    }
+/* ── Hero ────────────────────────────────────────────────── */
+.hero{padding:96px 0 72px;background:linear-gradient(175deg,var(--paper) 0%,var(--paper-warm) 100%)}
+.hero h1{margin-bottom:20px}
+.hero .lead{font-size:1.15rem;color:var(--ink-light);max-width:640px;line-height:1.65}
+.hero-meta{margin-top:24px;font-size:13px;color:var(--ink-light)}
+.hero-meta a{color:var(--ink-light)}
+.hero-actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:14px;font-weight:600;padding:10px 20px;border-radius:var(--radius);text-decoration:none;transition:all .15s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-hover);color:#fff}
+.btn-outline{border:1.5px solid var(--border);color:var(--ink-light);background:transparent}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
 
-    @media (max-width: 720px) {
-      .hero { min-height: 70vh; background-position: 62% center; }
-      .matrix-row { grid-template-columns: 1fr; }
-    }
+/* ── Principles cards ────────────────────────────────────── */
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:40px}
+.principle{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px}
+.principle h3{font-size:1.05rem;margin-bottom:8px}
+.principle p{font-size:15px;color:var(--ink-light);line-height:1.6}
 
-    @media (prefers-reduced-motion: reduce) {
-      * { scroll-behavior: auto !important; transition: none !important; }
-    }
-  </style>
+/* ── Lifecycle ───────────────────────────────────────────── */
+.lifecycle{display:flex;gap:0;align-items:stretch;margin:36px 0;overflow-x:auto;padding-bottom:8px}
+.lifecycle-stage{flex:1;min-width:120px;text-align:center;padding:18px 12px;background:#fff;border:1px solid var(--border);position:relative;font-size:14px;font-weight:600;color:var(--ink-light)}
+.lifecycle-stage:first-child{border-radius:var(--radius) 0 0 var(--radius)}
+.lifecycle-stage:last-child{border-radius:0 var(--radius) var(--radius) 0}
+.lifecycle-stage+.lifecycle-stage{border-left:0}
+.lifecycle-stage::after{content:'→';position:absolute;right:-7px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--border);z-index:1}
+.lifecycle-stage:last-child::after{display:none}
+
+/* ── Content cards ───────────────────────────────────────── */
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:24px;box-shadow:var(--shadow)}
+.card h3{margin-bottom:10px}
+.card p{font-size:15px;color:var(--ink-light);line-height:1.65}
+.card-link{display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:500;margin-top:12px}
+.card-link::after{content:'→';transition:transform .15s}
+.card-link:hover::after{transform:translateX(3px)}
+
+/* ── Video embed placeholder ─────────────────────────────── */
+.video-embed{margin-top:16px;border-radius:var(--radius);overflow:hidden;background:var(--ink);position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
+.video-embed video{width:100%;height:100%;object-fit:contain}
+.video-caption{font-size:13px;color:var(--ink-light);margin-top:8px;font-style:italic}
+
+/* ── Prompt framework ────────────────────────────────────── */
+.prompt-steps{display:grid;gap:0;margin:24px 0}
+.prompt-step{display:grid;grid-template-columns:36px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--border)}
+.prompt-step:last-child{border-bottom:none}
+.prompt-num{width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;font-family:var(--sans);flex-shrink:0}
+.prompt-step strong{font-family:var(--serif);font-weight:600}
+.prompt-step span{font-size:15px;color:var(--ink-light)}
+
+.code-block{background:var(--ink);color:#e0ddd5;padding:24px;border-radius:var(--radius);font-family:var(--mono);font-size:13.5px;line-height:1.7;overflow-x:auto;margin:20px 0;position:relative;white-space:pre-wrap;word-wrap:break-word}
+.code-block .copy-btn{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.12);color:#ccc;border:none;padding:4px 10px;border-radius:4px;font-size:12px;cursor:pointer;font-family:var(--sans)}
+.code-block .copy-btn:hover{background:rgba(255,255,255,.2)}
+.code-comment{color:#7a9a6a}
+.code-key{color:#e6c07b}
+.code-placeholder{color:#61afef;font-style:italic}
+
+/* ── Worked example ──────────────────────────────────────── */
+.example-box{border:2px solid var(--accent);border-radius:var(--radius);padding:28px;margin:24px 0;background:var(--accent-light)}
+.example-box h4{color:var(--accent);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
+
+/* ── Verification dashboard ──────────────────────────────── */
+.valid-grid{display:grid;gap:16px;margin:24px 0}
+.valid-item{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:16px;background:#fff;border:1px solid var(--border);border-radius:var(--radius)}
+.valid-letter{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:16px;flex-shrink:0}
+.valid-item strong{display:block;margin-bottom:2px}
+.valid-item p{font-size:14px;color:var(--ink-light);margin:0}
+
+/* ── Do / Do not table ───────────────────────────────────── */
+.safety-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:15px}
+.safety-table td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:top}
+.safety-table tr:last-child td{border-bottom:none}
+.safety-table .do-not{background:var(--red-light);color:var(--red);font-weight:600;width:80px;text-align:center;border-radius:var(--radius) 0 0 var(--radius)}
+.safety-table .do{background:var(--accent-light);color:var(--accent);font-weight:600;width:80px;text-align:center;border-radius:var(--radius) 0 0 var(--radius)}
+
+/* ── Security tiers ──────────────────────────────────────── */
+.tier-grid{display:grid;gap:16px;margin:24px 0}
+.tier{padding:24px;border-radius:var(--radius);border:1px solid var(--border);background:#fff}
+.tier-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:3px;margin-bottom:12px}
+.tier-public .tier-badge{background:var(--amber-light);color:var(--amber)}
+.tier-campus .tier-badge{background:var(--blue-light);color:var(--blue)}
+.tier-cloud .tier-badge{background:var(--accent-light);color:var(--accent)}
+.tier-local .tier-badge{background:var(--ink);color:#fff}
+
+/* ── Platform guide tabs ─────────────────────────────────── */
+.tab-bar{display:flex;gap:4px;border-bottom:2px solid var(--border);margin-bottom:24px;overflow-x:auto;padding-bottom:0}
+.tab-btn{font-family:var(--sans);font-size:14px;font-weight:500;padding:10px 16px;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--ink-light);cursor:pointer;white-space:nowrap;transition:all .15s}
+.tab-btn:hover{color:var(--ink)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ── Platform cards ──────────────────────────────────────── */
+.platform-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.platform{padding:20px;border:1px solid var(--border);border-radius:var(--radius);background:#fff}
+.platform h4{margin-bottom:6px;font-size:1rem}
+.platform-type{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+.platform p{font-size:14px;color:var(--ink-light);line-height:1.55}
+.platform-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.platform-tag{font-size:11px;padding:2px 8px;border-radius:3px;background:var(--paper-warm);color:var(--ink-light);font-weight:500}
+.platform-tag.secure{background:var(--accent-light);color:var(--accent)}
+.platform-tag.local{background:var(--ink);color:#fff}
+.platform-tag.literature{background:var(--blue-light);color:var(--blue)}
+.platform-tag.analysis{background:var(--amber-light);color:var(--amber)}
+
+/* ── Ethics spectrum ─────────────────────────────────────── */
+.spectrum-table{width:100%;border-collapse:collapse;margin:24px 0}
+.spectrum-table th{text-align:left;padding:10px 14px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-light);border-bottom:2px solid var(--border)}
+.spectrum-table td{padding:14px;border-bottom:1px solid var(--border);font-size:15px;vertical-align:top}
+.spectrum-table tr:last-child td{border-bottom:none}
+.rating-appropriate{color:var(--accent);font-weight:600}
+.rating-problematic{color:var(--amber);font-weight:600}
+.rating-inappropriate{color:var(--red);font-weight:600}
+
+/* ── Disclosure ──────────────────────────────────────────── */
+.disclosure{background:var(--paper-warm);border-left:3px solid var(--accent);padding:20px 24px;border-radius:0 var(--radius) var(--radius) 0;margin:16px 0;font-size:15px;line-height:1.65;color:var(--ink-light)}
+.disclosure strong{color:var(--ink);display:block;margin-bottom:4px;font-size:14px}
+
+/* ── Rules list ──────────────────────────────────────────── */
+.rules-list{list-style:none;padding:0;margin:24px 0}
+.rules-list li{padding:12px 0 12px 32px;border-bottom:1px solid var(--border);position:relative;font-size:15px}
+.rules-list li:last-child{border-bottom:none}
+.rules-list li::before{content:'';position:absolute;left:0;top:18px;width:16px;height:16px;border:2px solid var(--red);border-radius:3px}
+
+/* ── Future section ──────────────────────────────────────── */
+.future-card{padding:24px;border:1px solid var(--border);border-radius:var(--radius);background:#fff;margin-top:16px}
+.future-card h4{margin-bottom:8px}
+.future-card p{font-size:15px;color:var(--ink-light);line-height:1.65}
+.future-example{margin-top:12px;padding:14px;background:var(--paper-warm);border-radius:var(--radius);font-size:14px;color:var(--ink-light)}
+.future-example strong{color:var(--ink);font-size:13px;display:block;margin-bottom:4px}
+
+/* ── Sources ─────────────────────────────────────────────── */
+.source-group{margin-top:24px}
+.source-group h3{font-size:1rem;margin-bottom:12px}
+.source-list{list-style:none;padding:0}
+.source-list li{padding:8px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.55}
+.source-list li:last-child{border-bottom:none}
+.source-list a{text-decoration:none}
+.source-list a:hover{text-decoration:underline}
+.source-annotation{color:var(--ink-light);font-size:13px;display:block;margin-top:2px}
+
+/* ── Sampling parameters ─────────────────────────────────── */
+.param-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:24px 0}
+.param{padding:16px;background:#fff;border:1px solid var(--border);border-radius:var(--radius)}
+.param h4{font-family:var(--mono);font-size:14px;color:var(--accent);margin-bottom:6px}
+.param p{font-size:14px;color:var(--ink-light);line-height:1.5}
+.param-note{font-size:13px;color:var(--ink-light);margin-top:16px;padding:14px;background:var(--paper-warm);border-radius:var(--radius);line-height:1.6}
+
+/* ── Classification rule ─────────────────────────────────── */
+.classify-grid{display:grid;gap:12px;margin:24px 0}
+.classify-row{display:grid;grid-template-columns:180px 1fr;gap:16px;padding:14px 16px;border-radius:var(--radius);font-size:15px;align-items:baseline}
+.classify-row strong{font-weight:600}
+.classify-public{background:var(--amber-light)}
+.classify-internal{background:var(--blue-light)}
+.classify-sensitive{background:var(--ink);color:#ddd}
+.classify-sensitive strong{color:#fff}
+
+/* ── Footer ──────────────────────────────────────────────── */
+.site-footer{padding:48px 0;border-top:1px solid var(--border);background:var(--paper-warm)}
+.footer-inner{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:16px;font-size:14px;color:var(--ink-light)}
+
+/* ── Alignment table ──────────────────────────────────────── */
+.align-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:15px}
+.align-table th{text-align:left;padding:10px 14px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#fff;background:var(--ink)}
+.align-table th:first-child{border-radius:var(--radius) 0 0 0}
+.align-table th:last-child{border-radius:0 var(--radius) 0 0}
+.align-table td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+.align-table .col-stage{font-weight:600;width:150px}
+.align-table .col-role{color:var(--accent)}
+.align-table .col-avoid{color:var(--red)}
+.align-table caption{caption-side:bottom;font-size:13px;color:var(--ink-light);padding-top:10px;text-align:left;font-style:italic}
+
+/* ── Answer tiers ────────────────────────────────────────── */
+.tier-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+.answer-tier{padding:20px;border-radius:var(--radius);border:1px solid var(--border);background:#fff}
+.answer-tier h4{margin-bottom:6px}
+.answer-tier p{font-size:14px;color:var(--ink-light);line-height:1.55}
+.answer-tier .tier-q{margin-top:10px;font-size:13px;font-weight:600;color:var(--ink)}
+.tier-conservative{border-left:4px solid var(--accent)}
+.tier-moderate{border-left:4px solid var(--amber)}
+.tier-speculative{border-left:4px solid var(--red)}
+@media(max-width:768px){.tier-row{grid-template-columns:1fr}}
+
+/* ── Exercise box ────────────────────────────────────────── */
+.exercise-box{border:2px dashed var(--blue);border-radius:var(--radius);padding:28px;margin:24px 0;background:var(--blue-light)}
+.exercise-box h4{color:var(--blue);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
+
+/* ── Audience note ───────────────────────────────────────── */
+.audience-note{font-size:13px;color:var(--ink-light);padding:10px 14px;background:var(--paper-warm);border-radius:var(--radius);margin-bottom:20px;line-height:1.5;font-style:italic}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--paper);border-bottom:1px solid var(--border);padding:12px 24px;gap:4px;box-shadow:var(--shadow-lg)}
+  .nav-hamburger{display:block}
+  section{padding:48px 0}
+  .hero{padding:72px 0 48px}
+  .lifecycle{flex-direction:column}
+  .lifecycle-stage::after{content:'↓';position:static;display:block;margin-top:4px}
+  .lifecycle-stage:last-child::after{display:none}
+  .classify-row{grid-template-columns:1fr;gap:4px}
+  .spectrum-table{font-size:14px}
+  .spectrum-table td,.spectrum-table th{padding:10px 8px}
+}
+
+/* ── Print ───────────────────────────────────────────────── */
+@media print{
+  .site-nav,.hero-actions,.tab-bar,.copy-btn,.nav-hamburger,.video-embed{display:none!important}
+  body{font-size:11pt;line-height:1.5;color:#000}
+  section{padding:24px 0;page-break-inside:avoid}
+  .card,.tier,.platform,.principle{break-inside:avoid;border:1px solid #ccc}
+  a{color:#000;text-decoration:underline}
+  a[href]::after{content:" (" attr(href) ")";font-size:9pt;color:#666}
+  .code-block{background:#f5f5f5;color:#000;border:1px solid #ccc}
+}
+</style>
 </head>
 <body>
-  <header class="sticky top-0 z-50 bg-white/92 backdrop-blur border-b border-stone-200">
-    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-      <a href="#top" class="font-extrabold text-lg text-[var(--forest)] whitespace-nowrap">AI for Research</a>
-      <div class="hidden lg:flex items-center gap-5 text-sm font-semibold text-slate-600">
-        <a class="nav-link py-2" href="#workflow">Workflow</a>
-        <a class="nav-link py-2" href="#prompting">Prompting</a>
-        <a class="nav-link py-2" href="#verification">Verification</a>
-        <a class="nav-link py-2" href="#secure">Secure AI</a>
-        <a class="nav-link py-2" href="#platforms">Platforms</a>
-        <a class="nav-link py-2" href="#ethics">Ethics</a>
-        <a class="nav-link py-2" href="#future">Future</a>
-      </div>
-      <a href="../index.html" class="pill px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-stone-100">Education site</a>
-    </nav>
-  </header>
 
-  <main id="top">
-    <section class="hero flex items-end">
-      <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-12 pt-28 text-white">
-        <p class="font-bold uppercase tracking-[.08em] text-amber-200 text-sm">Updated 5 May 2026</p>
-        <h1 class="mt-4 max-w-4xl text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight">Generative AI for Research</h1>
-        <p class="mt-5 max-w-2xl text-lg sm:text-xl text-stone-100 leading-relaxed">
-          A practical, secure, and methodologically sceptical guide for researchers who want AI to accelerate work without outsourcing judgement.
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#workflow" class="inline-flex items-center gap-2 rounded-md bg-amber-300 px-4 py-3 font-bold text-slate-950 hover:bg-amber-200">
-            <i data-lucide="route" class="h-5 w-5"></i>
-            Explore the workflow
-          </a>
-          <a href="#platforms" class="inline-flex items-center gap-2 rounded-md border border-white/60 px-4 py-3 font-bold text-white hover:bg-white/12">
-            <i data-lucide="shield-check" class="h-5 w-5"></i>
-            Choose a platform
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="band bg-white">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 grid gap-4 md:grid-cols-3">
-        <article class="soft-card p-5 rule">
-          <h2 class="font-extrabold text-lg">AI is a collaborator, not evidence</h2>
-          <p class="mt-2 text-sm leading-relaxed text-slate-600">Use models for generation, critique, transformation, and organisation. Scholarly databases, primary sources, code, and expert judgement still carry the evidential weight.</p>
-        </article>
-        <article class="soft-card p-5 rule">
-          <h2 class="font-extrabold text-lg">Security and accountability are separate</h2>
-          <p class="mt-2 text-sm leading-relaxed text-slate-600">A secure or local model can protect unpublished work, but it cannot make claims accountable. The researcher remains responsible for every interpretation, citation, and disclosure.</p>
-        </article>
-        <article class="soft-card p-5 rule">
-          <h2 class="font-extrabold text-lg">Verification is structural</h2>
-          <p class="mt-2 text-sm leading-relaxed text-slate-600">Hallucination, positional bias, and correlated model errors are not rare accidents. Build checks into prompts, workflows, and publication decisions from the beginning.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="workflow" class="band bg-[#f7f8f4]">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div class="max-w-3xl">
-          <p class="section-kicker">Research Lifecycle</p>
-          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">Match the model to the task</h2>
-          <p class="mt-4 text-slate-600 leading-relaxed">The question is not whether AI can be inserted into research. It is whether the contribution is defensible, auditable, and proportionate to the evidence.</p>
-        </div>
-
-        <div class="mt-8 flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Research workflow stages">
-          <button class="workflow-btn pill px-4 py-2 font-bold whitespace-nowrap" data-stage="conception" aria-selected="true" role="tab">Conception</button>
-          <button class="workflow-btn pill px-4 py-2 font-bold whitespace-nowrap" data-stage="collection" aria-selected="false" role="tab">Data collection</button>
-          <button class="workflow-btn pill px-4 py-2 font-bold whitespace-nowrap" data-stage="analysis" aria-selected="false" role="tab">Analysis</button>
-          <button class="workflow-btn pill px-4 py-2 font-bold whitespace-nowrap" data-stage="interpretation" aria-selected="false" role="tab">Interpretation</button>
-          <button class="workflow-btn pill px-4 py-2 font-bold whitespace-nowrap" data-stage="writing" aria-selected="false" role="tab">Writing</button>
-          <button class="workflow-btn pill px-4 py-2 font-bold whitespace-nowrap" data-stage="review" aria-selected="false" role="tab">Peer review</button>
-        </div>
-
-        <div id="workflow-panel" class="mt-6 grid gap-6 lg:grid-cols-[1.1fr_.9fr] items-start"></div>
-
-        <div class="mt-10 grid gap-4 md:grid-cols-3">
-          <article class="card p-5">
-            <div class="icon-badge"><i data-lucide="mic" class="h-5 w-5"></i></div>
-            <h3 class="mt-4 font-extrabold text-lg">Voice interview bot</h3>
-            <p class="mt-2 text-sm text-slate-600 leading-relaxed">The deck includes a voice-enabled qualitative interview bot. Treat it as an interview support system: test prompts, consent wording, bias, accessibility, and data handling before any live study.</p>
-            <a class="source-link mt-3 inline-block text-sm" href="https://github.com/Tony-Myers/AI_voice_interview_bot" target="_blank" rel="noopener noreferrer">View Tony's GitHub example</a>
-          </article>
-          <article class="card p-5">
-            <div class="icon-badge"><i data-lucide="terminal-square" class="h-5 w-5"></i></div>
-            <h3 class="mt-4 font-extrabold text-lg">Sandboxed analysis</h3>
-            <p class="mt-2 text-sm text-slate-600 leading-relaxed">Use AI to draft deterministic R or Python code, not to calculate complex statistics inside a free-text chat. A sandbox helps contain untrusted code and protects the host system.</p>
-            <a class="source-link mt-3 inline-block text-sm" href="https://julius.ai/" target="_blank" rel="noopener noreferrer">Julius AI for data workflows</a>
-          </article>
-          <article class="card p-5">
-            <div class="icon-badge"><i data-lucide="book-check" class="h-5 w-5"></i></div>
-            <h3 class="mt-4 font-extrabold text-lg">Focused notebooks</h3>
-            <p class="mt-2 text-sm text-slate-600 leading-relaxed">NotebookLM-style systems are strongest when the source set is curated and narrow. Avoid dumping an entire field into one mega-notebook and treating the summary as synthesis.</p>
-            <a class="source-link mt-3 inline-block text-sm" href="https://support.google.com/notebooklm/answer/16164461?hl=en" target="_blank" rel="noopener noreferrer">NotebookLM help</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="prompting" class="band bg-white">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div class="grid gap-10 lg:grid-cols-[.85fr_1.15fr]">
-          <div>
-            <p class="section-kicker">Architecture-Driven Prompting</p>
-            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">Prompting is context design</h2>
-            <p class="mt-4 text-slate-600 leading-relaxed">Transformer-based systems generate likely continuations from the context window. That makes prompting a methodological act: you are constraining the probability distribution, not asking an oracle.</p>
-            <div class="mt-6 grid gap-3 sm:grid-cols-3">
-              <div class="soft-card p-4">
-                <p class="text-sm font-bold text-[var(--rose)]">Temperature</p>
-                <p class="mt-1 text-sm text-slate-600">Lower for factual consistency, higher for divergent idea generation.</p>
-              </div>
-              <div class="soft-card p-4">
-                <p class="text-sm font-bold text-[var(--gold)]">Top-p</p>
-                <p class="mt-1 text-sm text-slate-600">Limits sampling to the most likely cumulative token set.</p>
-              </div>
-              <div class="soft-card p-4">
-                <p class="text-sm font-bold text-[var(--violet)]">Top-k</p>
-                <p class="mt-1 text-sm text-slate-600">Hard-cuts the candidate token pool to a fixed size.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="card p-6">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <h3 class="font-extrabold text-xl">The 7-part research prompt</h3>
-                <p class="mt-1 text-sm text-slate-600">Adapted from the workshop and the education AI prompting page.</p>
-              </div>
-              <button id="copyPrompt" class="inline-flex items-center gap-2 rounded-md border border-stone-300 px-3 py-2 text-sm font-bold hover:bg-stone-100">
-                <i data-lucide="copy" class="h-4 w-4"></i>
-                Copy
-              </button>
-            </div>
-            <ol class="mt-5 grid gap-3 sm:grid-cols-2 text-sm">
-              <li class="soft-card p-3"><strong>1. Role:</strong> define the expert lens.</li>
-              <li class="soft-card p-3"><strong>2. Task:</strong> specify the action.</li>
-              <li class="soft-card p-3"><strong>3. Context:</strong> state study design and purpose.</li>
-              <li class="soft-card p-3"><strong>4. Evidence:</strong> supply the data or text to use.</li>
-              <li class="soft-card p-3"><strong>5. Constraints:</strong> forbid unsupported claims.</li>
-              <li class="soft-card p-3"><strong>6. Format:</strong> require tables, code, or headings.</li>
-              <li class="soft-card p-3 sm:col-span-2"><strong>7. Verification:</strong> ask for uncertainty, checks, and missing evidence.</li>
-            </ol>
-            <pre id="promptText" class="mt-5 max-h-[360px] overflow-auto rounded-md bg-slate-950 p-4 text-sm leading-relaxed text-stone-100 whitespace-pre-wrap">Act as a critical methodological adviser.
-
-Task:
-Evaluate the supplied material for factual, statistical, and methodological reliability.
-
-Context:
-I am preparing an academic research output and need conservative feedback before submission.
-
-Evidence:
-[Paste the source text, table, output, transcript, or model results here.]
-
-Constraints:
-Use only the supplied material unless I explicitly ask for external sources. Do not invent citations, missing facts, or statistical values. Distinguish fact, interpretation, and speculation.
-
-Output format:
-Use a table with these columns:
-Claim | Support status | Evidence | Concern | Required check | Conservative revision.
-
-Verification:
-Flag overclaiming, causal language, missing uncertainty, mismatches between evidence and conclusion, and any claim that needs independent database or code verification.</pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="verification" class="band bg-[#eef4f1]">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div class="max-w-3xl">
-          <p class="section-kicker">Verification</p>
-          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">Fluency is not evidence</h2>
-          <p class="mt-4 text-slate-600 leading-relaxed">The workshop's central risk message is blunt: agreement between polished outputs is not the same thing as independent corroboration. Verification needs its own workflow.</p>
-        </div>
-
-        <div class="mt-8 grid gap-5 lg:grid-cols-2">
-          <article class="card p-6">
-            <h3 class="font-extrabold text-xl">VALID-AI dashboard</h3>
-            <div class="mt-5 grid gap-3">
-              <div class="flex gap-3"><span class="icon-badge"><i data-lucide="badge-check" class="h-5 w-5"></i></span><p><strong>Verify sources:</strong> confirm that citations exist and say what the model claims.</p></div>
-              <div class="flex gap-3"><span class="icon-badge"><i data-lucide="scale" class="h-5 w-5"></i></span><p><strong>Assess authority:</strong> prioritise peer-reviewed and primary material over plausible grey literature.</p></div>
-              <div class="flex gap-3"><span class="icon-badge"><i data-lucide="search-check" class="h-5 w-5"></i></span><p><strong>Look for bias:</strong> inspect omitted methods, geographies, populations, and theoretical positions.</p></div>
-              <div class="flex gap-3"><span class="icon-badge"><i data-lucide="alert-triangle" class="h-5 w-5"></i></span><p><strong>Identify limits:</strong> separate supported findings from interpretation and speculation.</p></div>
-              <div class="flex gap-3"><span class="icon-badge"><i data-lucide="git-branch" class="h-5 w-5"></i></span><p><strong>Document provenance:</strong> record model, prompt, source set, date, and checks performed.</p></div>
-            </div>
-          </article>
-
-          <article class="card p-6">
-            <h3 class="font-extrabold text-xl">RAG helps, but it is not magic</h3>
-            <p class="mt-3 text-slate-600 leading-relaxed">Retrieval augmented generation moves from closed-book pattern completion to open-book, source-grounded generation. It can reduce hallucination by grounding answers in a trusted corpus, but large undifferentiated notebooks still suffer coverage and context-window problems.</p>
-            <div class="mt-5 grid gap-3">
-              <div class="soft-card p-4"><strong>Exploratory RAG:</strong> useful for orientation, question generation, and finding candidate passages.</div>
-              <div class="soft-card p-4"><strong>Rigorous synthesis:</strong> requires defined inclusion criteria, paper-level extraction, traceable notes, and independent checking.</div>
-              <div class="soft-card p-4"><strong>StatsRAG pattern:</strong> build an auditable specification, verify against a trusted local library, then produce a verdict card on compliance, metric integrity, direction, and source support.</div>
-            </div>
-            <a class="source-link mt-4 inline-block text-sm" href="https://www.ibm.com/think/topics/retrieval-augmented-generation" target="_blank" rel="noopener noreferrer">IBM explainer on RAG</a>
-          </article>
-        </div>
-
-        <div class="mt-8 card p-6">
-          <h3 class="font-extrabold text-xl">Safety protocol for AI-assisted analysis</h3>
-          <div class="mt-5 grid gap-4 md:grid-cols-3">
-            <div class="soft-card p-4">
-              <p class="font-bold text-[var(--rose)]">Do not</p>
-              <p class="mt-2 text-sm text-slate-600">Rely on an LLM for direct calculation of complex datasets.</p>
-              <p class="mt-3 font-bold text-[var(--teal)]">Do</p>
-              <p class="mt-2 text-sm text-slate-600">Generate Python or R code and run deterministic statistical procedures.</p>
-            </div>
-            <div class="soft-card p-4">
-              <p class="font-bold text-[var(--rose)]">Do not</p>
-              <p class="mt-2 text-sm text-slate-600">Accept test selection without manual verification of the design.</p>
-              <p class="mt-3 font-bold text-[var(--teal)]">Do</p>
-              <p class="mt-2 text-sm text-slate-600">Check normality, variance, outliers, dependence, units, and model assumptions.</p>
-            </div>
-            <div class="soft-card p-4">
-              <p class="font-bold text-[var(--rose)]">Do not</p>
-              <p class="mt-2 text-sm text-slate-600">Paste an AI interpretation into a manuscript unchecked.</p>
-              <p class="mt-3 font-bold text-[var(--teal)]">Do</p>
-              <p class="mt-2 text-sm text-slate-600">Constrain the prompt, rerun with variations, compare models, and verify against sources and code.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="secure" class="band bg-white">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div class="max-w-3xl">
-          <p class="section-kicker">Secure AI Choices</p>
-          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">Choose the smallest exposure that fits the job</h2>
-          <p class="mt-4 text-slate-600 leading-relaxed">The newest secure options are much better than public consumer chat, but "secure" still depends on your institution, licence, data classification, region, retention settings, and whether web grounding or connectors are enabled.</p>
-        </div>
-
-        <div class="mt-8 grid gap-5 lg:grid-cols-4">
-          <article class="card p-5">
-            <span class="icon-badge"><i data-lucide="globe-2" class="h-5 w-5"></i></span>
-            <h3 class="mt-4 font-extrabold text-lg">Public web AI</h3>
-            <p class="mt-2 text-sm text-slate-600">Best for low-risk brainstorming and public information. Do not upload unpublished manuscripts, sensitive participant data, or confidential grant material.</p>
-          </article>
-          <article class="card p-5">
-            <span class="icon-badge"><i data-lucide="building-2" class="h-5 w-5"></i></span>
-            <h3 class="mt-4 font-extrabold text-lg">Campus enterprise AI</h3>
-            <p class="mt-2 text-sm text-slate-600">ChatGPT Edu, Microsoft 365 Copilot Chat, Gemini for Workspace, and Claude for Work offer stronger controls, but local policy decides what data may be used.</p>
-          </article>
-          <article class="card p-5">
-            <span class="icon-badge"><i data-lucide="server-cog" class="h-5 w-5"></i></span>
-            <h3 class="mt-4 font-extrabold text-lg">Managed secure cloud</h3>
-            <p class="mt-2 text-sm text-slate-600">Azure AI Foundry, AWS Bedrock, and Google Vertex AI offer tenant-level governance, logging, region choices, and model-provider separation for serious deployments.</p>
-          </article>
-          <article class="card p-5">
-            <span class="icon-badge"><i data-lucide="hard-drive" class="h-5 w-5"></i></span>
-            <h3 class="mt-4 font-extrabold text-lg">Local or self-hosted AI</h3>
-            <p class="mt-2 text-sm text-slate-600">Ollama, LM Studio, Open WebUI, AnythingLLM, Jan, and GPT4All can run models on your own machine or server. This helps confidentiality, not accuracy.</p>
-          </article>
-        </div>
-
-        <div class="mt-8 card p-6">
-          <h3 class="font-extrabold text-xl">A simple classification rule</h3>
-          <div class="mt-5 grid gap-4 md:grid-cols-3">
-            <div class="soft-card p-4"><strong>Public data:</strong> use any appropriate tool, but verify and cite independently.</div>
-            <div class="soft-card p-4"><strong>Internal or unpublished work:</strong> use approved enterprise/campus AI or a managed secure cloud service.</div>
-            <div class="soft-card p-4"><strong>Sensitive, identifiable, or embargoed data:</strong> use approved local, self-hosted, or institutionally governed platforms only.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="platforms" class="band bg-[#f7f8f4]">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-          <div class="max-w-3xl">
-            <p class="section-kicker">Current Platform Guide</p>
-            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">Tools worth knowing in 2026</h2>
-            <p class="mt-4 text-slate-600 leading-relaxed">These are not endorsements. They are a researcher's map: what each platform is good for, what to check, and when to avoid it.</p>
-          </div>
-          <div class="flex flex-wrap gap-2" aria-label="Filter platform cards">
-            <button class="filter-btn pill px-3 py-2 text-sm font-bold" data-filter="all" aria-pressed="true">All</button>
-            <button class="filter-btn pill px-3 py-2 text-sm font-bold" data-filter="secure" aria-pressed="false">Secure</button>
-            <button class="filter-btn pill px-3 py-2 text-sm font-bold" data-filter="literature" aria-pressed="false">Literature</button>
-            <button class="filter-btn pill px-3 py-2 text-sm font-bold" data-filter="analysis" aria-pressed="false">Analysis</button>
-            <button class="filter-btn pill px-3 py-2 text-sm font-bold" data-filter="local" aria-pressed="false">Local</button>
-          </div>
-        </div>
-
-        <div id="platform-grid" class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3"></div>
-
-        <div id="local-lab" class="mt-12">
-          <p class="section-kicker">Local Model Lab</p>
-          <h3 class="mt-2 text-2xl sm:text-3xl font-extrabold">Places to try local and open models</h3>
-          <div class="mt-6 grid gap-5 lg:grid-cols-3">
-            <article class="card p-5">
-              <h4 class="font-extrabold text-lg">Beginner desktop</h4>
-              <p class="mt-2 text-sm text-slate-600">LM Studio, Jan, and GPT4All are the easiest starting points for offline chat with open models such as Qwen, Llama, Gemma, Mistral, and DeepSeek.</p>
-            </article>
-            <article class="card p-5">
-              <h4 class="font-extrabold text-lg">Research workstation</h4>
-              <p class="mt-2 text-sm text-slate-600">Ollama plus Open WebUI gives a stronger local lab: model switching, RAG, tool calling, and a browser-style interface for teams or demos.</p>
-            </article>
-            <article class="card p-5">
-              <h4 class="font-extrabold text-lg">Explore before downloading</h4>
-              <p class="mt-2 text-sm text-slate-600">Hugging Face models and Spaces let you inspect model cards, licences, examples, and app demos before committing compute or storage locally.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="ethics" class="band bg-white">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div class="grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
-          <div>
-            <p class="section-kicker">Authorship and Peer Review</p>
-            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">Local AI solves confidentiality. It does not solve accountability.</h2>
-            <p class="mt-4 text-slate-600 leading-relaxed">The deck's peer-review section is a useful ethical spectrum: some uses of local AI are highly appropriate, some are risky, and unverified generation is academic misconduct regardless of where the model runs.</p>
-          </div>
-          <div class="grid gap-3">
-            <div class="matrix-row hidden md:grid text-sm font-bold text-slate-500 px-2">
-              <span>Use</span><span>Status</span><span>Core risk</span>
-            </div>
-            <div class="matrix-row grid gap-2 card p-4">
-              <strong>Gap analysis and red teaming</strong>
-              <span class="text-[var(--teal)] font-bold">Highly appropriate</span>
-              <span class="text-sm text-slate-600">The researcher must decide which critiques are valid.</span>
-            </div>
-            <div class="matrix-row grid gap-2 card p-4">
-              <strong>Grammar, wording, structure</strong>
-              <span class="text-[var(--teal)] font-bold">Highly appropriate</span>
-              <span class="text-sm text-slate-600">Meaning must remain human-generated and checked.</span>
-            </div>
-            <div class="matrix-row grid gap-2 card p-4">
-              <strong>Substantial drafting</strong>
-              <span class="text-[var(--gold)] font-bold">Problematic</span>
-              <span class="text-sm text-slate-600">Risks false synthesis, fabricated citations, and authorship blur.</span>
-            </div>
-            <div class="matrix-row grid gap-2 card p-4">
-              <strong>Unverified paste-in</strong>
-              <span class="text-[var(--rose)] font-bold">Inappropriate</span>
-              <span class="text-sm text-slate-600">The author cannot vouch for accuracy, originality, or source integrity.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-10 grid gap-5 lg:grid-cols-2">
-          <article class="card p-6">
-            <h3 class="font-extrabold text-xl">Disclosure statement examples</h3>
-            <p class="mt-3 text-slate-600">Adapt these to the journal. Always include the tool, version if available, task, date range, and human verification performed.</p>
-            <div class="mt-4 grid gap-3 text-sm">
-              <p class="soft-card p-4"><strong>Copy editing:</strong> I used [tool] to suggest grammar, wording, and structure improvements to human-authored text. I reviewed all changes and take responsibility for the final manuscript.</p>
-              <p class="soft-card p-4"><strong>Analysis support:</strong> I used [tool] to draft R/Python code and identify possible model assumptions. All analyses were run in [software], checked against the dataset and statistical references, and revised by the authors.</p>
-              <p class="soft-card p-4"><strong>Red teaming:</strong> I used [local/approved tool] to identify possible limitations, missing literature, and overclaims. Suggestions were independently evaluated and only incorporated after author review.</p>
-            </div>
-          </article>
-          <article class="card p-6">
-            <h3 class="font-extrabold text-xl">Non-negotiable research rules</h3>
-            <ul class="mt-4 space-y-3 text-slate-700">
-              <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--teal)] flex-none mt-0.5"></i><span>Never cite anything you have not read and verified yourself.</span></li>
-              <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--teal)] flex-none mt-0.5"></i><span>Never treat AI output as scholarly evidence.</span></li>
-              <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--teal)] flex-none mt-0.5"></i><span>Always verify sources in academic databases.</span></li>
-              <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--teal)] flex-none mt-0.5"></i><span>Use AI to assist thinking, not replace it.</span></li>
-              <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--teal)] flex-none mt-0.5"></i><span>Write your own argument and own the final judgement.</span></li>
-            </ul>
-            <div class="mt-5 flex flex-wrap gap-3 text-sm">
-              <a class="source-link" href="https://www.nature.com/nature-portfolio/editorial-policies/ai" target="_blank" rel="noopener noreferrer">Nature AI policy</a>
-              <a class="source-link" href="https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals" target="_blank" rel="noopener noreferrer">Elsevier AI policy</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="future" class="band bg-[#eef4f1]">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div class="max-w-3xl">
-          <p class="section-kicker">Future Direction</p>
-          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">From co-intelligence to managed agents</h2>
-          <p class="mt-4 text-slate-600 leading-relaxed">The workshop points to a shift from back-and-forth prompting to agentic workflows. The researcher becomes less a prompt typist and more a manager of objectives, constraints, tools, audit logs, and checkpoints.</p>
-        </div>
-        <div class="mt-8 grid gap-5 md:grid-cols-3">
-          <article class="card p-5">
-            <span class="icon-badge"><i data-lucide="bot" class="h-5 w-5"></i></span>
-            <h3 class="mt-4 font-extrabold text-lg">Agents</h3>
-            <p class="mt-2 text-sm text-slate-600">Coding and research agents can run multi-step tasks, but require explicit permissions, sandboxing, source boundaries, and review gates.</p>
-          </article>
-          <article class="card p-5">
-            <span class="icon-badge"><i data-lucide="sliders-horizontal" class="h-5 w-5"></i></span>
-            <h3 class="mt-4 font-extrabold text-lg">Fine tuning and LoRA</h3>
-            <p class="mt-2 text-sm text-slate-600">Low-rank adaptation can specialise models without full retraining. It is powerful, but dataset quality, licensing, evaluation, and drift matter.</p>
-          </article>
-          <article class="card p-5">
-            <span class="icon-badge"><i data-lucide="network" class="h-5 w-5"></i></span>
-            <h3 class="mt-4 font-extrabold text-lg">Beyond standard transformers</h3>
-            <p class="mt-2 text-sm text-slate-600">Future systems may reduce context limitations or combine symbolic, retrieval, planning, and model-based reasoning. The verification burden will not disappear.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="sources" class="band bg-white">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <p class="section-kicker">Sources</p>
-        <h2 class="mt-2 text-3xl font-extrabold">Primary and official links checked for this build</h2>
-        <div class="mt-6 grid gap-6 lg:grid-cols-3 text-sm">
-          <div>
-            <h3 class="font-extrabold text-lg">Research method and risk</h3>
-            <ul class="mt-3 space-y-2">
-              <li><a class="source-link" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer">Vaswani et al., Attention Is All You Need</a></li>
-              <li><a class="source-link" href="https://doi.org/10.1162/tacl_a_00638" target="_blank" rel="noopener noreferrer">Lost in the Middle, TACL 2024</a></li>
-              <li><a class="source-link" href="https://doi.org/10.48550/arXiv.2509.04664" target="_blank" rel="noopener noreferrer">Why Language Models Hallucinate</a></li>
-              <li><a class="source-link" href="https://doi.org/10.1038/s41586-026-10265-5" target="_blank" rel="noopener noreferrer">Towards end-to-end automation of AI research</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="font-extrabold text-lg">Security and enterprise AI</h3>
-            <ul class="mt-3 space-y-2">
-              <li><a class="source-link" href="https://openai.com/enterprise-privacy/" target="_blank" rel="noopener noreferrer">OpenAI enterprise privacy</a></li>
-              <li><a class="source-link" href="https://learn.microsoft.com/en-us/copilot/privacy-and-protections" target="_blank" rel="noopener noreferrer">Microsoft 365 Copilot Chat privacy</a></li>
-              <li><a class="source-link" href="https://support.google.com/docs/answer/14615114?hl=en-en" target="_blank" rel="noopener noreferrer">Gemini in Workspace data protection</a></li>
-              <li><a class="source-link" href="https://privacy.anthropic.com/en/articles/9267385-does-anthropic-act-as-a-data-processor-or-controller" target="_blank" rel="noopener noreferrer">Anthropic commercial data relationship</a></li>
-              <li><a class="source-link" href="https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/openai/data-privacy" target="_blank" rel="noopener noreferrer">Azure AI Foundry data privacy</a></li>
-              <li><a class="source-link" href="https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html" target="_blank" rel="noopener noreferrer">Amazon Bedrock data protection</a></li>
-              <li><a class="source-link" href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/vertex-ai-zero-data-retention" target="_blank" rel="noopener noreferrer">Google Vertex AI data governance</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="font-extrabold text-lg">Tools and local AI</h3>
-            <ul class="mt-3 space-y-2">
-              <li><a class="source-link" href="https://elicit.com/" target="_blank" rel="noopener noreferrer">Elicit</a></li>
-              <li><a class="source-link" href="https://scite.ai/" target="_blank" rel="noopener noreferrer">Scite</a></li>
-              <li><a class="source-link" href="https://www.rayyan.ai/" target="_blank" rel="noopener noreferrer">Rayyan</a></li>
-              <li><a class="source-link" href="https://huggingface.co/" target="_blank" rel="noopener noreferrer">Hugging Face</a></li>
-              <li><a class="source-link" href="https://ollama.com/" target="_blank" rel="noopener noreferrer">Ollama</a></li>
-              <li><a class="source-link" href="https://lmstudio.ai/" target="_blank" rel="noopener noreferrer">LM Studio</a></li>
-              <li><a class="source-link" href="https://docs.openwebui.com/" target="_blank" rel="noopener noreferrer">Open WebUI</a></li>
-              <li><a class="source-link" href="https://anythingllm.com/" target="_blank" rel="noopener noreferrer">AnythingLLM</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="bg-slate-950 text-stone-200">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-sm">
-      <p>Tony Myers &copy; 2026. Built as a standalone companion to the AI for education site.</p>
-      <a class="text-amber-200 font-bold hover:text-amber-100" href="#top">Back to top</a>
+<!-- ═══ Navigation ═══ -->
+<nav class="site-nav" id="top">
+  <div class="nav-inner">
+    <a href="#top" class="nav-brand">AI for Research</a>
+    <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle navigation">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="nav-links">
+      <a href="#workflow">Workflow</a>
+      <a href="#prompting">Prompting</a>
+      <a href="#verification">Verification</a>
+      <a href="#secure">Security</a>
+      <a href="#platforms">Platforms</a>
+      <a href="#ethics">Ethics</a>
+      <a href="#future">Future</a>
+      <a href="#sources">Sources</a>
     </div>
-  </footer>
+    <a href="https://tony-myers.github.io/AI-for-education/index.html" class="nav-parent">← Education site</a>
+  </div>
+</nav>
 
-  <script>
-    const workflowData = {
-      conception: {
-        icon: "lightbulb",
-        title: "Conception and design",
-        role: "Critical sparring partner",
-        body: "Use AI to structure inquiry, pressure-test hypotheses, generate candidate variables, and surface missing assumptions. It is not the sole creator of research questions.",
-        use: ["Question refinement", "Variable mapping", "Alternative theoretical framings", "Grant or study design critique"],
-        avoid: ["Claiming novelty without literature search", "Letting the model define the problem", "Confusing plausible ideas with feasible studies"]
-      },
-      collection: {
-        icon: "mic",
-        title: "Data collection",
-        role: "Wording and bias checker",
-        body: "AI can improve interview schedules, survey items, participant-facing explanations, and accessibility. Voice bots can help with structured interviewing, but require consent, governance, and piloting.",
-        use: ["Interview prompt testing", "Bias checks", "Plain-language participant materials", "Transcript preparation workflows"],
-        avoid: ["Collecting sensitive data in unapproved tools", "Synthetic data replacing participant evidence", "Unlogged changes to interview logic"]
-      },
-      analysis: {
-        icon: "chart-no-axes-combined",
-        title: "Data analysis",
-        role: "Code drafter and assumption checker",
-        body: "For qualitative work, AI can suggest candidate codes and reflexive questions. For quantitative work, it should draft deterministic code and diagnostics, not become the calculator or final analyst.",
-        use: ["R or Python drafting", "Debugging scripts", "Candidate qualitative codes", "Outlier and assumption checklists"],
-        avoid: ["LLM-only statistics", "Unsupported test selection", "Unverified thematic claims", "Over-reading p values"]
-      },
-      interpretation: {
-        icon: "scale",
-        title: "Interpretation",
-        role: "Alternative-reading tester",
-        body: "Ask for conservative, moderate, and speculative interpretations. Require the model to mark what evidence would support or undermine each reading.",
-        use: ["Uncertainty bands", "Rival explanations", "Causal language checks", "Practical versus statistical significance"],
-        avoid: ["Single 'correct' interpretation", "Consensus between models as proof", "Ignoring contradictory evidence"]
-      },
-      writing: {
-        icon: "pen-line",
-        title: "Writing and preparation",
-        role: "Clarity and structure editor",
-        body: "Use AI to improve readability, structure, argument flow, abstract variants, lay summaries, and responses to reviewers. Keep intellectual synthesis and final claims human-owned.",
-        use: ["Copy editing", "Structure review", "Abstract and title options", "AI disclosure drafting"],
-        avoid: ["Substantial unverified drafting", "Fabricated citations", "Outsourced narrative arc"]
-      },
-      review: {
-        icon: "messages-square",
-        title: "Peer review and response",
-        role: "Reviewer simulation and response organiser",
-        body: "Local or approved AI can act as a pre-review stress test for your own manuscript. For confidential peer review, follow the journal's rules and do not upload manuscripts into unapproved tools.",
-        use: ["Pre-review red teaming", "Reviewer response tables", "Tone checks", "Limitation audits"],
-        avoid: ["Uploading confidential review manuscripts to public AI", "AI as final evaluator", "Undeclared AI-supported peer review"]
-      }
-    };
+<!-- ═══ Hero ═══ -->
+<header class="hero" id="hero">
+  <div class="container">
+    <p class="section-label">Tony Myers · Birmingham Newman University</p>
+    <h1>Generative AI for Research</h1>
+    <p class="lead">A practical, secure, and methodologically sceptical guide for researchers who want AI to accelerate work without outsourcing judgement. This guide is designed to be useful whether or not you attended the accompanying workshop — every claim stands on its own sources and reasoning.</p>
+    <div class="hero-actions">
+      <a href="#workflow" class="btn btn-primary">Explore the workflow</a>
+      <a href="#platforms" class="btn btn-outline">Choose a platform</a>
+    </div>
+    <p class="hero-meta">Updated 7 May 2026 · Companion to <a href="https://tony-myers.github.io/AI-for-education/index.html">The AI-Powered Academic</a></p>
+  </div>
+</header>
 
-    const platformData = [
-      {
-        name: "ChatGPT Edu / Enterprise",
-        tags: ["secure", "writing", "analysis"],
-        best: "Campus-scale general AI, data analysis, file work, custom GPTs, writing support.",
-        check: "Use institutional workspace. OpenAI states business data is not used to train models by default.",
-        url: "https://openai.com/chatgpt/education/"
-      },
-      {
-        name: "Microsoft 365 Copilot Chat",
-        tags: ["secure", "writing"],
-        best: "Staff productivity, Office workflows, enterprise data protection, audit and retention integration.",
-        check: "Prompts and responses are processed within the Microsoft 365 service boundary when enterprise data protection applies.",
-        url: "https://learn.microsoft.com/en-us/copilot/privacy-and-protections"
-      },
-      {
-        name: "Gemini for Workspace",
-        tags: ["secure", "writing"],
-        best: "Google Workspace users needing document, email, meeting, and Drive-aware assistance.",
-        check: "Google says Workspace data is not used to train generative models outside Workspace without permission.",
-        url: "https://support.google.com/docs/answer/14615114?hl=en-en"
-      },
-      {
-        name: "Claude for Work",
-        tags: ["secure", "writing", "analysis"],
-        best: "Long-form critique, red teaming, coding support, policy-safe writing in team or enterprise settings.",
-        check: "Anthropic states commercial inputs and outputs are not used to train models by default.",
-        url: "https://privacy.anthropic.com/en/articles/7996868-i-want-to-opt-out-of-my-prompts-and-results-being-used-for-training-models"
-      },
-      {
-        name: "NotebookLM",
-        tags: ["literature", "writing", "secure"],
-        best: "Source-grounded notebooks, summaries, audio overviews, mind maps, briefing documents.",
-        check: "Use focused source sets and verify cited passages. Workspace and Education handling differs from personal accounts.",
-        url: "https://support.google.com/notebooklm/answer/16164461?hl=en"
-      },
-      {
-        name: "SecureXamine",
-        tags: ["secure", "local", "literature"],
-        best: "A local secure NotebookLM-style pattern for sensitive source-grounded work.",
-        check: "Treat as an institutional/local deployment pattern. Validate indexing, retention, access controls, and audit logs.",
-        url: "https://github.com/Tony-Myers"
-      },
-      {
-        name: "Azure AI Foundry / Azure OpenAI",
-        tags: ["secure", "analysis"],
-        best: "Institutional deployments needing region, tenant, governance, and compliance controls.",
-        check: "Microsoft states prompts, completions, embeddings, and training data are not available to OpenAI or used to train foundation models without permission.",
-        url: "https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/openai/data-privacy"
-      },
-      {
-        name: "Amazon Bedrock",
-        tags: ["secure", "analysis"],
-        best: "Multi-provider model access within AWS governance, IAM, VPC, logging, and encryption patterns.",
-        check: "AWS documents model-provider separation from customer prompts and completions in Bedrock deployment accounts.",
-        url: "https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html"
-      },
-      {
-        name: "Google Vertex AI",
-        tags: ["secure", "analysis"],
-        best: "Google Cloud model deployment, evaluation, grounding, data governance, and enterprise controls.",
-        check: "Google says Vertex AI managed model data is not used for training or fine tuning without permission, with retention caveats for selected features.",
-        url: "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/vertex-ai-zero-data-retention"
-      },
-      {
-        name: "Elicit",
-        tags: ["literature"],
-        best: "Semantic search, evidence tables, reports, alerts, screening, and data extraction for reviews.",
-        check: "Strong for discovery and extraction, but do not cite summaries without reading the source paper.",
-        url: "https://elicit.com/"
-      },
-      {
-        name: "Scite",
-        tags: ["literature"],
-        best: "Checking how papers are cited, whether claims are supported or contrasted, and grounding answers in full text.",
-        check: "Use Smart Citations as a signal for follow-up reading, not as a substitute for judgement.",
-        url: "https://scite.ai/"
-      },
-      {
-        name: "Rayyan",
-        tags: ["literature"],
-        best: "Systematic review screening, deduplication, filters, PICO workflow, and collaboration.",
-        check: "Keep inclusion/exclusion decisions auditable and reviewer-controlled.",
-        url: "https://www.rayyan.ai/"
-      },
-      {
-        name: "ResearchRabbit / Litmaps / Connected Papers",
-        tags: ["literature"],
-        best: "Citation-network discovery, seed-paper expansion, and visual literature exploration.",
-        check: "Excellent for discovery. Weak as evidence of completeness for a formal systematic search.",
-        url: "https://www.researchrabbit.ai/"
-      },
-      {
-        name: "Semantic Scholar",
-        tags: ["literature"],
-        best: "Academic search, APIs, citation metadata, and open research graph workflows.",
-        check: "Useful for automation, but metadata and generated summaries still need source checking.",
-        url: "https://www.semanticscholar.org/product/api"
-      },
-      {
-        name: "Julius AI",
-        tags: ["analysis"],
-        best: "Conversational data analysis, notebooks, charts, dashboards, and code-assisted statistical exploration.",
-        check: "Verify test selection, run code deterministically, inspect outliers, and check domain meaning.",
-        url: "https://julius.ai/"
-      },
-      {
-        name: "Hugging Face",
-        tags: ["local", "analysis"],
-        best: "Finding open models, datasets, model cards, licences, benchmarks, and Spaces demos.",
-        check: "Read model cards and licences. A demo Space is not a privacy-safe environment for sensitive data.",
-        url: "https://huggingface.co/"
-      },
-      {
-        name: "Ollama",
-        tags: ["local"],
-        best: "Fast local model setup from the command line, including Qwen, Llama, Gemma, Mistral, and more.",
-        check: "Offline local runs protect data leaving the machine; model quality and licence still vary.",
-        url: "https://ollama.com/"
-      },
-      {
-        name: "LM Studio",
-        tags: ["local"],
-        best: "Friendly desktop app for downloading, running, and serving local models privately.",
-        check: "Match model size to hardware. Keep confidential projects offline unless remote features are deliberately enabled.",
-        url: "https://lmstudio.ai/"
-      },
-      {
-        name: "Open WebUI",
-        tags: ["local", "secure"],
-        best: "Self-hosted interface for Ollama and OpenAI-compatible APIs, with RAG, plugins, and team-style workflows.",
-        check: "Self-hosting makes you the administrator: patching, access control, backups, and logs are your responsibility.",
-        url: "https://docs.openwebui.com/"
-      },
-      {
-        name: "AnythingLLM / Jan / GPT4All",
-        tags: ["local"],
-        best: "Private desktop AI with document chat, local storage, and simple open-model experimentation.",
-        check: "Good starting points for local AI literacy. Validate document indexing and export/backup behaviour.",
-        url: "https://anythingllm.com/"
-      }
-    ];
+<!-- ═══ Principles ═══ -->
+<section id="principles">
+  <div class="container">
+    <div class="principles">
+      <div class="principle">
+        <h3>AI is a collaborator, not evidence</h3>
+        <p>Use models for generation, critique, transformation, and organisation. Scholarly databases, primary sources, code, and expert judgement still carry the evidential weight.</p>
+      </div>
+      <div class="principle">
+        <h3>Security and accountability are separate</h3>
+        <p>A secure or local model can protect unpublished work, but it cannot make claims accountable. The researcher remains responsible for every interpretation, citation, and disclosure.</p>
+      </div>
+      <div class="principle">
+        <h3>Verification is structural</h3>
+        <p>Hallucination, positional bias, and correlated model errors are not rare accidents. Build checks into prompts, workflows, and publication decisions from the beginning.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    function renderWorkflow(stageKey) {
-      const stage = workflowData[stageKey];
-      const panel = document.getElementById("workflow-panel");
-      panel.innerHTML = `
-        <article class="card p-6">
-          <div class="flex items-start gap-4">
-            <span class="icon-badge"><i data-lucide="${stage.icon}" class="h-5 w-5"></i></span>
-            <div>
-              <p class="text-sm font-bold text-[var(--teal)]">${stage.role}</p>
-              <h3 class="mt-1 text-2xl font-extrabold">${stage.title}</h3>
-              <p class="mt-3 text-slate-600 leading-relaxed">${stage.body}</p>
-            </div>
-          </div>
-        </article>
-        <div class="grid gap-4">
-          <article class="card p-5">
-            <h4 class="font-extrabold">Use AI for</h4>
-            <ul class="mt-3 space-y-2 text-sm text-slate-700">
-              ${stage.use.map(item => `<li class="flex gap-2"><i data-lucide="check" class="h-4 w-4 text-[var(--teal)] flex-none mt-0.5"></i><span>${item}</span></li>`).join("")}
-            </ul>
-          </article>
-          <article class="card p-5">
-            <h4 class="font-extrabold">Do not use it for</h4>
-            <ul class="mt-3 space-y-2 text-sm text-slate-700">
-              ${stage.avoid.map(item => `<li class="flex gap-2"><i data-lucide="x" class="h-4 w-4 text-[var(--rose)] flex-none mt-0.5"></i><span>${item}</span></li>`).join("")}
-            </ul>
-          </article>
+<!-- ═══ Workflow / Lifecycle ═══ -->
+<section id="workflow">
+  <div class="container">
+    <p class="section-label">Research lifecycle</p>
+    <h2>Match the model to the task</h2>
+    <p>The question is not whether AI can be inserted into research. It is whether the contribution is defensible, auditable, and proportionate to the evidence. The stages below show where AI can add genuine value — and where the risks concentrate.</p>
+
+    <div class="lifecycle">
+      <div class="lifecycle-stage">Conception</div>
+      <div class="lifecycle-stage">Data collection</div>
+      <div class="lifecycle-stage">Analysis</div>
+      <div class="lifecycle-stage">Interpretation</div>
+      <div class="lifecycle-stage">Writing</div>
+      <div class="lifecycle-stage">Peer review</div>
+    </div>
+
+    <h3 style="margin-top:32px">Capability alignment: match the prompt to the research task</h3>
+    <p>Each pipeline stage has a productive AI role and a clear boundary. The principle throughout: deploy AI for generation, critique, transformation, and organisation. Never use it as a final authority.</p>
+
+    <table class="align-table">
+      <thead>
+        <tr><th>Pipeline stage</th><th>Best AI role</th><th>Do not use for</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-stage">Idea conception</td>
+          <td class="col-role">Critical sparring partner</td>
+          <td class="col-avoid">Sole creator of hypotheses</td>
+        </tr>
+        <tr>
+          <td class="col-stage">Literature search</td>
+          <td class="col-role">Search-term planner</td>
+          <td class="col-avoid">Citation source or factual database</td>
+        </tr>
+        <tr>
+          <td class="col-stage">Data collection</td>
+          <td class="col-role">Wording and bias checker</td>
+          <td class="col-avoid">Generating synthetic data</td>
+        </tr>
+        <tr>
+          <td class="col-stage">Data analysis</td>
+          <td class="col-role">Code drafter and assumption checker</td>
+          <td class="col-avoid">Analytical authority</td>
+        </tr>
+        <tr>
+          <td class="col-stage">Writing</td>
+          <td class="col-role">Clarity and structure editor</td>
+          <td class="col-avoid">Primary author</td>
+        </tr>
+        <tr>
+          <td class="col-stage">Peer review</td>
+          <td class="col-role">Reviewer-simulation and response organiser</td>
+          <td class="col-avoid">Final reviewer or evaluator</td>
+        </tr>
+      </tbody>
+      <caption>Use AI to structure inquiry; use scholarly databases and expert judgement to establish evidence.</caption>
+    </table>
+
+    <!-- Voice interview bot -->
+    <div class="card">
+      <h3>Voice interview bot</h3>
+      <p>A voice-enabled qualitative interview bot can support early-stage research by helping test prompts, consent wording, and question flow before a live study. The example below uses DeepSeek for completions, ElevenLabs for text-to-speech, and Groq Whisper for speech-to-text. Treat it as an interview rehearsal system — never as a substitute for ethical approval, informed consent, or trained interviewing skills.</p>
+      <a href="https://github.com/Tony-Myers/AI_voice_interview_bot" class="card-link">View the GitHub example</a>
+    </div>
+
+    <!-- Sandboxed analysis -->
+    <div class="card">
+      <h3>Sandboxed analysis</h3>
+      <p>Use AI to draft deterministic R or Python code, not to calculate complex statistics inside a free-text chat window. A sandboxed environment runs the generated code in isolation, which protects the host system and makes the analysis reproducible. Julius AI provides one such sandbox, with model selection, a connected code environment, and R/Python support.</p>
+      <!-- Video: Julius demo -->
+      <div class="video-embed">
+        <video controls preload="metadata" poster="">
+          <source src="videos/Julius_analysis_example.mp4" type="video/mp4">
+          Your browser does not support video. <a href="videos/Julius_analysis_example.mp4">Download the demo</a>.
+        </video>
+      </div>
+      <p class="video-caption">Demo: Using Julius AI's sandboxed R environment with model selection and connected data. 5 min 19 s.</p>
+      <a href="https://julius.ai/" class="card-link">Julius AI for data workflows</a>
+    </div>
+
+    <!-- IPA Analysis Tool -->
+    <div class="card">
+      <h3>AI-assisted qualitative analysis</h3>
+      <p>Interpretative Phenomenological Analysis (IPA) and other qualitative frameworks can benefit from AI as an analytical companion — not a replacement for the researcher's interpretive labour. The tool below accepts a research question, researcher reflexive statement, and interview transcripts, then generates exploratory themes using DeepSeek. The reflexive statement is threaded through the analysis to surface the researcher's own biases and assumptions, maintaining the double hermeneutic that IPA demands.</p>
+      <!-- Video: IPA demo -->
+      <div class="video-embed">
+        <video controls preload="metadata">
+          <source src="videos/IPA_analysis_app_refexive.mp4" type="video/mp4">
+          Your browser does not support video. <a href="videos/IPA_analysis_app_refexive.mp4">Download the demo</a>.
+        </video>
+      </div>
+      <p class="video-caption">Demo: IPA Analysis Tool with reflexive statement support and DeepSeek completions. 4 min 55 s.</p>
+      <a href="https://github.com/Tony-Myers/IPA-analysis-bot" class="card-link">View the GitHub repository</a>
+    </div>
+
+    <!-- Focused notebooks -->
+    <div class="card">
+      <h3>Focused notebooks</h3>
+      <p>NotebookLM-style systems are strongest when the source set is curated and narrow — typically 5 to 15 closely related sources addressing a defined question. Avoid dumping an entire field into one mega-notebook and treating the summary as synthesis. The model cannot perform systematic review methodology; it can help you navigate and interrogate a pre-selected corpus.</p>
+      <a href="https://support.google.com/notebooklm/answer/16164461?hl=en" class="card-link">NotebookLM help</a>
+    </div>
+
+    <!-- Local manuscript review -->
+    <div class="card">
+      <h3>Local manuscript review</h3>
+      <p>A locally-hosted review pipeline can provide confidential feedback on draft manuscripts without exposing unpublished work to cloud APIs. The example below runs on Apple Silicon using MLX with quantised open-weight models (Qwen 3.6, Gemma 4), providing structured methodological critique via a FastAPI web interface with separate Chat and Review modes. This solves the confidentiality problem — the manuscript never leaves the machine — but it does not solve the accountability problem. The researcher must still evaluate every critique the model produces.</p>
+      <p>Running multiple models against the same manuscript is instructive: each model tends to identify different genuine weaknesses while also introducing its own distinct factual errors. One model may correctly flag an inferential gap between large F-values and trivial adjusted R² differences; another may erroneously describe a flexible distribution method as "distribution-free." This pattern — broader critical coverage at the cost of model-specific errors — reinforces why multi-model comparison and researcher verification are both necessary.</p>
+      <!-- Video: Local reviewer demo -->
+      <div class="video-embed">
+        <video controls preload="metadata">
+          <source src="videos/local_reviewer_different_models.mp4" type="video/mp4">
+          Your browser does not support video. <a href="videos/local_reviewer_different_models.mp4">Download the demo</a>.
+        </video>
+      </div>
+      <p class="video-caption">Demo: Local LLM manuscript reviewer with model switching (Qwen 3.6 35B, Gemma 4 26B). 5 min 17 s.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Prompting ═══ -->
+<section id="prompting">
+  <div class="container">
+    <p class="section-label">Architecture-driven prompting</p>
+    <h2>Prompting is context design</h2>
+    <p>Transformer-based systems generate likely continuations from the context window. That makes prompting a methodological act: you are constraining the probability distribution, not asking an oracle.</p>
+
+    <div class="audience-note">The sampling parameters below are relevant to researchers using API access or local models. If you are using a standard chat interface (ChatGPT, Claude, Gemini), the platform manages these settings and you can skip to the prompt framework.</div>
+
+    <div class="param-grid">
+      <div class="param">
+        <h4>temperature</h4>
+        <p>Lower values (0.0–0.3) for factual consistency and reproducible outputs. Higher values (0.7–1.0) for divergent idea generation.</p>
+      </div>
+      <div class="param">
+        <h4>top_p</h4>
+        <p>Limits sampling to the most likely cumulative token set. A value of 0.9 means the model considers only the top 90% probability mass.</p>
+      </div>
+      <div class="param">
+        <h4>top_k</h4>
+        <p>Hard-cuts the candidate token pool to a fixed size. A value of 40 means only the 40 most probable next tokens are considered.</p>
+      </div>
+    </div>
+    <p class="param-note">These parameters interact. Setting temperature to 0 makes top-p and top-k irrelevant (greedy decoding). In practice, adjust temperature first and leave the others at defaults unless you have a specific reason to constrain further. Most chat platforms do not expose these controls.</p>
+
+    <h3>The 7-part research prompt</h3>
+    <p>This framework structures prompts so that the model receives enough context to generate useful output while the constraints prevent the most common failure modes: hallucinated citations, overclaiming, and unsupported causal language.</p>
+
+    <div class="prompt-steps">
+      <div class="prompt-step"><div class="prompt-num">1</div><div><strong>Role</strong> — <span>define the expert lens the model should adopt.</span></div></div>
+      <div class="prompt-step"><div class="prompt-num">2</div><div><strong>Task</strong> — <span>specify the action: evaluate, draft, compare, extract.</span></div></div>
+      <div class="prompt-step"><div class="prompt-num">3</div><div><strong>Context</strong> — <span>state the study design, purpose, and stage of work.</span></div></div>
+      <div class="prompt-step"><div class="prompt-num">4</div><div><strong>Evidence</strong> — <span>supply the data, text, or output to work with.</span></div></div>
+      <div class="prompt-step"><div class="prompt-num">5</div><div><strong>Constraints</strong> — <span>forbid unsupported claims, invented citations, speculation.</span></div></div>
+      <div class="prompt-step"><div class="prompt-num">6</div><div><strong>Format</strong> — <span>require tables, code blocks, headings, or structured output.</span></div></div>
+      <div class="prompt-step"><div class="prompt-num">7</div><div><strong>Verification</strong> — <span>ask for uncertainty flags, missing evidence, and checks needed.</span></div></div>
+    </div>
+
+    <div class="code-block" id="prompt-template"><button class="copy-btn" onclick="copyBlock(this)">Copy</button><span class="code-comment"># Research critique prompt — paste into any capable model</span>
+
+<span class="code-key">Role:</span>
+Act as a critical methodological adviser.
+
+<span class="code-key">Task:</span>
+Evaluate the supplied material for factual, statistical, and
+methodological reliability.
+
+<span class="code-key">Context:</span>
+I am preparing an academic research output and need conservative
+feedback before submission.
+
+<span class="code-key">Evidence:</span>
+<span class="code-placeholder">[Paste the source text, table, output, transcript, or
+model results here.]</span>
+
+<span class="code-key">Constraints:</span>
+Use only the supplied material unless I explicitly ask for external
+sources. Do not invent citations, missing facts, or statistical
+values. Distinguish clearly between fact, interpretation, and
+speculation.
+
+<span class="code-key">Output format:</span>
+Use a table with these columns:
+Claim | Support status | Evidence | Concern | Required check |
+Conservative revision.
+
+<span class="code-key">Verification:</span>
+Flag overclaiming, causal language without experimental design,
+missing uncertainty, mismatches between evidence and conclusion,
+and any claim that needs independent database or code verification.</div>
+
+    <!-- Worked example -->
+    <div class="example-box">
+      <h4>Worked example — what good output looks like</h4>
+      <p>Suppose you paste a draft results paragraph that reads: <em>"Sprint training significantly improved VO<sub>2</sub>max (p = 0.03), demonstrating that high-intensity intervals are superior to steady-state training for aerobic adaptation."</em></p>
+      <p style="margin-top:12px">A well-configured model should return something like this:</p>
+      <table class="safety-table" style="margin-top:12px;font-size:14px">
+        <tr>
+          <td style="font-weight:600;width:140px">Claim</td>
+          <td>Sprint training is "superior" for aerobic adaptation</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Support status</td>
+          <td>Partially supported</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Evidence</td>
+          <td>p = 0.03 for within-group change in VO<sub>2</sub>max</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Concern</td>
+          <td>"Superior" implies a between-group comparison, but only a within-group p-value is supplied. No effect size, no confidence interval, no comparison condition reported. "Significantly" conflates statistical and practical significance.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Required check</td>
+          <td>Report the between-group comparison statistic and effect size. Check whether the study design supports a causal claim (randomised? controlled?).</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Conservative revision</td>
+          <td>"Sprint training was associated with a pre-to-post increase in VO<sub>2</sub>max (mean difference = X, 95% CI [Y, Z], p = 0.03). Comparison with steady-state training requires the between-group analysis reported in Table N."</td>
+        </tr>
+      </table>
+      <p style="margin-top:14px;font-size:14px;color:var(--ink-light)">The model catches the overclaiming, flags the missing effect size, and distinguishes within-group from between-group evidence. This is the kind of output the 7-part prompt is designed to elicit. If the model instead validates the original claim, the prompt constraints need tightening or the model is not suitable for this task.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Verification ═══ -->
+<section id="verification">
+  <div class="container">
+    <p class="section-label">Verification</p>
+    <h2>Fluency is not evidence</h2>
+    <p>Agreement between polished outputs is not the same thing as independent corroboration. Two models trained on overlapping data can produce the same confident, wrong answer. Verification needs its own workflow, separate from generation.</p>
+
+    <div class="card" style="margin-bottom:28px">
+      <h3>Why hallucination is structural, not accidental</h3>
+      <p>If a generative large language model cannot perfectly classify a fact, it is mathematically prone to hallucinate it. Hallucinations are not broken code — they are a natural consequence of the model doing exactly what it was trained to do: make the best statistical guess possible based on its training distribution (Kalai et al., 2025). This means hallucination cannot be fully eliminated through prompt engineering alone; it must be managed through verification workflows, source checking, and multi-model comparison.</p>
+    </div>
+
+    <h3>From single answers to plausible answer sets</h3>
+    <p>Never ask a generative model for "the correct interpretation." Instead, mandate that it provides a defined range of interpretations and evaluates the evidentiary weight for each.</p>
+
+    <div class="tier-row">
+      <div class="answer-tier tier-conservative">
+        <h4>Conservative</h4>
+        <p>Grounded firmly in the supplied evidence. Lowest risk of hallucination. Claims only what the data directly supports.</p>
+        <p class="tier-q">Ask: "What evidence supports this?"</p>
+      </div>
+      <div class="answer-tier tier-moderate">
+        <h4>Moderate</h4>
+        <p>Synthesises the supplied text with standard domain knowledge. Reasonable inferences, but introduce additional assumptions.</p>
+        <p class="tier-q">Ask: "What additional evidence is needed?"</p>
+      </div>
+      <div class="answer-tier tier-speculative">
+        <h4>Speculative</h4>
+        <p>Extrapolates broader implications beyond the evidence. High uncertainty. Useful for hypothesis generation, not for claims.</p>
+        <p class="tier-q">Ask: "What facts would count against this?"</p>
+      </div>
+    </div>
+
+    <h3>The VALID-AI checklist</h3>
+    <p style="font-size:14px;color:var(--ink-light);margin-bottom:16px">This checklist was developed for this guide as a mnemonic for the minimum verification steps a researcher should perform on any AI-generated content before it enters a manuscript or analysis pipeline.</p>
+
+    <div class="valid-grid">
+      <div class="valid-item">
+        <div class="valid-letter">V</div>
+        <div><strong>Verify sources</strong><p>Confirm that every citation exists and says what the model claims it says. Check DOIs, page numbers, and author lists against the original database entry.</p></div>
+      </div>
+      <div class="valid-item">
+        <div class="valid-letter">A</div>
+        <div><strong>Assess authority</strong><p>Prioritise peer-reviewed and primary material over plausible grey literature. Models can generate convincing-sounding references to reports and working papers that do not exist.</p></div>
+      </div>
+      <div class="valid-item">
+        <div class="valid-letter">L</div>
+        <div><strong>Look for bias</strong><p>Inspect what is omitted: methods, geographies, populations, theoretical positions, and languages not represented in the output. Models reflect training data distributions, not the full evidence base.</p></div>
+      </div>
+      <div class="valid-item">
+        <div class="valid-letter">I</div>
+        <div><strong>Identify limits</strong><p>Separate supported findings from interpretation and speculation. If the model does not distinguish these itself, the output cannot be trusted without manual classification.</p></div>
+      </div>
+      <div class="valid-item">
+        <div class="valid-letter">D</div>
+        <div><strong>Document provenance</strong><p>Record the model name and version, the full prompt, the source set provided, the date of generation, and the verification checks performed. This documentation enables reproducibility and audit.</p></div>
+      </div>
+    </div>
+
+    <h3>RAG helps, but it is not magic</h3>
+    <p>Retrieval-augmented generation (RAG) moves from closed-book pattern completion to open-book, source-grounded generation. It can reduce hallucination by anchoring answers in a trusted corpus, but it introduces its own failure modes: retrieval misses, context-window truncation, and false confidence from partial matches.</p>
+
+    <div class="card" style="margin-top:16px">
+      <h4>Three levels of RAG use</h4>
+      <p><strong>Exploratory RAG</strong> — useful for orientation, question generation, and finding candidate passages in a curated source set. Acceptable for early-stage literature scanning.</p>
+      <p><strong>Rigorous synthesis</strong> — requires defined inclusion criteria, paper-level extraction, traceable notes, and independent checking. RAG alone cannot perform this; it can assist with navigation within a pre-screened corpus.</p>
+      <p><strong>StatsRAG pattern</strong> — build an auditable statistical specification, verify it against a trusted local reference library, then produce a verdict card covering compliance, metric integrity, direction, and source support. This is the approach used in tools like the StatsRAG project for Bayesian analysis specification.</p>
+      <a href="https://www.ibm.com/think/topics/retrieval-augmented-generation" class="card-link">IBM explainer on RAG</a>
+    </div>
+
+    <h3 style="margin-top:36px">Safety protocol for AI-assisted analysis</h3>
+
+    <table class="safety-table">
+      <tr>
+        <td class="do-not">Avoid</td>
+        <td>Relying on an LLM for direct calculation of complex statistics or numerical datasets.</td>
+      </tr>
+      <tr>
+        <td class="do">Instead</td>
+        <td>Generate deterministic R or Python code and run it in a controlled environment. Inspect the code before execution.</td>
+      </tr>
+      <tr>
+        <td class="do-not">Avoid</td>
+        <td>Accepting test selection or model specification without manual verification of the design and assumptions.</td>
+      </tr>
+      <tr>
+        <td class="do">Instead</td>
+        <td>Check normality, variance structure, outliers, dependence, units, sample size, and model assumptions against the study design.</td>
+      </tr>
+      <tr>
+        <td class="do-not">Avoid</td>
+        <td>Pasting AI-generated interpretation into a manuscript without independent checking.</td>
+      </tr>
+      <tr>
+        <td class="do">Instead</td>
+        <td>Constrain the prompt, re-run with variations, compare outputs across models, and verify claims against the original data and published sources.</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ Secure AI ═══ -->
+<section id="secure">
+  <div class="container">
+    <p class="section-label">Secure AI choices</p>
+    <h2>Choose the smallest exposure that fits the job</h2>
+    <p>The newest secure options are considerably better than public consumer chat, but "secure" still depends on your institution, licence terms, data classification policy, region, retention settings, and whether features like web grounding or third-party connectors are enabled. No single answer works for every institution.</p>
+
+    <div class="tier-grid">
+      <div class="tier tier-public">
+        <span class="tier-badge">Public web AI</span>
+        <h4>ChatGPT, Gemini, Claude (free/consumer tiers), Perplexity</h4>
+        <p>Best for low-risk brainstorming, exploring public information, and learning how models behave. Do not upload unpublished manuscripts, sensitive participant data, or confidential grant material. Consumer tier data handling varies by provider and changes frequently — check the current terms.</p>
+      </div>
+      <div class="tier tier-campus">
+        <span class="tier-badge">Campus enterprise AI</span>
+        <h4>ChatGPT Edu, Microsoft 365 Copilot Chat, Gemini for Workspace, Claude for Work</h4>
+        <p>Stronger contractual controls, typically with no-training clauses and regional data residency. However, local policy decides what data classifications are permitted. Check your institution's AI acceptable use policy and the specific enterprise agreement before uploading anything beyond public data.</p>
+      </div>
+      <div class="tier tier-cloud">
+        <span class="tier-badge">Managed secure cloud</span>
+        <h4>Azure AI Foundry, AWS Bedrock, Google Vertex AI</h4>
+        <p>Tenant-level governance, audit logging, region selection, and model-provider separation. Suitable for serious deployments with institutional data. Requires technical setup and ongoing administration — not a plug-and-play option for individual researchers.</p>
+      </div>
+      <div class="tier tier-local">
+        <span class="tier-badge">Local or self-hosted AI</span>
+        <h4>Ollama, LM Studio, Open WebUI, AnythingLLM, Jan, GPT4All</h4>
+        <p>Run models on your own hardware. Nothing leaves the machine. This maximises confidentiality but does not maximise accuracy — local models are typically smaller and less capable than frontier cloud models. Best for peer-review assistance, manuscript critique, and code generation where the researcher can verify every output.</p>
+      </div>
+    </div>
+
+    <h3>A simple classification rule</h3>
+    <div class="classify-grid">
+      <div class="classify-row classify-public">
+        <strong>Public data</strong>
+        <span>Use any appropriate tool, but verify and cite independently. The convenience of AI does not reduce the citation standard.</span>
+      </div>
+      <div class="classify-row classify-internal">
+        <strong>Internal or unpublished work</strong>
+        <span>Use approved enterprise/campus AI or a managed secure cloud service. Check retention and training-exclusion clauses.</span>
+      </div>
+      <div class="classify-row classify-sensitive">
+        <strong>Sensitive, identifiable, or embargoed data</strong>
+        <span>Use approved local, self-hosted, or institutionally governed platforms only. This includes participant data, clinical records, and pre-publication findings under embargo.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Platform Guide ═══ -->
+<section id="platforms">
+  <div class="container">
+    <p class="section-label">Current platform guide</p>
+    <h2>Tools worth knowing in 2026</h2>
+    <p>These are not endorsements. They are a researcher's map: what each platform is good for, what to check, and when to consider alternatives. All links and descriptions were checked in May 2026; product details change frequently.</p>
+
+    <div class="tab-bar" role="tablist">
+      <button class="tab-btn active" onclick="switchTab(event,'all')" role="tab">All</button>
+      <button class="tab-btn" onclick="switchTab(event,'secure')" role="tab">Secure</button>
+      <button class="tab-btn" onclick="switchTab(event,'literature')" role="tab">Literature</button>
+      <button class="tab-btn" onclick="switchTab(event,'analysis')" role="tab">Analysis</button>
+      <button class="tab-btn" onclick="switchTab(event,'local')" role="tab">Local</button>
+    </div>
+
+    <!-- All platforms -->
+    <div class="tab-panel active" id="panel-all">
+      <div class="platform-grid">
+
+        <div class="platform" data-tags="secure">
+          <div class="platform-type">Cloud · Enterprise</div>
+          <h4>ChatGPT (OpenAI)</h4>
+          <p>Strong general-purpose model with web browsing, code execution, and image generation. Enterprise and Edu tiers offer no-training guarantees. Free/Plus tiers may use conversations for model improvement unless opted out.</p>
+          <div class="platform-tags"><span class="platform-tag secure">Secure tiers available</span></div>
         </div>
-      `;
-      document.querySelectorAll(".workflow-btn").forEach(btn => {
-        const selected = btn.dataset.stage === stageKey;
-        btn.setAttribute("aria-selected", selected ? "true" : "false");
-      });
-      lucide.createIcons();
+
+        <div class="platform" data-tags="secure">
+          <div class="platform-type">Cloud · Enterprise</div>
+          <h4>Claude (Anthropic)</h4>
+          <p>Emphasis on careful reasoning and long-context processing (up to 200k tokens). Strong for manuscript critique, coding, and structured analysis. Claude for Work provides enterprise data controls.</p>
+          <div class="platform-tags"><span class="platform-tag secure">Secure tiers available</span></div>
+        </div>
+
+        <div class="platform" data-tags="secure">
+          <div class="platform-type">Cloud · Enterprise</div>
+          <h4>Gemini (Google)</h4>
+          <p>Deep integration with Google Workspace. Gemini in Docs, Sheets, and Slides is useful for faculty already in the Google ecosystem. Workspace data protection policies apply to enterprise customers.</p>
+          <div class="platform-tags"><span class="platform-tag secure">Secure tiers available</span></div>
+        </div>
+
+        <div class="platform" data-tags="secure">
+          <div class="platform-type">Cloud · Enterprise</div>
+          <h4>Microsoft 365 Copilot Chat</h4>
+          <p>Grounded in your Microsoft 365 data (SharePoint, Teams, email). Useful for institutional knowledge retrieval. Commercial data protection means prompts and responses are not used for training.</p>
+          <div class="platform-tags"><span class="platform-tag secure">Secure tiers available</span></div>
+        </div>
+
+        <div class="platform" data-tags="literature">
+          <div class="platform-type">Literature · Search</div>
+          <h4>Elicit</h4>
+          <p>AI-assisted literature review and data extraction. Searches Semantic Scholar, extracts structured data from papers, and supports screening workflows. Useful for scoping reviews and evidence mapping.</p>
+          <div class="platform-tags"><span class="platform-tag literature">Literature</span></div>
+        </div>
+
+        <div class="platform" data-tags="literature">
+          <div class="platform-type">Literature · Citation</div>
+          <h4>Scite</h4>
+          <p>Shows how a paper has been cited — supporting, contrasting, or mentioning — across the literature. Useful for assessing the reception of a specific finding and identifying disputes.</p>
+          <div class="platform-tags"><span class="platform-tag literature">Literature</span></div>
+        </div>
+
+        <div class="platform" data-tags="literature">
+          <div class="platform-type">Literature · Screening</div>
+          <h4>Rayyan</h4>
+          <p>Systematic review management with AI-assisted screening. Supports blind review, conflict resolution, and PRISMA-compatible export. Free for individual researchers.</p>
+          <div class="platform-tags"><span class="platform-tag literature">Literature</span></div>
+        </div>
+
+        <div class="platform" data-tags="literature">
+          <div class="platform-type">Literature · Notebooks</div>
+          <h4>NotebookLM (Google)</h4>
+          <p>Source-grounded chat over uploaded documents. Best with 5–15 curated sources on a focused topic. Generates audio overviews and summaries. Does not replace systematic search or formal synthesis.</p>
+          <div class="platform-tags"><span class="platform-tag literature">Literature</span><span class="platform-tag secure">Secure (Workspace)</span></div>
+        </div>
+
+        <div class="platform" data-tags="analysis">
+          <div class="platform-type">Analysis · Sandbox</div>
+          <h4>Julius AI</h4>
+          <p>Data analysis platform with sandboxed code execution in R and Python. Connects to data sources, generates code, and produces visualisations. Useful for exploratory analysis and teaching statistical workflows.</p>
+          <div class="platform-tags"><span class="platform-tag analysis">Analysis</span></div>
+        </div>
+
+        <div class="platform" data-tags="analysis">
+          <div class="platform-type">Analysis · Search</div>
+          <h4>Perplexity</h4>
+          <p>AI-powered search with source citations. Useful for quick fact-checking and finding recent publications. Pro tier offers more capable models and longer outputs. Not a substitute for systematic database searching.</p>
+          <div class="platform-tags"><span class="platform-tag analysis">Analysis</span></div>
+        </div>
+
+        <div class="platform" data-tags="local">
+          <div class="platform-type">Local · Desktop</div>
+          <h4>LM Studio</h4>
+          <p>Desktop application for running open models locally. Easy model discovery, download, and chat. Good entry point for researchers new to local AI. Supports GGUF-format models on CPU and GPU.</p>
+          <div class="platform-tags"><span class="platform-tag local">Local</span></div>
+        </div>
+
+        <div class="platform" data-tags="local">
+          <div class="platform-type">Local · Desktop</div>
+          <h4>Jan</h4>
+          <p>Open-source desktop AI with a clean interface. Supports local models, API connections, and extensions. Good for researchers who want offline chat without terminal commands.</p>
+          <div class="platform-tags"><span class="platform-tag local">Local</span></div>
+        </div>
+
+        <div class="platform" data-tags="local">
+          <div class="platform-type">Local · Desktop</div>
+          <h4>GPT4All</h4>
+          <p>Privacy-focused desktop client from Nomic. Runs quantised models locally with a simple GUI. Includes a local document Q&A feature for small corpora.</p>
+          <div class="platform-tags"><span class="platform-tag local">Local</span></div>
+        </div>
+
+        <div class="platform" data-tags="local">
+          <div class="platform-type">Local · Research lab</div>
+          <h4>Ollama + Open WebUI</h4>
+          <p>Command-line model server (Ollama) paired with a browser-based interface (Open WebUI). Supports model switching, RAG, tool calling, and multi-user access. The strongest local setup for research teams and demonstrations.</p>
+          <div class="platform-tags"><span class="platform-tag local">Local</span></div>
+        </div>
+
+        <div class="platform" data-tags="local">
+          <div class="platform-type">Local · RAG</div>
+          <h4>AnythingLLM</h4>
+          <p>Desktop and server application for local RAG. Upload documents, build a vector store, and chat with local or cloud models grounded in your own data. Good for building a private knowledge base.</p>
+          <div class="platform-tags"><span class="platform-tag local">Local</span></div>
+        </div>
+
+        <div class="platform" data-tags="local">
+          <div class="platform-type">Community · Models</div>
+          <h4>Hugging Face</h4>
+          <p>The primary hub for open-weight models. Inspect model cards, licences, benchmark results, and community Spaces before downloading. Essential for evaluating which model is appropriate for a given task.</p>
+          <div class="platform-tags"><span class="platform-tag local">Local</span><span class="platform-tag literature">Literature</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Filtered panels generated by JS -->
+    <div class="tab-panel" id="panel-secure"><div class="platform-grid"></div></div>
+    <div class="tab-panel" id="panel-literature"><div class="platform-grid"></div></div>
+    <div class="tab-panel" id="panel-analysis"><div class="platform-grid"></div></div>
+    <div class="tab-panel" id="panel-local"><div class="platform-grid"></div></div>
+  </div>
+</section>
+
+<!-- ═══ Ethics / Authorship ═══ -->
+<section id="ethics">
+  <div class="container">
+    <p class="section-label">Authorship and peer review</p>
+    <h2>Local AI solves confidentiality. It does not solve accountability.</h2>
+    <p>Some uses of AI in the peer-review and writing process are highly appropriate; some are risky; and unverified generation is academic misconduct regardless of where the model runs. The spectrum below applies to any model, cloud or local.</p>
+
+    <table class="spectrum-table">
+      <thead>
+        <tr><th>Use case</th><th>Rating</th><th>Researcher responsibility</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Gap analysis and red teaming</td>
+          <td class="rating-appropriate">Highly appropriate</td>
+          <td>The researcher must independently evaluate which critiques are valid and decide what to act on.</td>
+        </tr>
+        <tr>
+          <td>Grammar, wording, and structure</td>
+          <td class="rating-appropriate">Highly appropriate</td>
+          <td>The meaning and argument must remain human-generated. All changes must be reviewed and approved.</td>
+        </tr>
+        <tr>
+          <td>Substantial drafting of text</td>
+          <td class="rating-problematic">Problematic</td>
+          <td>Risks false synthesis, fabricated citations, and authorship blur. If used at all, every claim must be independently verified and the contribution disclosed.</td>
+        </tr>
+        <tr>
+          <td>Unverified paste-in</td>
+          <td class="rating-inappropriate">Inappropriate</td>
+          <td>The author cannot vouch for accuracy, originality, or source integrity. This constitutes academic misconduct under most institutional and journal policies.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:36px">Disclosure statement templates</h3>
+    <p>Adapt these to the target journal. Always include the tool name, version where available, specific task, date range, and the human verification performed.</p>
+
+    <div class="disclosure">
+      <strong>Copy editing</strong>
+      I used [tool and version] to suggest grammar, wording, and structure improvements to human-authored text. I reviewed all changes and take full responsibility for the final manuscript.
+    </div>
+    <div class="disclosure">
+      <strong>Analysis support</strong>
+      I used [tool and version] to draft R/Python code and identify possible model assumptions. All analyses were executed in [software and version], checked against the dataset and relevant statistical references, and revised by the authors.
+    </div>
+    <div class="disclosure">
+      <strong>Red teaming</strong>
+      I used [local/approved tool and version] to identify possible limitations, missing literature, and overclaims. Suggestions were independently evaluated and only incorporated after author review and verification against primary sources.
+    </div>
+
+    <h3 style="margin-top:36px">Non-negotiable research rules</h3>
+
+    <!-- Interactive exercise -->
+    <div class="exercise-box" style="margin-bottom:32px">
+      <h4>Try it yourself — AI peer review of your own paper</h4>
+      <p style="margin-bottom:12px">Paste your abstract and methods section into any capable model using the prompt below. Then evaluate the output: did the model identify a real weakness? Did it fabricate a concern? How does it compare to actual reviewer feedback you have received?</p>
+      <div class="code-block" style="margin:0"><button class="copy-btn" onclick="copyBlock(this)">Copy</button>You are a sceptical methodological reviewer for an academic
+journal. Your job is to find weaknesses, not to validate.
+
+Read the material below and evaluate every substantive claim
+for evidential support.
+
+Context: I am preparing a manuscript for peer-reviewed
+publication. I want conservative, evidence-grounded feedback
+before submission. I do not want encouragement — I want
+problems.
+
+=== MATERIAL TO REVIEW ===
+<span class="code-placeholder">[PASTE YOUR ABSTRACT AND METHODS SECTION HERE]</span>
+=== END OF MATERIAL ===
+
+<span class="code-key">Constraints:</span>
+- Use ONLY the supplied text.
+- Do not invent missing information or fabricate citations.
+- If a claim cannot be assessed from the material provided,
+  say so explicitly and state what additional information
+  would be needed.
+- Do not soften your language.
+
+<span class="code-key">Output format:</span>
+A numbered table with these columns:
+Claim | Support status | Evidence from text | Concern |
+What needs checking | Suggested revision
+
+Support status must be one of: directly supported, partially
+supported, unsupported, not assessable.
+
+After the table, write one paragraph summarising the three
+most serious methodological issues.
+
+Finally: list any claims where you were uncertain about your
+own assessment and explain why. If you have no concerns about
+a claim, do not fabricate one.</div>
+      <p style="margin-top:14px;font-size:14px;color:var(--ink-light)"><strong>Debrief questions:</strong> Did the model identify a real weakness you had not noticed? Did it fabricate a concern that does not withstand scrutiny? Did different models produce different critiques? This exercise demonstrates both the power and the limits of AI-assisted review — and why the researcher must evaluate every critique independently.</p>
+    </div>
+    <ul class="rules-list">
+      <li>Never cite anything you have not read and verified yourself.</li>
+      <li>Never treat AI output as scholarly evidence.</li>
+      <li>Always verify AI-suggested sources in academic databases (Scopus, Web of Science, PubMed, Google Scholar).</li>
+      <li>Use AI to assist thinking, not replace it.</li>
+      <li>Write your own argument and own the final judgement.</li>
+    </ul>
+
+    <p style="margin-top:20px;font-size:14px">
+      See also:
+      <a href="https://www.nature.com/nature-portfolio/editorial-policies/ai">Nature AI policy</a> ·
+      <a href="https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals">Elsevier AI policy</a>
+    </p>
+  </div>
+</section>
+
+<!-- ═══ Future ═══ -->
+<section id="future">
+  <div class="container">
+    <p class="section-label">Future direction</p>
+    <h2>From co-intelligence to managed agents</h2>
+    <p>The trajectory points towards a shift from back-and-forth prompting to agentic workflows, where the researcher becomes less a prompt typist and more a manager of objectives, constraints, tools, audit logs, and checkpoints. This raises the verification burden rather than removing it.</p>
+
+    <div class="future-card">
+      <h4>Agentic research workflows</h4>
+      <p>Coding and research agents (such as those in Claude Code, Cursor, and Windsurf) can execute multi-step tasks: searching literature, writing and running code, iterating on errors. The appeal is real, but so are the risks. Agents require explicit permission boundaries, sandboxed execution environments, source-boundary constraints (preventing the agent from citing material outside a defined corpus), and human review gates at each decision point. Unsupervised agent runs that modify data or submit outputs are not currently defensible in an academic context.</p>
+      <div class="future-example">
+        <strong>Practical example</strong>
+        A coding agent could be tasked with writing a Bayesian power analysis in R, running it, checking convergence diagnostics, and producing a summary table — but the researcher must review the model specification, prior choices, and interpretation before the output enters a protocol or manuscript.
+      </div>
+    </div>
+
+    <div class="future-card">
+      <h4>Fine-tuning and low-rank adaptation (LoRA)</h4>
+      <p>LoRA allows specialisation of a foundation model for a narrow task — such as evaluating statistical claims in academic prose or classifying methodological frameworks — without the cost or data requirements of full fine-tuning. A LoRA adapter trained on 100 annotated examples can meaningfully shift model behaviour on a focused task. However, dataset quality determines everything: garbage in, confidently wrong garbage out. Licensing of the base model, evaluation against held-out test sets, and monitoring for distributional drift over time all matter. Fine-tuning is powerful and accessible, but it is not a shortcut to a reliable domain expert.</p>
+      <div class="future-example">
+        <strong>Practical example</strong>
+        A LoRA adapter trained on annotated statistical claims (correct vs. overclaimed vs. under-reported) can be applied to a small open-weight model to produce a manuscript screening tool. The adapter adds domain specificity; the base model provides language capability. The researcher must still validate the tool against known-good and known-bad examples before trusting its output.
+      </div>
+    </div>
+
+    <div class="future-card">
+      <h4>Beyond standard transformer architectures</h4>
+      <p>Current transformer limitations — finite context windows, no persistent memory, limited planning — are active research frontiers. Future systems may combine symbolic reasoning, retrieval, planning modules, and model-based generation. Mixture-of-experts architectures (already deployed in models like Qwen and Gemini) improve efficiency by activating only relevant subnetworks for a given input. State-space models and recurrent alternatives may reduce the quadratic cost of attention on long sequences. None of these architectural advances will eliminate the need for researcher verification; they will change the shape of the errors rather than removing them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Sources ═══ -->
+<section id="sources">
+  <div class="container">
+    <p class="section-label">Sources</p>
+    <h2>Primary and official links</h2>
+    <p>All links were checked for this build in May 2026. Where a source is behind a paywall, the DOI or arXiv preprint is provided.</p>
+
+    <div class="source-group">
+      <h3>Research method and risk</h3>
+      <ul class="source-list">
+        <li>
+          <a href="https://arxiv.org/abs/1706.03762">Vaswani et al., Attention Is All You Need (2017)</a>
+          <span class="source-annotation">The foundational transformer architecture paper. Essential context for understanding why prompt design matters.</span>
+        </li>
+        <li>
+          <a href="https://doi.org/10.1162/tacl_a_00638">Liu et al., Lost in the Middle (TACL, 2024)</a>
+          <span class="source-annotation">Demonstrates positional bias: models attend more to information at the start and end of the context window, with reduced recall for middle-positioned content.</span>
+        </li>
+        <li>
+          <a href="https://doi.org/10.48550/arXiv.2509.04664">Kalai, Nachum, Vempala &amp; Zhang, Why Language Models Hallucinate (2025)</a>
+          <span class="source-annotation">Shows that hallucination is a mathematical consequence of imperfect fact classification, not a fixable bug. The foundation for the verification-first approach taken throughout this guide.</span>
+        </li>
+        <li>
+          <a href="https://doi.org/10.1038/s41586-026-10265-5">Towards end-to-end automation of AI research (Nature, 2026)</a>
+          <span class="source-annotation">Recent exploration of agentic AI in the research pipeline. Demonstrates both capability and the verification challenges that remain.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="source-group">
+      <h3>Security and enterprise AI</h3>
+      <ul class="source-list">
+        <li><a href="https://openai.com/enterprise-privacy/">OpenAI enterprise privacy</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/copilot/privacy-and-protections">Microsoft 365 Copilot Chat privacy</a></li>
+        <li><a href="https://support.google.com/docs/answer/14615114?hl=en">Gemini in Workspace data protection</a></li>
+        <li><a href="https://privacy.anthropic.com/en/articles/9267385-does-anthropic-act-as-a-data-processor-or-controller">Anthropic commercial data relationship</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/openai/data-privacy">Azure AI Foundry data privacy</a></li>
+        <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html">Amazon Bedrock data protection</a></li>
+        <li><a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/vertex-ai-zero-data-retention">Google Vertex AI data governance</a></li>
+      </ul>
+    </div>
+
+    <div class="source-group">
+      <h3>Tools and local AI</h3>
+      <ul class="source-list">
+        <li><a href="https://elicit.com/">Elicit</a> <span class="source-annotation">AI-assisted literature review and evidence extraction.</span></li>
+        <li><a href="https://scite.ai/">Scite</a> <span class="source-annotation">Citation context analysis: supporting, contrasting, mentioning.</span></li>
+        <li><a href="https://www.rayyan.ai/">Rayyan</a> <span class="source-annotation">Systematic review screening and management.</span></li>
+        <li><a href="https://julius.ai/">Julius AI</a> <span class="source-annotation">Sandboxed data analysis with R and Python.</span></li>
+        <li><a href="https://huggingface.co/">Hugging Face</a> <span class="source-annotation">Model hub, model cards, community Spaces, and datasets.</span></li>
+        <li><a href="https://ollama.com/">Ollama</a> <span class="source-annotation">Local model server for macOS, Linux, and Windows.</span></li>
+        <li><a href="https://lmstudio.ai/">LM Studio</a> <span class="source-annotation">Desktop application for running quantised open models.</span></li>
+        <li><a href="https://docs.openwebui.com/">Open WebUI</a> <span class="source-annotation">Browser-based interface for Ollama and other backends.</span></li>
+        <li><a href="https://anythingllm.com/">AnythingLLM</a> <span class="source-annotation">Local RAG and document Q&A platform.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Footer ═══ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <span>Tony Myers © 2026. Birmingham Newman University.</span>
+      <span>Standalone companion to <a href="https://tony-myers.github.io/AI-for-education/index.html">The AI-Powered Academic</a>.</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ Scripts ═══ -->
+<script>
+// ── Copy button ──
+function copyBlock(btn){
+  const block=btn.parentElement;
+  const text=block.textContent.replace('Copy','').trim();
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='Copied';
+    setTimeout(()=>btn.textContent='Copy',1500);
+  });
+}
+
+// ── Tab switching ──
+function switchTab(e,tag){
+  // Update buttons
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+
+  // Show correct panel
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+
+  if(tag==='all'){
+    document.getElementById('panel-all').classList.add('active');
+    return;
+  }
+
+  // Populate filtered panel
+  const panel=document.getElementById('panel-'+tag);
+  const grid=panel.querySelector('.platform-grid');
+  grid.innerHTML='';
+  document.querySelectorAll('#panel-all .platform').forEach(p=>{
+    if(p.dataset.tags&&p.dataset.tags.includes(tag)){
+      grid.appendChild(p.cloneNode(true));
     }
+  });
+  panel.classList.add('active');
+}
 
-    function renderPlatforms(filter) {
-      const grid = document.getElementById("platform-grid");
-      const selected = filter === "all" ? platformData : platformData.filter(item => item.tags.includes(filter));
-      grid.innerHTML = selected.map(item => `
-        <article class="card p-5 flex flex-col">
-          <div class="flex items-start justify-between gap-3">
-            <h3 class="font-extrabold text-lg">${item.name}</h3>
-            <a class="inline-flex items-center justify-center rounded-md border border-stone-300 p-2 hover:bg-stone-100" href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="Open ${item.name}">
-              <i data-lucide="external-link" class="h-4 w-4"></i>
-            </a>
-          </div>
-          <p class="mt-3 text-sm text-slate-600 leading-relaxed"><strong>Best for:</strong> ${item.best}</p>
-          <p class="mt-3 text-sm text-slate-600 leading-relaxed"><strong>Check:</strong> ${item.check}</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            ${item.tags.map(tag => `<span class="pill px-2 py-1 text-xs font-bold text-slate-600">${tag}</span>`).join("")}
-          </div>
-        </article>
-      `).join("");
-      document.querySelectorAll(".filter-btn").forEach(btn => {
-        btn.setAttribute("aria-pressed", btn.dataset.filter === filter ? "true" : "false");
-      });
-      lucide.createIcons();
-    }
+// ── Scroll spy ──
+(function(){
+  const sections=document.querySelectorAll('section[id]');
+  const links=document.querySelectorAll('.nav-links a[href^="#"]');
 
-    document.addEventListener("DOMContentLoaded", () => {
-      renderWorkflow("conception");
-      renderPlatforms("all");
-
-      document.querySelectorAll(".workflow-btn").forEach(btn => {
-        btn.addEventListener("click", () => renderWorkflow(btn.dataset.stage));
-      });
-
-      document.querySelectorAll(".filter-btn").forEach(btn => {
-        btn.addEventListener("click", () => renderPlatforms(btn.dataset.filter));
-      });
-
-      document.getElementById("copyPrompt").addEventListener("click", async () => {
-        const text = document.getElementById("promptText").innerText;
-        try {
-          await navigator.clipboard.writeText(text);
-          document.getElementById("copyPrompt").innerHTML = '<i data-lucide="check" class="h-4 w-4"></i>Copied';
-          lucide.createIcons();
-          setTimeout(() => {
-            document.getElementById("copyPrompt").innerHTML = '<i data-lucide="copy" class="h-4 w-4"></i>Copy';
-            lucide.createIcons();
-          }, 1800);
-        } catch (err) {
-          console.warn("Clipboard copy failed", err);
-        }
-      });
-
-      lucide.createIcons();
+  function onScroll(){
+    const scrollY=window.scrollY+100;
+    let current='';
+    sections.forEach(s=>{
+      if(s.offsetTop<=scrollY){current=s.id}
     });
-  </script>
+    links.forEach(l=>{
+      l.classList.remove('active');
+      if(l.getAttribute('href')==='#'+current) l.classList.add('active');
+    });
+  }
+
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
+
+// ── Close mobile nav on link click ──
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+</script>
+
 </body>
 </html>
