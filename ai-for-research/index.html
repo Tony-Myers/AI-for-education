@@ -404,7 +404,7 @@ p+p{margin-top:16px}
     <!-- Voice interview bot -->
     <div class="card">
       <h3>Voice interview bot</h3>
-      <p>A voice-enabled qualitative interview bot can support early-stage research by helping test prompts, consent wording, and question flow before a live study. The example below uses DeepSeek for completions, ElevenLabs for text-to-speech, and Groq Whisper for speech-to-text. Treat it as an interview rehearsal system — never as a substitute for ethical approval, informed consent, or trained interviewing skills.</p>
+      <p>A voice-enabled qualitative interview bot can support data collection by conducting semi-structured interviews using natural speech. The example below uses DeepSeek for completions, ElevenLabs for text-to-speech, and Groq Whisper for speech-to-text. This approach has been used in practice — for example, in a pilot study capturing participant experiences of rugby taster sessions, with full ethical approval and a participant information sheet (OPIS) in place. As with any data collection method, standard ethical requirements apply: institutional ethical approval, informed consent, and appropriate data handling must all be secured before deployment.</p>
       <div class="video-embed">
         <iframe src="https://www.youtube-nocookie.com/embed/H_EscT2Yc8g" title="Voice-enabled interview bot demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
@@ -850,6 +850,34 @@ and any claim that needs independent database or code verification.</div>
           <div class="platform-tags"><span class="platform-tag local">Local</span></div>
         </div>
 
+        <div class="platform" data-tags="secure">
+          <div class="platform-type">Cloud · Privacy</div>
+          <h4>Duck.ai (DuckDuckGo)</h4>
+          <p>Anonymous access to multiple models (GPT-4o mini, Claude 3.5 Haiku, Llama 4 Scout, Mistral Small 3) with no account required. DuckDuckGo strips IP addresses and metadata before proxying requests, and has contractual no-training agreements with all model providers. Free tier with daily limits; subscriber tier adds GPT-5.1, Claude Sonnet 4.5, and Llama 4 Maverick.</p>
+          <div class="platform-tags"><span class="platform-tag secure">Secure</span></div>
+        </div>
+
+        <div class="platform" data-tags="secure">
+          <div class="platform-type">Cloud · Privacy</div>
+          <h4>Lumo (Proton)</h4>
+          <p>Privacy-first AI assistant from the makers of Proton Mail. Runs open-weight models (Qwen, OLMO 2, GPT-OSS 120B, Kimi K2, and others) exclusively on Proton-controlled European servers — no data is sent to third-party providers. Zero-access encryption means Proton itself cannot read saved conversations. Ghost mode ensures chats are deleted on close. Integrates with Proton Drive for file analysis. Weaker than frontier models on complex reasoning, but the privacy architecture is the strongest of any cloud chat service currently available.</p>
+          <div class="platform-tags"><span class="platform-tag secure">Secure</span></div>
+        </div>
+
+        <div class="platform" data-tags="secure">
+          <div class="platform-type">Browser · Privacy</div>
+          <h4>Brave Leo</h4>
+          <p>AI assistant built into the Brave browser with access to Qwen, Llama, and Claude models, all now hosted on Brave infrastructure. No account required for the free tier. Requests are proxied to strip IP addresses, conversations are not stored on Brave servers, and chat history exists only on the local device. Premium tier adds stronger models. Brave is also pioneering verifiable privacy via Trusted Execution Environments (TEEs) for cryptographic proof that privacy claims are met. Useful for page-level tasks: summarisation, translation, and Q&A grounded in the current tab.</p>
+          <div class="platform-tags"><span class="platform-tag secure">Secure</span></div>
+        </div>
+
+        <div class="platform" data-tags="secure">
+          <div class="platform-type">Cloud · Privacy</div>
+          <h4>Okara</h4>
+          <p>Private AI workspace offering 20+ open-source models (Llama, Qwen, DeepSeek, Mistral, and others) with client-side key generation and encrypted-at-rest chat history. Models are self-hosted or accessed via zero-data-retention APIs. Supports file uploads, image generation, and integrated web/social search. The workspace mode allows teams to collaborate in a shared encrypted thread with persistent context. Published an open-source encryption whitepaper. Relatively new (founded 2025) and less battle-tested than the larger privacy platforms.</p>
+          <div class="platform-tags"><span class="platform-tag secure">Secure</span></div>
+        </div>
+
         <div class="platform" data-tags="local">
           <div class="platform-type">Community · Models</div>
           <h4>Hugging Face</h4>
@@ -1074,6 +1102,10 @@ a claim, do not fabricate one.</div>
         <li><a href="https://www.rayyan.ai/">Rayyan</a> <span class="source-annotation">Systematic review screening and management.</span></li>
         <li><a href="https://julius.ai/">Julius AI</a> <span class="source-annotation">Sandboxed data analysis with R and Python.</span></li>
         <li><a href="https://huggingface.co/">Hugging Face</a> <span class="source-annotation">Model hub, model cards, community Spaces, and datasets.</span></li>
+        <li><a href="https://duck.ai/">Duck.ai</a> <span class="source-annotation">DuckDuckGo's anonymous, proxied AI chat. No account required.</span></li>
+        <li><a href="https://lumo.proton.me/">Lumo (Proton)</a> <span class="source-annotation">Zero-access encrypted AI on Proton-controlled European servers.</span></li>
+        <li><a href="https://brave.com/leo/">Brave Leo</a> <span class="source-annotation">Browser-integrated AI with IP proxying and TEE-verifiable privacy.</span></li>
+        <li><a href="https://okara.ai/">Okara</a> <span class="source-annotation">Encrypted multi-model AI workspace with client-side key generation.</span></li>
         <li><a href="https://ollama.com/">Ollama</a> <span class="source-annotation">Local model server for macOS, Linux, and Windows.</span></li>
         <li><a href="https://lmstudio.ai/">LM Studio</a> <span class="source-annotation">Desktop application for running quantised open models.</span></li>
         <li><a href="https://docs.openwebui.com/">Open WebUI</a> <span class="source-annotation">Browser-based interface for Ollama and other backends.</span></li>
