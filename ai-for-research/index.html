@@ -106,9 +106,9 @@ p+p{margin-top:16px}
 .card-link::after{content:'→';transition:transform .15s}
 .card-link:hover::after{transform:translateX(3px)}
 
-/* ── Video embed placeholder ─────────────────────────────── */
-.video-embed{margin-top:16px;border-radius:var(--radius);overflow:hidden;background:var(--ink);position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
-.video-embed video{width:100%;height:100%;object-fit:contain}
+/* ── Video embed ──────────────────────────────────────────── */
+.video-embed{margin-top:16px;border-radius:var(--radius);overflow:hidden;position:relative;padding-bottom:56.25%;height:0}
+.video-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
 .video-caption{font-size:13px;color:var(--ink-light);margin-top:8px;font-style:italic}
 
 /* ── Prompt framework ────────────────────────────────────── */
@@ -405,6 +405,10 @@ p+p{margin-top:16px}
     <div class="card">
       <h3>Voice interview bot</h3>
       <p>A voice-enabled qualitative interview bot can support early-stage research by helping test prompts, consent wording, and question flow before a live study. The example below uses DeepSeek for completions, ElevenLabs for text-to-speech, and Groq Whisper for speech-to-text. Treat it as an interview rehearsal system — never as a substitute for ethical approval, informed consent, or trained interviewing skills.</p>
+      <div class="video-embed">
+        <iframe src="https://www.youtube-nocookie.com/embed/H_EscT2Yc8g" title="Voice-enabled interview bot demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="video-caption">Demo: Voice-enabled interview bot using DeepSeek, ElevenLabs TTS, and Groq Whisper STT.</p>
       <a href="https://github.com/Tony-Myers/AI_voice_interview_bot" class="card-link">View the GitHub example</a>
     </div>
 
@@ -414,12 +418,9 @@ p+p{margin-top:16px}
       <p>Use AI to draft deterministic R or Python code, not to calculate complex statistics inside a free-text chat window. A sandboxed environment runs the generated code in isolation, which protects the host system and makes the analysis reproducible. Julius AI provides one such sandbox, with model selection, a connected code environment, and R/Python support.</p>
       <!-- Video: Julius demo -->
       <div class="video-embed">
-        <video controls preload="metadata" poster="">
-          <source src="videos/Julius_analysis_example.mp4" type="video/mp4">
-          Your browser does not support video. <a href="videos/Julius_analysis_example.mp4">Download the demo</a>.
-        </video>
+        <iframe src="https://www.youtube-nocookie.com/embed/XuGjVXW5Q5E" title="Julius AI sandboxed analysis demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
-      <p class="video-caption">Demo: Using Julius AI's sandboxed R environment with model selection and connected data. 5 min 19 s.</p>
+      <p class="video-caption">Demo: Using Julius AI's sandboxed R environment with model selection and connected data.</p>
       <a href="https://julius.ai/" class="card-link">Julius AI for data workflows</a>
     </div>
 
@@ -429,12 +430,9 @@ p+p{margin-top:16px}
       <p>Interpretative Phenomenological Analysis (IPA) and other qualitative frameworks can benefit from AI as an analytical companion — not a replacement for the researcher's interpretive labour. The tool below accepts a research question, researcher reflexive statement, and interview transcripts, then generates exploratory themes using DeepSeek. The reflexive statement is threaded through the analysis to surface the researcher's own biases and assumptions, maintaining the double hermeneutic that IPA demands.</p>
       <!-- Video: IPA demo -->
       <div class="video-embed">
-        <video controls preload="metadata">
-          <source src="videos/IPA_analysis_app_refexive.mp4" type="video/mp4">
-          Your browser does not support video. <a href="videos/IPA_analysis_app_refexive.mp4">Download the demo</a>.
-        </video>
+        <iframe src="https://www.youtube-nocookie.com/embed/kFo53ZvBixk" title="IPA Analysis Tool demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
-      <p class="video-caption">Demo: IPA Analysis Tool with reflexive statement support and DeepSeek completions. 4 min 55 s.</p>
+      <p class="video-caption">Demo: IPA Analysis Tool with reflexive statement support and DeepSeek completions.</p>
       <a href="https://github.com/Tony-Myers/IPA-analysis-bot" class="card-link">View the GitHub repository</a>
     </div>
 
@@ -452,12 +450,9 @@ p+p{margin-top:16px}
       <p>Running multiple models against the same manuscript is instructive: each model tends to identify different genuine weaknesses while also introducing its own distinct factual errors. One model may correctly flag an inferential gap between large F-values and trivial adjusted R² differences; another may erroneously describe a flexible distribution method as "distribution-free." This pattern — broader critical coverage at the cost of model-specific errors — reinforces why multi-model comparison and researcher verification are both necessary.</p>
       <!-- Video: Local reviewer demo -->
       <div class="video-embed">
-        <video controls preload="metadata">
-          <source src="videos/local_reviewer_different_models.mp4" type="video/mp4">
-          Your browser does not support video. <a href="videos/local_reviewer_different_models.mp4">Download the demo</a>.
-        </video>
+        <iframe src="https://www.youtube-nocookie.com/embed/heqV_bWjDkU" title="Local LLM manuscript reviewer demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
-      <p class="video-caption">Demo: Local LLM manuscript reviewer with model switching (Qwen 3.6 35B, Gemma 4 26B). 5 min 17 s.</p>
+      <p class="video-caption">Demo: Local LLM manuscript reviewer with model switching (Qwen 3.6 35B, Gemma 4 26B).</p>
     </div>
   </div>
 </section>
@@ -636,7 +631,20 @@ and any claim that needs independent database or code verification.</div>
       <p><strong>Exploratory RAG</strong> — useful for orientation, question generation, and finding candidate passages in a curated source set. Acceptable for early-stage literature scanning.</p>
       <p><strong>Rigorous synthesis</strong> — requires defined inclusion criteria, paper-level extraction, traceable notes, and independent checking. RAG alone cannot perform this; it can assist with navigation within a pre-screened corpus.</p>
       <p><strong>StatsRAG pattern</strong> — build an auditable statistical specification, verify it against a trusted local reference library, then produce a verdict card covering compliance, metric integrity, direction, and source support. This is the approach used in tools like the StatsRAG project for Bayesian analysis specification.</p>
+      <div class="video-embed" style="margin-top:16px">
+        <iframe src="https://www.youtube-nocookie.com/embed/cXrEgBpQwPc" title="StatsRAG: Verify LLM statistical output" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="video-caption">Demo: StatsRAG — verifying LLM-generated statistical output against a trusted reference library.</p>
       <a href="https://www.ibm.com/think/topics/retrieval-augmented-generation" class="card-link">IBM explainer on RAG</a>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h4>When AI gets statistics wrong</h4>
+      <p>The video below demonstrates a case where a model produces a confident but incorrect interpretation of statistical output. This is not a rare edge case — it is the default risk when statistical reasoning is delegated to a language model without independent verification. The model may identify the correct test, report plausible numbers, and still misinterpret what they mean.</p>
+      <div class="video-embed">
+        <iframe src="https://www.youtube-nocookie.com/embed/R3Kk1JZMt5o" title="Incorrect interpretation of statistical output" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="video-caption">Demo: An LLM producing confident but incorrect interpretation of statistical output.</p>
     </div>
 
     <h3 style="margin-top:36px">Safety protocol for AI-assisted analysis</h3>
@@ -986,6 +994,14 @@ a claim, do not fabricate one.</div>
         <strong>Practical example</strong>
         A coding agent could be tasked with writing a Bayesian power analysis in R, running it, checking convergence diagnostics, and producing a summary table — but the researcher must review the model specification, prior choices, and interpretation before the output enters a protocol or manuscript.
       </div>
+      <div class="video-embed" style="margin-top:16px">
+        <iframe src="https://www.youtube-nocookie.com/embed/UmVRXxABh4k" title="Claude Code: SecurXamine agentic demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="video-caption">Demo: Claude Code building SecurXamine — an agentic coding workflow with human review gates.</p>
+      <div class="video-embed" style="margin-top:16px">
+        <iframe src="https://www.youtube-nocookie.com/embed/JI7VMckliI0" title="Codex: Bayesian 3D visualisation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="video-caption">Demo: OpenAI Codex generating a Bayesian 3D visualisation as an agentic task.</p>
     </div>
 
     <div class="future-card">
@@ -995,6 +1011,10 @@ a claim, do not fabricate one.</div>
         <strong>Practical example</strong>
         A LoRA adapter trained on annotated statistical claims (correct vs. overclaimed vs. under-reported) can be applied to a small open-weight model to produce a manuscript screening tool. The adapter adds domain specificity; the base model provides language capability. The researcher must still validate the tool against known-good and known-bad examples before trusting its output.
       </div>
+      <div class="video-embed" style="margin-top:16px">
+        <iframe src="https://www.youtube-nocookie.com/embed/gVvhyOzFPZA" title="Ouro small thinker LoRA demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="video-caption">Demo: Fine-tuning a small thinking model (Ouro) with LoRA adapters for statistical claim evaluation.</p>
     </div>
 
     <div class="future-card">
