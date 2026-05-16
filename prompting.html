@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     body { font-family:'Inter',sans-serif; background:#f8fafc; color:#1e293b }
     .nav-link { transition:color .3s,border-color .3s,background-color .3s; border-bottom:2px solid transparent; cursor:pointer; border-radius: 4px; }
@@ -53,7 +53,7 @@
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
   <div class="bg-black text-white rounded-xl p-12 text-center space-y-4 mb-8">
     <h2 class="text-3xl font-bold">Foundations: Mastering Prompt Engineering</h2>
-    <p class="max-w-3xl mx-auto">Prompt engineering is the art and science of designing inputs to guide AI toward accurate, relevant, and useful outputs. These ten principles are evidence-based.</p>
+    <p class="max-w-3xl mx-auto">Prompting is the practice of designing context, constraints and checks so that AI outputs are useful without being mistaken for evidence.</p>
   </div>
   <div class="bg-gradient-to-r from-sky-50 to-blue-50 rounded-xl p-6 mb-8 border border-sky-200">
     <h3 class="text-xl font-bold text-sky-700 mb-4">Download Prompt Templates</h3>
@@ -73,9 +73,22 @@
     </div>
   </div>
   <div class="bg-white rounded-xl shadow-lg p-8">
+    <div class="bg-slate-50 border-l-4 border-sky-600 p-6 rounded-r-lg mb-10">
+      <h3 class="text-2xl font-bold text-slate-800 mb-4">The 7-Part Prompt Framework</h3>
+      <p class="text-slate-600 mb-5">For research, teaching and feedback tasks, a good prompt should define the work and the verification route. This structure adapts the research guide’s framework for everyday academic use.</p>
+      <ol class="grid grid-cols-1 md:grid-cols-2 gap-3 text-slate-700">
+        <li class="bg-white p-3 rounded border border-slate-200"><strong>1. Role:</strong> define the expert lens or teaching stance.</li>
+        <li class="bg-white p-3 rounded border border-slate-200"><strong>2. Task:</strong> state the action: evaluate, draft, compare, extract or explain.</li>
+        <li class="bg-white p-3 rounded border border-slate-200"><strong>3. Context:</strong> give the audience, level, purpose and stage of work.</li>
+        <li class="bg-white p-3 rounded border border-slate-200"><strong>4. Evidence:</strong> provide the text, data or sources the model should use.</li>
+        <li class="bg-white p-3 rounded border border-slate-200"><strong>5. Constraints:</strong> forbid invented citations, unsupported claims and overclaiming.</li>
+        <li class="bg-white p-3 rounded border border-slate-200"><strong>6. Format:</strong> specify the output structure, length and headings.</li>
+        <li class="bg-white p-3 rounded border border-slate-200 md:col-span-2"><strong>7. Verification:</strong> ask the model to flag uncertainty, missing evidence and checks still needed.</li>
+      </ol>
+    </div>
     <div class="text-center mb-8">
-      <h3 class="text-2xl font-bold text-slate-800 mb-4">The 10 Evidence-Based Principles of Effective Prompting</h3>
-      <p class="text-slate-600 max-w-3xl mx-auto">Master these core techniques to dramatically improve your AI interactions. Each principle is backed by research and practical testing.</p>
+      <h3 class="text-2xl font-bold text-slate-800 mb-4">The 10 Principles of Effective Prompting</h3>
+      <p class="text-slate-600 max-w-3xl mx-auto">Use these core techniques as practical starting points, then test outputs against the evidence and the task requirements.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         <div class="principle-card bg-gradient-to-br from-sky-50 to-blue-50 p-6 rounded border border-sky-200">
@@ -153,13 +166,31 @@
         </div>
     </div>
   </div>
+  <section class="mt-12 bg-white rounded-xl shadow-lg p-8 border border-slate-100">
+    <h2 class="text-2xl font-bold text-slate-800 mb-3">Related AI Literacy Sites</h2>
+    <p class="text-slate-600 mb-6 max-w-4xl">Move between the staff, research, student and beginner-facing guides. Product features, pricing, model access and privacy settings change frequently, so check current provider documentation before relying on a platform for teaching, research or sensitive work.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <a href="ai-for-research/" class="block p-5 rounded-lg border border-sky-200 bg-sky-50 hover:bg-sky-100 transition-colors">
+        <h3 class="font-bold text-sky-800">Research Guide</h3>
+        <p class="text-sm text-slate-700 mt-2">Secure, verification-first AI use across the research workflow.</p>
+      </a>
+      <a href="https://tony-myers.github.io/AI-for-students/" class="block p-5 rounded-lg border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 transition-colors">
+        <h3 class="font-bold text-emerald-800">Student AI Literacy</h3>
+        <p class="text-sm text-slate-700 mt-2">Student-facing guidance on evidence, verification and judgement.</p>
+      </a>
+      <a href="https://tony-myers.github.io/AI-for-students/ai-beginners-experience/" class="block p-5 rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 transition-colors">
+        <h3 class="font-bold text-amber-800">AI for Beginners and Experts by Experience</h3>
+        <p class="text-sm text-slate-700 mt-2">Plain-language support for people unfamiliar with AI.</p>
+      </a>
+    </div>
+  </section>
   <div class="text-center mt-8">
     <a href="index.html" class="px-4 py-2 bg-slate-200 rounded hover:bg-slate-300">← Back to Home</a>
   </div>
 </main>
 
 <footer class="bg-slate-800 text-white py-6 text-center text-sm">
-  Tony Myers © 2025
+  Tony Myers © 2026
 </footer>
 
 <script>

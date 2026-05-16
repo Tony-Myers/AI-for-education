@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     body { font-family:'Inter',sans-serif; background:#f8fafc; color:#1e293b }
     .nav-link { transition:color .3s,border-color .3s,background-color .3s; border-bottom:2px solid transparent; cursor:pointer; border-radius: 4px; }
@@ -55,12 +55,12 @@
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="bg-black text-white rounded-xl p-12 text-center space-y-4 mb-8">
       <h2 class="text-3xl font-bold">An Ethical Framework for AI in Academia</h2>
-      <p class="max-w-3xl mx-auto">A proactive approach is essential to harness AI's benefits while mitigating risks. Use this interactive checklist to evaluate tools and practices.</p>
+      <p class="max-w-3xl mx-auto">Responsible AI use depends on clear boundaries, secure data handling, verification and disclosure. Use this interactive checklist to evaluate tools and practices.</p>
     </div>
     
     <div class="bg-white rounded-xl shadow-lg p-8 mb-12">
       <div id="ethics-checklist-container" class="space-y-4">
-        <p class="text-center text-slate-600">Loading ethical framework...</p>
+        <noscript><p class="text-center text-slate-600">Enable JavaScript to view the ethical framework checklist.</p></noscript>
       </div>
     </div>
 
@@ -156,13 +156,32 @@
       </div>
     </div>
     
+    <section class="mt-12 bg-white rounded-xl shadow-lg p-8 border border-slate-100">
+      <h2 class="text-2xl font-bold text-slate-800 mb-3">Related AI Literacy Sites</h2>
+      <p class="text-slate-600 mb-6 max-w-4xl">Move between the staff, research, student and beginner-facing guides. Product features, pricing, model access and privacy settings change frequently, so check current provider documentation before relying on a platform for teaching, research or sensitive work.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="ai-for-research/" class="block p-5 rounded-lg border border-sky-200 bg-sky-50 hover:bg-sky-100 transition-colors">
+          <h3 class="font-bold text-sky-800">Research Guide</h3>
+          <p class="text-sm text-slate-700 mt-2">Secure, verification-first AI use across the research workflow.</p>
+        </a>
+        <a href="https://tony-myers.github.io/AI-for-students/" class="block p-5 rounded-lg border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 transition-colors">
+          <h3 class="font-bold text-emerald-800">Student AI Literacy</h3>
+          <p class="text-sm text-slate-700 mt-2">Student-facing guidance on evidence, verification and judgement.</p>
+        </a>
+        <a href="https://tony-myers.github.io/AI-for-students/ai-beginners-experience/" class="block p-5 rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 transition-colors">
+          <h3 class="font-bold text-amber-800">AI for Beginners and Experts by Experience</h3>
+          <p class="text-sm text-slate-700 mt-2">Plain-language support for people unfamiliar with AI.</p>
+        </a>
+      </div>
+    </section>
+
     <div class="text-center mt-12">
       <a href="index.html" class="px-4 py-2 bg-slate-200 rounded-lg hover:bg-slate-300 transition-colors">← Back to Home</a>
     </div>
 </main>
 
 <footer class="bg-slate-800 text-white py-6 text-center text-sm mt-12">
-  Tony Myers © 2025
+  Tony Myers © 2026
 </footer>
 
 <script>
@@ -178,9 +197,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Original ethics checklist data and rendering
   const ethicsChecklistData = [
-    { principle: "Academic Integrity", question: "Does my syllabus clearly state my policy on using this tool for graded assignments?", redFlags: "A one-size-fits-all policy; lack of clarity on what constitutes cheating.", bestPractice: "Develop assignment-specific AI policies. When use is permitted, teach students how to cite the AI tool properly." },
-    { principle: "Student Data Privacy", question: "Does the tool's privacy policy state whether it uses my students' data to train its models?", redFlags: "Vague privacy policies; no option to opt out of data collection for training; requiring excessive personal information.", bestPractice: "Prefer tools that do not train on user data. Anonymise all student work before uploading by removing all Personally Identifiable Information (PII)." },
-    { principle: "Algorithmic Fairness & Bias", question: "On what kind of data was this model likely trained? Could it be biased against certain student groups?", redFlags: "The tool consistently produces stereotypical content; it struggles with diverse names, cultures, or linguistic styles.", bestPractice: "Critically evaluate all AI outputs. Use the tool's flaws as a teachable moment about bias. Involve diverse human judgment in all high-stakes decisions." }
+    { principle: "Academic Integrity", question: "Does the assessment brief clearly state what AI use is allowed, what must be disclosed, and who is responsible for verification?", redFlags: "A one-size-fits-all policy; unclear boundaries; no requirement to check AI-generated claims or sources.", bestPractice: "Develop assignment-specific AI guidance. When use is permitted, require verification, disclosure and student responsibility for the final submission." },
+    { principle: "Student Data Privacy", question: "Does the tool's privacy documentation explain whether student data, prompts, uploads or outputs may be used for training or review?", redFlags: "Vague privacy policies; no clear training opt-out; unnecessary personal information; unclear retention or sharing settings.", bestPractice: "Use institutionally approved or enterprise-protected tools for non-public data. Anonymise student work before upload and avoid uploading sensitive, identifiable or confidential material unless explicitly approved." },
+    { principle: "Verification and Evidence", question: "Does the workflow require human checking before AI output affects teaching, feedback, research or assessment?", redFlags: "Treating fluent output as accurate; accepting AI-suggested citations without checking; using AI as the sole source of evidence.", bestPractice: "Use AI as a collaborator, not evidence. Verify sources, assumptions and claims against authoritative materials before use." },
+    { principle: "Algorithmic Fairness and Bias", question: "On what kind of data was this model likely trained? Could it be biased against certain student groups?", redFlags: "The tool consistently produces stereotypical content; it struggles with diverse names, cultures or linguistic styles.", bestPractice: "Critically evaluate all AI outputs. Use the tool's flaws as a teachable moment about bias. Involve diverse human judgement in all high-stakes decisions." }
   ];
 
   function renderEthicsChecklist() {

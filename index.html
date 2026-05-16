@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     body { font-family:'Inter',sans-serif; background:#f8fafc; color:#1e293b }
     .nav-link { transition:color .3s,border-color .3s,background-color .3s; border-bottom:2px solid transparent; cursor:pointer; border-radius: 4px; }
@@ -57,7 +57,7 @@
   <div class="bg-black text-white rounded-xl p-12 text-center space-y-6">
     <h2 id="home-title" class="text-4xl font-bold"></h2>
     <div class="w-auto h-auto mx-auto bg-sky-900/30 rounded-full flex items-center justify-center border-4 border-sky-400/50" style="width: 420px; height: 420px;">
-      <img id="home-hero-img" src="" alt="AI in Academia" class="hero-img">
+      <img id="home-hero-img" src="/AI-for-education/images/hero-image.gif" alt="AI in Academia" class="hero-img">
     </div>
     <div id="home-subtitle" class="text-left max-w-3xl mx-auto"></div>
   </div>
@@ -95,10 +95,29 @@
       <p id="home-btn-ethics-desc" class="text-slate-300 text-sm mt-2"></p>
     </a>
   </div>
+
+  <section class="mt-12 bg-white rounded-xl shadow-lg p-8 border border-slate-100">
+    <h2 class="text-2xl font-bold text-slate-800 mb-3">Related AI Literacy Sites</h2>
+    <p class="text-slate-600 mb-6 max-w-4xl">Move between the staff, research, student and beginner-facing guides. Product features, pricing, model access and privacy settings change frequently, so check current provider documentation before relying on a platform for teaching, research or sensitive work.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <a href="ai-for-research/" class="block p-5 rounded-lg border border-sky-200 bg-sky-50 hover:bg-sky-100 transition-colors">
+        <h3 class="font-bold text-sky-800">Research Guide</h3>
+        <p class="text-sm text-slate-700 mt-2">Secure, verification-first AI use across the research workflow.</p>
+      </a>
+      <a href="https://tony-myers.github.io/AI-for-students/" class="block p-5 rounded-lg border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 transition-colors">
+        <h3 class="font-bold text-emerald-800">Student AI Literacy</h3>
+        <p class="text-sm text-slate-700 mt-2">Student-facing guidance on evidence, verification and judgement.</p>
+      </a>
+      <a href="https://tony-myers.github.io/AI-for-students/ai-beginners-experience/" class="block p-5 rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 transition-colors">
+        <h3 class="font-bold text-amber-800">AI for Beginners and Experts by Experience</h3>
+        <p class="text-sm text-slate-700 mt-2">Plain-language support for people unfamiliar with AI.</p>
+      </a>
+    </div>
+  </section>
 </main>
 
 <footer class="bg-slate-800 text-white py-6 text-center text-sm">
-  Tony Myers © 2025
+  Tony Myers © 2026
 </footer>
 
 <script>
@@ -118,10 +137,10 @@ document.addEventListener('DOMContentLoaded', function() {
           title: "The AI-Powered Academic",
 subtitle: `
   <p class="mb-4">
-    Generative AI is no longer a niche curiosity but a core utility fundamentally reshaping academia. This guide is designed to help educators move from asking <em>if</em> they should use AI to understanding <em>how</em> to do so effectively and ethically.
+    Generative AI is now part of ordinary academic work, but useful adoption depends on judgement rather than excitement. This guide is designed to help educators decide <em>when</em> AI is appropriate, <em>how</em> to use it responsibly, and <em>where</em> verification, disclosure and data protection are needed.
   </p>
   <p>
-    To navigate this landscape, students need strong AI literacy, and it is our role to facilitate that development. This begins with enhancing our own skills. Within this site, you will find curated tools, practical academic workflows, and prompt templates to support your research, teaching, and productivity.
+    Students need strong AI literacy, and staff need the confidence to model careful use. Within this site, you will find curated tools, practical workflows, prompt templates and links to the research and student-facing guides.
   </p>
   
   <div style="text-align: center; margin-top: 1.5rem;">
@@ -135,9 +154,9 @@ subtitle: `
               integration: { title: "AI Integration", description: "Strategic implementation in higher education" },
               literacy: { title: "AI Literacy", description: "Essential skills for the AI age" },
               prompting: { title: "Prompt Engineering", description: "Master the art of AI communication" },
-              research: { title: "AI for Research", description: "Transform your research workflow" },
-              teaching: { title: "AI for Teaching", description: "Enhance learning experiences" },
-              platforms: { title: "AI Platforms", description: "Explore leading AI tools" },
+              research: { title: "AI for Research", description: "Use AI as a collaborator, not as evidence" },
+              teaching: { title: "AI for Teaching", description: "Support learning with clear boundaries" },
+              platforms: { title: "AI Platforms", description: "Compare tools and privacy choices" },
               toolkit: { title: "AI Toolkit", description: "Curated academic tools" },
               ethics: { title: "Ethical Framework", description: "Responsible AI practices" }
           }

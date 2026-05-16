@@ -7,7 +7,7 @@
 <title>AI for Research — Tony Myers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;family=Source+Sans+3:wght@300;400;500;600;700&amp;family=Source+Code+Pro:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
 /* ── Reset & base ────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -319,7 +319,7 @@ p+p{margin-top:16px}
       <a href="#workflow" class="btn btn-primary">Explore the workflow</a>
       <a href="#platforms" class="btn btn-outline">Choose a platform</a>
     </div>
-    <p class="hero-meta">Updated 7 May 2026 · Companion to <a href="https://tony-myers.github.io/AI-for-education/index.html">The AI-Powered Academic</a></p>
+    <p class="hero-meta">Updated 16 May 2026 · Companion to <a href="https://tony-myers.github.io/AI-for-education/index.html">The AI-Powered Academic</a></p>
   </div>
 </header>
 
@@ -731,7 +731,7 @@ and any claim that needs independent database or code verification.</div>
   <div class="container">
     <p class="section-label">Current platform guide</p>
     <h2>Tools worth knowing in 2026</h2>
-    <p>These are not endorsements. They are a researcher's map: what each platform is good for, what to check, and when to consider alternatives. All links and descriptions were checked in May 2026; product details change frequently.</p>
+    <p>These are not endorsements. They are a researcher's map: what each platform is good for, what to check, and when to consider alternatives. All links and descriptions were checked in May 2026, but product details, model access, pricing, data retention and privacy settings change frequently. Check current provider documentation before using any tool with non-public research data.</p>
 
     <div class="tab-bar" role="tablist">
       <button class="tab-btn active" onclick="switchTab(event,'all')" role="tab">All</button>
@@ -755,7 +755,7 @@ and any claim that needs independent database or code verification.</div>
         <div class="platform" data-tags="secure">
           <div class="platform-type">Cloud · Enterprise</div>
           <h4>Claude (Anthropic)</h4>
-          <p>Emphasis on careful reasoning and long-context processing (up to 200k tokens). Strong for manuscript critique, coding, and structured analysis. Claude for Work provides enterprise data controls.</p>
+          <p>Emphasis on careful reasoning, document work and long-context processing. Strong for manuscript critique, coding and structured analysis. Claude for Work provides enterprise data controls; check the current context limits and plan features.</p>
           <div class="platform-tags"><span class="platform-tag secure">Secure tiers available</span></div>
         </div>
 
@@ -811,7 +811,7 @@ and any claim that needs independent database or code verification.</div>
         <div class="platform" data-tags="analysis">
           <div class="platform-type">Analysis · Search</div>
           <h4>Perplexity</h4>
-          <p>AI-powered search with source citations. Useful for quick fact-checking and finding recent publications. Pro tier offers more capable models and longer outputs. Not a substitute for systematic database searching.</p>
+          <p>AI search with visible source links. Useful for quick orientation and finding recent publications. Paid tiers may offer more capable models and longer outputs. Not a substitute for systematic database searching.</p>
           <div class="platform-tags"><span class="platform-tag analysis">Analysis</span></div>
         </div>
 
@@ -832,14 +832,14 @@ and any claim that needs independent database or code verification.</div>
         <div class="platform" data-tags="local">
           <div class="platform-type">Local · Desktop</div>
           <h4>GPT4All</h4>
-          <p>Privacy-focused desktop client from Nomic. Runs quantised models locally with a simple GUI. Includes a local document Q&A feature for small corpora.</p>
+          <p>Privacy-focused desktop client from Nomic. Runs quantised models locally with a simple GUI. Includes a local document Q&amp;A feature for small corpora.</p>
           <div class="platform-tags"><span class="platform-tag local">Local</span></div>
         </div>
 
         <div class="platform" data-tags="local">
           <div class="platform-type">Local · Research lab</div>
           <h4>Ollama + Open WebUI</h4>
-          <p>Command-line model server (Ollama) paired with a browser-based interface (Open WebUI). Supports model switching, RAG, tool calling, and multi-user access. The strongest local setup for research teams and demonstrations.</p>
+          <p>Command-line model server (Ollama) paired with a browser-based interface (Open WebUI). Supports model switching, RAG, tool calling and multi-user access. A flexible local setup for research teams and demonstrations.</p>
           <div class="platform-tags"><span class="platform-tag local">Local</span></div>
         </div>
 
@@ -853,28 +853,28 @@ and any claim that needs independent database or code verification.</div>
         <div class="platform" data-tags="secure">
           <div class="platform-type">Cloud · Privacy</div>
           <h4>Duck.ai (DuckDuckGo)</h4>
-          <p>Anonymous access to multiple models (GPT-4o mini, Claude 3.5 Haiku, Llama 4 Scout, Mistral Small 3) with no account required. DuckDuckGo strips IP addresses and metadata before proxying requests, and has contractual no-training agreements with all model providers. Free tier with daily limits; subscriber tier adds GPT-5.1, Claude Sonnet 4.5, and Llama 4 Maverick.</p>
+          <p>Anonymous access to a rotating set of third-party models with no account required. DuckDuckGo describes requests as proxied to reduce identifying metadata and says it has contractual no-training arrangements with model providers. Model availability and limits change, so check the current Duck.ai documentation before relying on a specific model.</p>
           <div class="platform-tags"><span class="platform-tag secure">Secure</span></div>
         </div>
 
         <div class="platform" data-tags="secure">
           <div class="platform-type">Cloud · Privacy</div>
           <h4>Lumo (Proton)</h4>
-          <p>Privacy-first AI assistant from the makers of Proton Mail. Runs open-weight models (Qwen, OLMO 2, GPT-OSS 120B, Kimi K2, and others) exclusively on Proton-controlled European servers — no data is sent to third-party providers. Zero-access encryption means Proton itself cannot read saved conversations. Ghost mode ensures chats are deleted on close. Integrates with Proton Drive for file analysis. Weaker than frontier models on complex reasoning, but the privacy architecture is the strongest of any cloud chat service currently available.</p>
+          <p>Privacy-focused AI assistant from the makers of Proton Mail. Proton describes Lumo as running on Proton-controlled infrastructure with zero-access encryption for saved conversations and a temporary mode for ephemeral chats. This may suit sensitive drafting or file review where the capability is sufficient, but check current terms, model options and institutional requirements.</p>
           <div class="platform-tags"><span class="platform-tag secure">Secure</span></div>
         </div>
 
         <div class="platform" data-tags="secure">
           <div class="platform-type">Browser · Privacy</div>
           <h4>Brave Leo</h4>
-          <p>AI assistant built into the Brave browser with access to Qwen, Llama, and Claude models, all now hosted on Brave infrastructure. No account required for the free tier. Requests are proxied to strip IP addresses, conversations are not stored on Brave servers, and chat history exists only on the local device. Premium tier adds stronger models. Brave is also pioneering verifiable privacy via Trusted Execution Environments (TEEs) for cryptographic proof that privacy claims are met. Useful for page-level tasks: summarisation, translation, and Q&A grounded in the current tab.</p>
+          <p>AI assistant built into the Brave browser with a choice of hosted models. Brave describes requests as proxied and chat history as stored locally unless users choose otherwise. Useful for page-level tasks such as summarisation, translation and Q&amp;A grounded in the current tab; verify current privacy claims and model availability before using it for research material.</p>
           <div class="platform-tags"><span class="platform-tag secure">Secure</span></div>
         </div>
 
         <div class="platform" data-tags="secure">
           <div class="platform-type">Cloud · Privacy</div>
           <h4>Okara</h4>
-          <p>Private AI workspace offering 20+ open-source models (Llama, Qwen, DeepSeek, Mistral, and others) with client-side key generation and encrypted-at-rest chat history. Models are self-hosted or accessed via zero-data-retention APIs. Supports file uploads, image generation, and integrated web/social search. The workspace mode allows teams to collaborate in a shared encrypted thread with persistent context. Published an open-source encryption whitepaper. Relatively new (founded 2025) and less battle-tested than the larger privacy platforms.</p>
+          <p>Private multi-model AI workspace with encryption and collaboration features. It may be useful for structured research workflows where the provider's current terms match the data classification, but it is newer and less institutionally tested than the large enterprise platforms. Check the current documentation before uploading non-public data.</p>
           <div class="platform-tags"><span class="platform-tag secure">Secure</span></div>
         </div>
 
@@ -1084,7 +1084,7 @@ a claim, do not fabricate one.</div>
     <div class="source-group">
       <h3>Security and enterprise AI</h3>
       <ul class="source-list">
-        <li><a href="https://openai.com/enterprise-privacy/">OpenAI enterprise privacy</a></li>
+        <li><a href="https://openai.com/business-data">OpenAI business data privacy</a></li>
         <li><a href="https://learn.microsoft.com/en-us/copilot/privacy-and-protections">Microsoft 365 Copilot Chat privacy</a></li>
         <li><a href="https://support.google.com/docs/answer/14615114?hl=en">Gemini in Workspace data protection</a></li>
         <li><a href="https://privacy.anthropic.com/en/articles/9267385-does-anthropic-act-as-a-data-processor-or-controller">Anthropic commercial data relationship</a></li>
@@ -1104,12 +1104,12 @@ a claim, do not fabricate one.</div>
         <li><a href="https://huggingface.co/">Hugging Face</a> <span class="source-annotation">Model hub, model cards, community Spaces, and datasets.</span></li>
         <li><a href="https://duck.ai/">Duck.ai</a> <span class="source-annotation">DuckDuckGo's anonymous, proxied AI chat. No account required.</span></li>
         <li><a href="https://lumo.proton.me/">Lumo (Proton)</a> <span class="source-annotation">Zero-access encrypted AI on Proton-controlled European servers.</span></li>
-        <li><a href="https://brave.com/leo/">Brave Leo</a> <span class="source-annotation">Browser-integrated AI with IP proxying and TEE-verifiable privacy.</span></li>
+        <li><a href="https://brave.com/leo/">Brave Leo</a> <span class="source-annotation">Browser-integrated AI with privacy-focused request handling.</span></li>
         <li><a href="https://okara.ai/">Okara</a> <span class="source-annotation">Encrypted multi-model AI workspace with client-side key generation.</span></li>
         <li><a href="https://ollama.com/">Ollama</a> <span class="source-annotation">Local model server for macOS, Linux, and Windows.</span></li>
         <li><a href="https://lmstudio.ai/">LM Studio</a> <span class="source-annotation">Desktop application for running quantised open models.</span></li>
         <li><a href="https://docs.openwebui.com/">Open WebUI</a> <span class="source-annotation">Browser-based interface for Ollama and other backends.</span></li>
-        <li><a href="https://anythingllm.com/">AnythingLLM</a> <span class="source-annotation">Local RAG and document Q&A platform.</span></li>
+        <li><a href="https://anythingllm.com/">AnythingLLM</a> <span class="source-annotation">Local RAG and document Q&amp;A platform.</span></li>
       </ul>
     </div>
   </div>
@@ -1120,7 +1120,7 @@ a claim, do not fabricate one.</div>
   <div class="container">
     <div class="footer-inner">
       <span>Tony Myers © 2026. Birmingham Newman University.</span>
-      <span>Standalone companion to <a href="https://tony-myers.github.io/AI-for-education/index.html">The AI-Powered Academic</a>.</span>
+      <span>Related: <a href="https://tony-myers.github.io/AI-for-education/index.html">The AI-Powered Academic</a> · <a href="https://tony-myers.github.io/AI-for-students/">Student AI Literacy</a> · <a href="https://tony-myers.github.io/AI-for-students/ai-beginners-experience/">AI for Beginners and Experts by Experience</a>.</span>
       <a href="#top">Back to top ↑</a>
     </div>
   </div>

@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     body { font-family:'Inter',sans-serif; background:#f8fafc; color:#1e293b }
     .nav-link { transition:color .3s,border-color .3s,background-color .3s; border-bottom:2px solid transparent; cursor:pointer; border-radius: 4px; }
@@ -52,7 +52,7 @@
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
   <div class="bg-black text-white rounded-xl p-12 text-center space-y-4 mb-8">
     <h2 class="text-3xl font-bold">AI for Your Research</h2>
-    <p class="max-w-3xl mx-auto">AI is transforming the entire research lifecycle, from discovery to dissemination. Click on a stage to explore techniques and tools.</p>
+    <p class="max-w-3xl mx-auto">AI can support parts of the research lifecycle, but it should not be treated as evidence, authority or a replacement for scholarly judgement. Click on a stage to explore techniques and tools.</p>
   </div>
   
   <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
@@ -61,10 +61,35 @@
             <a href="https://youtu.be/bJFsGBrZkLE?si=qst0a-WknmnxucWE" class="font-semibold text-sky-700 hover:underline" target="_blank" rel="noopener noreferrer">▶️ Watch: Tony Myers on AI in research</a>
         </div>
       <div class="space-y-4 text-slate-700 leading-relaxed mt-6">
-          <p>Artificial intelligence is rapidly becoming an indispensable tool in academic research, serving not as a replacement for human intellect, but as a powerful accelerator for discovery and analysis. By augmenting the researcher's capabilities, AI streamlines workflows, uncovers novel connections in data, and facilitates new modes of inquiry across all disciplines.</p>
-          <p>From the initial stages of literature synthesis and grant proposal writing, through to complex data analysis and the ethical drafting of manuscripts, AI offers support throughout the research lifecycle. It can help identify funding opportunities, perform preliminary coding of qualitative data, debug statistical scripts, and assist in disseminating findings to both academic and public audiences.</p>
-          <p>Harnessing this potential requires a commitment to responsible and ethical use. Effective integration depends on the core skills of AI literacy: critical evaluation of outputs, robust prompt engineering, and an awareness of data privacy. The resources below provide practical applications and tools to help you navigate each stage of the AI-enhanced research process.</p>
+          <p>Artificial intelligence can support academic research when its role is tightly defined. It can help organise material, generate search terms, critique drafts, draft code, and reformat outputs for different audiences. It should not be used as a citation source or as the final authority on evidence.</p>
+          <p>From literature mapping and grant preparation through to analysis support and dissemination, AI is most useful when paired with clear prompts, secure platform choices and independent verification. Research databases, primary sources, reproducible code and expert judgement still carry the evidential weight.</p>
+          <p>The resources below provide practical applications and tools for each stage of the research process. For a fuller treatment of secure platforms, RAG, prompt design and the VALID-AI checklist, use the dedicated research guide.</p>
       </div>
+  </div>
+
+  <div class="bg-sky-50 border border-sky-200 rounded-xl p-6 mb-8">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div>
+        <h3 class="text-2xl font-bold text-sky-800 mb-2">Full Research Guide</h3>
+        <p class="text-slate-700">The research subsite expands this page with secure/private platform choices, a seven-part research prompt, the VALID-AI checklist, source-grounded NotebookLM/RAG guidance, and verification protocols.</p>
+      </div>
+      <a href="ai-for-research/" class="inline-flex justify-center px-5 py-3 bg-sky-700 text-white rounded-lg hover:bg-sky-800 font-semibold">Open the Research Guide →</a>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+    <div class="bg-white rounded-lg shadow p-5 border-l-4 border-sky-600">
+      <h3 class="font-bold text-slate-800 mb-2">AI is a collaborator, not evidence</h3>
+      <p class="text-sm text-slate-600">Use AI for generation, critique, organisation and transformation. Use scholarly sources, data and expert judgement for evidence.</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-5 border-l-4 border-emerald-600">
+      <h3 class="font-bold text-slate-800 mb-2">Verification is structural</h3>
+      <p class="text-sm text-slate-600">Build checks into prompts and workflows instead of treating verification as a final tidy-up.</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-5 border-l-4 border-amber-600">
+      <h3 class="font-bold text-slate-800 mb-2">Source-grounded is not magic</h3>
+      <p class="text-sm text-slate-600">NotebookLM and RAG can help interrogate a curated source set, but citations and interpretations still need checking.</p>
+    </div>
   </div>
 
   <div class="bg-white rounded-xl shadow-lg p-8">
@@ -73,13 +98,32 @@
       <p class="text-center text-slate-600">Click on a research stage above to explore AI tools and techniques for that area.</p>
     </div>
   </div>
+  <section class="mt-12 bg-white rounded-xl shadow-lg p-8 border border-slate-100">
+    <h2 class="text-2xl font-bold text-slate-800 mb-3">Related AI Literacy Sites</h2>
+    <p class="text-slate-600 mb-6 max-w-4xl">Move between the staff, research, student and beginner-facing guides. Product features, pricing, model access and privacy settings change frequently, so check current provider documentation before relying on a platform for teaching, research or sensitive work.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <a href="ai-for-research/" class="block p-5 rounded-lg border border-sky-200 bg-sky-50 hover:bg-sky-100 transition-colors">
+        <h3 class="font-bold text-sky-800">Research Guide</h3>
+        <p class="text-sm text-slate-700 mt-2">Secure, verification-first AI use across the research workflow.</p>
+      </a>
+      <a href="https://tony-myers.github.io/AI-for-students/" class="block p-5 rounded-lg border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 transition-colors">
+        <h3 class="font-bold text-emerald-800">Student AI Literacy</h3>
+        <p class="text-sm text-slate-700 mt-2">Student-facing guidance on evidence, verification and judgement.</p>
+      </a>
+      <a href="https://tony-myers.github.io/AI-for-students/ai-beginners-experience/" class="block p-5 rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 transition-colors">
+        <h3 class="font-bold text-amber-800">AI for Beginners and Experts by Experience</h3>
+        <p class="text-sm text-slate-700 mt-2">Plain-language support for people unfamiliar with AI.</p>
+      </a>
+    </div>
+  </section>
+
   <div class="text-center mt-8">
     <a href="index.html" class="px-4 py-2 bg-slate-200 rounded hover:bg-slate-300">← Back to Home</a>
   </div>
 </main>
 
 <footer class="bg-slate-800 text-white py-6 text-center text-sm">
-  Tony Myers © 2025
+  Tony Myers © 2026
 </footer>
 
 <script>

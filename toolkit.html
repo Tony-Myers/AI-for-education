@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     body { font-family:'Inter',sans-serif; background:#f8fafc; color:#1e293b }
     .nav-link { transition:color .3s,border-color .3s,background-color .3s; border-bottom:2px solid transparent; cursor:pointer; border-radius: 4px; }
@@ -59,6 +59,9 @@
       <h2 class="text-3xl font-bold">The Academic's AI Toolkit</h2>
       <p class="max-w-3xl mx-auto">Explore tools to support diverse learners, automate resource creation, and enhance your own productivity.</p>
     </div>
+    <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8 text-sm text-amber-900">
+      Tool features, pricing, model access and privacy settings change frequently. Check current provider documentation and your institutional guidance before uploading student work, unpublished research, confidential data or personal information.
+    </div>
 
     <div class="space-y-12 mb-12">
       <h2 class="text-3xl font-bold text-center text-slate-800">Featured Tool: NotebookLM</h2>
@@ -67,12 +70,12 @@
         <div class="flex flex-col md:flex-row justify-between items-start mb-6">
             <div>
                 <h3 class="text-3xl font-bold text-sky-700 mb-2">NotebookLM (Google)</h3>
-                <span class="inline-block bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded font-semibold uppercase tracking-wide">Essential for Staff & Students</span>
+                <span class="inline-block bg-sky-100 text-sky-800 text-xs px-2 py-1 rounded font-semibold uppercase tracking-wide">Useful for Staff and Students</span>
             </div>
             <a href="https://notebooklm.google.com" target="_blank" class="mt-4 md:mt-0 px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-500 font-medium transition-colors">Launch Tool →</a>
         </div>
 
-        <p class="text-slate-600 mb-6 text-lg">A "grounded" AI assistant that processes text, audio, and video sources. Unlike standard chatbots, it cites its sources, making it safer for academic environments. It has recently evolved into a multimodal powerhouse capable of generating podcasts, visual aids, and lesson resources.</p>
+        <p class="text-slate-600 mb-6 text-lg">A source-grounded AI assistant for working with uploaded or linked materials. NotebookLM can cite passages from the sources you provide, which makes checking easier, but it does not make the output automatically reliable. Use it to navigate a focused source set, then verify every important claim against the source.</p>
         
         <div class="mb-8 bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-md">
             <div class="flex">
@@ -96,19 +99,19 @@
                 <ul class="space-y-3 text-slate-700">
                     <li class="flex items-start gap-2">
                         <span class="text-purple-600 mt-1">🎙️</span>
-                        <span><strong>Generate "Audio Overviews" (Podcasts):</strong> Convert your text-heavy module handbooks or lecture notes into engaging audio discussions for accessibility.</span>
+                        <span><strong>Generate audio overviews:</strong> Convert selected module materials into audio discussion formats, then check tone and accuracy before sharing.</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <span class="text-red-600 mt-1">📹</span>
-                        <span><strong>Video Processing:</strong> Upload YouTube lecture links. Ask NotebookLM to summarise them or extract key quotes for your slides.</span>
+                        <span><strong>Video processing:</strong> Where your account supports it, add YouTube lecture links and ask NotebookLM to summarise them or locate relevant passages.</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <span class="text-emerald-600 mt-1">🧩</span>
-                        <span><strong>Instant Quiz & Flashcards:</strong> Generate 20-question quizzes or flashcard tables from your readings to upload to the VLE.</span>
+                        <span><strong>Quiz and flashcard drafts:</strong> Generate practice questions from readings, then review them for accuracy, level and alignment with learning outcomes.</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <span class="text-orange-600 mt-1">🎞️</span>
-                        <span><strong>Slide Deck & Infographic Outlines:</strong> Ask the AI to "Outline a 5-slide deck" or "Plan an infographic timeline" based on your sources.</span>
+                        <span><strong>Slide deck and infographic outlines:</strong> Ask for an outline based on your sources, then refine it with your own disciplinary judgement.</span>
                     </li>
                 </ul>
             </div>
@@ -117,15 +120,16 @@
                  <ul class="space-y-3 text-slate-700">
                     <li class="flex items-start gap-2">
                         <span class="text-blue-600 mt-1">🔍</span>
-                        <span><strong>Grounded Analysis:</strong> Upload 20 PDFs and ask: "Synthesise the arguments on X across all sources with citations."</span>
+                        <span><strong>Grounded analysis:</strong> Upload a focused source set and ask: "Compare the arguments on X across these sources with citations."</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <span class="text-blue-600 mt-1">🧠</span>
-                        <span><strong>Mind Mapping:</strong> Use it to identify connections between varied sources to structure your literature review.</span>
+                        <span><strong>Mind mapping:</strong> Use it to identify possible connections between sources, then check whether those links are really supported.</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <span class="text-blue-600 mt-1">📝</span>
-                        <span><strong>Grant & Briefing Prep:</strong> Quickly generate briefing documents, FAQs, or timelines from rough notes.</span>
+                        <span><strong>Grant and briefing preparation:</strong> Draft briefing documents, FAQs or timelines from notes, then verify all facts and funder requirements.</span>
+                    </li>
                    </ul>
             </div>
         </div>
@@ -189,9 +193,28 @@
         </div>
       </div>
       <div id="toolkit-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <p class="col-span-full text-center text-slate-600">Loading toolkit...</p>
+        <noscript><p class="col-span-full text-center text-slate-600">Enable JavaScript to view and filter the toolkit.</p></noscript>
       </div>
     </div>
+
+    <section class="mt-12 bg-white rounded-xl shadow-lg p-8 border border-slate-100">
+      <h2 class="text-2xl font-bold text-slate-800 mb-3">Related AI Literacy Sites</h2>
+      <p class="text-slate-600 mb-6 max-w-4xl">Move between the staff, research, student and beginner-facing guides. Product features, pricing, model access and privacy settings change frequently, so check current provider documentation before relying on a platform for teaching, research or sensitive work.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="ai-for-research/" class="block p-5 rounded-lg border border-sky-200 bg-sky-50 hover:bg-sky-100 transition-colors">
+          <h3 class="font-bold text-sky-800">Research Guide</h3>
+          <p class="text-sm text-slate-700 mt-2">Secure, verification-first AI use across the research workflow.</p>
+        </a>
+        <a href="https://tony-myers.github.io/AI-for-students/" class="block p-5 rounded-lg border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 transition-colors">
+          <h3 class="font-bold text-emerald-800">Student AI Literacy</h3>
+          <p class="text-sm text-slate-700 mt-2">Student-facing guidance on evidence, verification and judgement.</p>
+        </a>
+        <a href="https://tony-myers.github.io/AI-for-students/ai-beginners-experience/" class="block p-5 rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 transition-colors">
+          <h3 class="font-bold text-amber-800">AI for Beginners and Experts by Experience</h3>
+          <p class="text-sm text-slate-700 mt-2">Plain-language support for people unfamiliar with AI.</p>
+        </a>
+      </div>
+    </section>
 
     <div class="text-center mt-8">
       <a href="index.html" class="px-4 py-2 bg-slate-200 rounded hover:bg-slate-300">← Back to Home</a>
@@ -199,7 +222,7 @@
 </main>
 
 <footer class="bg-slate-800 text-white py-6 text-center text-sm">
-  Tony Myers © 2025
+  Tony Myers © 2026
 </footer>
 
 <script>
@@ -213,10 +236,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   const toolkitData = [
-    { name: "Google AI Studio", fn: "Prototyping & Code", features: "Build prompts and apps using Gemini models. Excellent for analysing multimodal data (video/images) and generating Python code for research.", cost: "Freemium", link: "https://aistudio.google.com" },
-    { name: "Gamma", fn: "Content Creation", features: "Generates beautiful slide decks, documents, and webpages from text prompts. Useful for rapid teaching material creation.", cost: "Freemium", link: "https://gamma.app" },
+    { name: "Google AI Studio", fn: "Prototyping & Code", features: "Build and test prompts and apps using Gemini models. Useful for multimodal experiments and code drafting, with output checking.", cost: "Freemium", link: "https://aistudio.google.com" },
+    { name: "Gamma", fn: "Content Creation", features: "Drafts slide decks, documents and webpages from text prompts. Useful for early teaching material prototypes that still need academic review.", cost: "Freemium", link: "https://gamma.app" },
     { name: "Research Rabbit", fn: "Literature Mapping", features: "Visualises citation networks to find connected papers. Essential for the 'discovery' phase of research.", cost: "Free", link: "https://researchrabbitapp.com" },
-    { name: "Elicit", fn: "Literature Review", features: "Finds papers and extracts key data into a table (e.g., participants, methods, findings). good for systematic reviews.", cost: "Freemium", link: "https://elicit.com" },
+    { name: "Elicit", fn: "Literature Review", features: "Finds papers and extracts key data into a table, such as participants, methods and findings. Helpful for scoping, but not a substitute for formal review methods.", cost: "Freemium", link: "https://elicit.com" },
     { name: "Connected Papers", fn: "Literature Mapping", features: "Visual graph of related papers. Helps ensure you haven't missed seminal works.", cost: "Freemium", link: "https://connectedpapers.com" },
     { name: "Consensus", fn: "Evidence Search", features: "Search engine that answers questions with scientific consensus, citing study types and sample sizes.", cost: "Freemium", link: "https://consensus.app" }
   ];
